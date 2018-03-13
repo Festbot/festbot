@@ -1,4 +1,4 @@
-# Eurorack buddy
+# Festbot
 
 ## Setup
 
