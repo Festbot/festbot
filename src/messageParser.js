@@ -5,8 +5,6 @@ const handlers = [
 ];
 
 module.exports = function(message, callback) {
-	let handler = function() {};
-
 	handlers.forEach((handler, index) => {
 		if (handler.recognize(message)) {
 			callback(handler.answer(message));

@@ -4,7 +4,7 @@ class Welcome {
 	}
 
 	static answer() {
-		return `Hi! 👋 `;
+		return `Hi! 👋  Lemme check out your Spotify profile so I can learn more about your musical taste.`;
 	}
 };
 

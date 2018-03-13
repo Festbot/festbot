@@ -2,23 +2,19 @@
 
 const bodyParser = require('body-parser'),
 	config = require('config'),
-	crypto = require('crypto'),
 	express = require('express'),
 	https = require('https'),
 	fs = require('fs'),
 	messageParser = require('./messageParser'),
-	request = require('request');
+	request = require('request'),
+	FacebookAuth = require('./authorizers/facebook');
 
 const app = express();
 app.set('port', process.env.PORT || 5000);
 app.set('view engine', 'ejs');
-app.use(bodyParser.json({ verify: verifyRequestSignature }));
+app.use(bodyParser.json({ verify: FacebookAuth.verifyRequestSignature }));
 app.use(express.static('public'));
 
-// App Secret can be retrieved from the App Dashboard
-const APP_SECRET = (process.env.MESSENGER_APP_SECRET) ?
-	process.env.MESSENGER_APP_SECRET :
-	config.get('appSecret');
 
 // Arbitrary value used to validate a webhook
 const VALIDATION_TOKEN = (process.env.MESSENGER_VALIDATION_TOKEN) ?
@@ -35,11 +31,6 @@ const PAGE_ACCESS_TOKEN = (process.env.MESSENGER_PAGE_ACCESS_TOKEN) ?
 const SERVER_URL = (process.env.SERVER_URL) ?
 	(process.env.SERVER_URL) :
 	config.get('serverURL');
-
-if (!(APP_SECRET && VALIDATION_TOKEN && PAGE_ACCESS_TOKEN && SERVER_URL)) {
-	console.error("Missing config values");
-	process.exit(1);
-}
 
 app.get('/webhook', function(req, res) {
 	if (
@@ -78,53 +69,9 @@ app.post('/webhook', function (req, res) {
 	}
 });
 
-app.get('/authorize', function(req, res) {
-	const accountLinkingToken = req.query.account_linking_token;
-	const redirectURI = req.query.redirect_uri;
+app.get('/authorize', FacebookAuth.authorize);
 
-	// Authorization Code should be generated per user by the developer. This will
-	// be passed to the Account Linking callback.
-	const authCode = "1234567890";
 
-	// Redirect users to this URI on successful login
-	const redirectURISuccess = redirectURI + "&authorization_code=" + authCode;
-
-	res.render('authorize', {
-		accountLinkingToken: accountLinkingToken,
-		redirectURI: redirectURI,
-		redirectURISuccess: redirectURISuccess
-	});
-});
-
-/*
- * Verify that the callback came from Facebook. Using the App Secret from
- * the App Dashboard, we can verify the signature that is sent with each
- * callback in the x-hub-signature field, located in the header.
- *
- * https://developers.facebook.com/docs/graph-api/webhooks#setup
- *
- */
-function verifyRequestSignature(req, res, buf) {
-	const signature = req.headers["x-hub-signature"];
-
-	if (!signature) {
-		// For testing, let's log an error. In production, you should throw an
-		// error.
-		console.error("Couldn't validate the signature.");
-	} else {
-		const elements = signature.split('=');
-		const method = elements[0];
-		const signatureHash = elements[1];
-
-		const expectedHash = crypto.createHmac('sha1', APP_SECRET)
-			.update(buf)
-			.digest('hex');
-
-		if (signatureHash != expectedHash) {
-			throw new Error("Couldn't validate the request signature.");
-		}
-	}
-}
 
 function receivedMessage(event) {
 	var senderID = event.sender.id;
@@ -163,8 +110,8 @@ function callSendAPI(messageData) {
 }
 
 https.createServer({
-	key: fs.readFileSync("../privatekey.pem"),
-	cert: fs.readFileSync("../certs.pem")
+	key: fs.readFileSync("../keys/eurorack_privatekey.pem"),
+	cert: fs.readFileSync("../keys/eurorack_certs.pem")
 }, app).listen(app.get('port'));
 
 module.exports = app;
