@@ -1,10 +1,13 @@
 const crypto = require('crypto');
 const config = require('config');
+const request = require('request');
 
 // App Secret can be retrieved from the App Dashboard
-const APP_SECRET = (process.env.MESSENGER_APP_SECRET) ?
-	process.env.MESSENGER_APP_SECRET :
-	config.get('appSecret');
+const APP_SECRET = config.get('appSecret');
+// Arbitrary value used to validate a webhook
+const VALIDATION_TOKEN = config.get('validationToken');
+// // Generate a page access token for your page from the App Dashboard
+const PAGE_ACCESS_TOKEN = config.get('pageAccessToken');
 
 module.exports.authorize = function(req, res) {
 	const accountLinkingToken = req.query.account_linking_token;
@@ -54,3 +57,26 @@ module.exports.verifyRequestSignature = function(req, res, buf) {
 		}
 	}
 };
+
+module.exports.validateWebhook = function(req, res) {
+	if (
+		req.query['hub.mode'] === 'subscribe' &&
+		req.query['hub.verify_token'] === VALIDATION_TOKEN
+	) {
+		console.log("Validating webhook");
+		res.status(200).send(req.query['hub.challenge']);
+	}
+	else {
+		console.error("Failed validation. Make sure the validation tokens match.");
+		res.sendStatus(403);
+	}
+};
+
+module.exports.callSendAPI = function(messageData) {
+	request({
+		uri: 'https://graph.facebook.com/v2.6/me/messages',
+		qs: { access_token: PAGE_ACCESS_TOKEN },
+		method: 'POST',
+		json: messageData
+	});
+}
