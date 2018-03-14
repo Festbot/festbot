@@ -1,22 +1,45 @@
 'use strict';
 
+var senderId = null;
+
 const bodyParser = require('body-parser'),
 	config = require('config'),
 	express = require('express'),
 	https = require('https'),
 	fs = require('fs'),
 	messageParser = require('./messageParser'),
-	FacebookApi = require('./apiHelpers/facebook'),
+	FacebookAuth = require('./apiHelpers/facebook/auth'),
+	FacebookSend = require('./apiHelpers/facebook/sendApi'),
 	SpotifyApi = require('./apiHelpers/spotify');
 
 const app = express();
 app.set('port', process.env.PORT || 5000);
 app.set('view engine', 'ejs');
-app.use(bodyParser.json({ verify: FacebookApi.verifyRequestSignature }));
+app.use(bodyParser.json({ verify: FacebookAuth.verifyRequestSignature }));
 app.use(express.static('public'));
+
 app.get('/spotify-login', SpotifyApi.login);
-app.get('/webhook', FacebookApi.validateWebhook);
-app.get('/authorize', FacebookApi.authorize);
+app.get('/spotify-callback', (req, res) => {
+	SpotifyApi.callback(req, res).then((data) => {
+		const accessToken = data.accessToken;
+		SpotifyApi.getInfoAboutMyself(accessToken).then((data) => {
+			if (senderId) {
+				FacebookSend.sendImage(senderId, data.images[0].url);
+			}
+
+			SpotifyApi.getTopArtists(accessToken).then((topartists) => {
+				let artistsNames = '';
+				topartists.items.forEach(artist => {
+					artistsNames += ' ' + artist.name
+				});
+
+				FacebookSend.sendMessage(senderId, 'Your favorite artists are:' + artistsNames);
+			});
+		});
+	});
+});
+app.get('/webhook', FacebookAuth.validateWebhook);
+app.get('/authorize', FacebookAuth.authorize);
 
 app.post('/webhook', function (req, res) {
 	const data = req.body;
@@ -42,28 +65,17 @@ app.post('/webhook', function (req, res) {
 });
 
 function receivedMessage(event) {
-	var senderID = event.sender.id;
-	var recipientID = event.recipient.id;
-	var timeOfMessage = event.timestamp;
-	var message = event.message;
-
-	var isEcho = message.is_echo;
-	var messageId = message.mid;
-	var appId = message.app_id;
-	var metadata = message.metadata;
-
-	var messageText = message.text;
-	var messageAttachments = message.attachments;
-	var quickReply = message.quick_reply;
+	const messageText = event.message.text;
 
 	if (messageText) {
 		messageParser(messageText, function(response) {
-			console.log('send response', response);
+			senderId = event.sender.id;
 
-			FacebookApi.callSendAPI({
-				recipient: { id: senderID },
-				message: { text: response }
-			});
+			FacebookSend.sendMessage(senderId, response);
+
+			setTimeout(() => {
+				FacebookSend.sendLoginButton(senderId, 'https://eurorack.haveinstock.com:5000/spotify-login');
+			}, 1000);
 		});
 	}
 }

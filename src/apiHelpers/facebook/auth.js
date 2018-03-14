@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 const config = require('config');
-const request = require('request');
+const request = require('request-promise');
 
 // App Secret can be retrieved from the App Dashboard
 const APP_SECRET = config.get('appSecret');
@@ -71,12 +71,3 @@ module.exports.validateWebhook = function(req, res) {
 		res.sendStatus(403);
 	}
 };
-
-module.exports.callSendAPI = function(messageData) {
-	request({
-		uri: 'https://graph.facebook.com/v2.6/me/messages',
-		qs: { access_token: PAGE_ACCESS_TOKEN },
-		method: 'POST',
-		json: messageData
-	});
-}
