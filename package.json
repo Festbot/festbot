@@ -13,12 +13,13 @@
   },
   "author": "",
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.15.0",
     "config": "^1.20.4",
     "ejs": "^2.4.2",
     "express": "^4.13.4",
-    "request": "^2.72.0",
-    "ramda": "^0.25.0"
+    "ramda": "^0.25.0",
+    "request": "^2.85.0"
   },
   "engines": {
     "node": "~4.1.2"

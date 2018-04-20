@@ -2,5 +2,10 @@
     "appSecret": "e39381721d6441a383783aead28e0276",
     "pageAccessToken": "EAALnx14BiKcBAHKn0xopSfXhg1EtDMcHnw2oeMPZAyQlwU2qzrOACahbL3oleHVCsZAIEUZCQsQL2eOTe37QZAHgByYiLAFpaZAEfJkYNGZBV1nr8uoAXHY5WaqH3bCrEqjhUNeyU7fc13ZBWWlmddG80PFs7lqadZCGRoVlv4aADwZDZD",
     "validationToken": "TOKEN",
-    "serverURL": "to_be_set_manually"
+    "serverURL": "to_be_set_manually",
+    "spotify": {
+      "clientId": "a9e2d9e4fbd845e3ac54b4ab24c6a44d",
+      "clientSecret": "56318a6ca19f4bbd85c66c81a36c5cca",
+      "callbackUrl": "https://eurorack.haveinstock.com:5000/spotify-callback"
+    }
 }

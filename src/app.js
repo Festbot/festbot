@@ -20,20 +20,23 @@ app.use(express.static('public'));
 
 app.get('/spotify-login', SpotifyApi.login);
 app.get('/spotify-callback', (req, res) => {
-	SpotifyApi.callback(req, res).then((data) => {
+	SpotifyApi.callback(req, res).then(data => {
 		const accessToken = data.accessToken;
-		SpotifyApi.getInfoAboutMyself(accessToken).then((data) => {
+		SpotifyApi.getInfoAboutMyself(accessToken).then(data => {
 			if (senderId) {
 				FacebookSend.sendImage(senderId, data.images[0].url);
 			}
 
-			SpotifyApi.getTopArtists(accessToken).then((topartists) => {
+			SpotifyApi.getTopArtists(accessToken).then(topartists => {
 				let artistsNames = '';
 				topartists.items.forEach(artist => {
-					artistsNames += ' ' + artist.name
+					artistsNames += ' ' + artist.name;
 				});
 
-				FacebookSend.sendMessage(senderId, 'Your favorite artists are:' + artistsNames);
+				FacebookSend.sendMessage(
+					senderId,
+					'Your favorite artists are:' + artistsNames
+				);
 			});
 		});
 	});
@@ -41,7 +44,7 @@ app.get('/spotify-callback', (req, res) => {
 app.get('/webhook', FacebookAuth.validateWebhook);
 app.get('/authorize', FacebookAuth.authorize);
 
-app.post('/webhook', function (req, res) {
+app.post('/webhook', function(req, res) {
 	const data = req.body;
 
 	// Make sure this is a page subscription
@@ -54,7 +57,7 @@ app.post('/webhook', function (req, res) {
 
 			// Iterate over each messaging event
 			pageEntry.messaging.forEach(function(messagingEvent) {
-			if (messagingEvent.message) {
+				if (messagingEvent.message) {
 					receivedMessage(messagingEvent);
 				}
 			});
@@ -74,15 +77,24 @@ function receivedMessage(event) {
 			FacebookSend.sendMessage(senderId, response);
 
 			setTimeout(() => {
-				FacebookSend.sendLoginButton(senderId, 'https://eurorack.haveinstock.com:5000/spotify-login');
+				//FacebookSend.sendLoginButton(senderId, 'https://eurorack.haveinstock.com:5000/spotify-login');
+				FacebookSend.sendWebviewButton(senderId);
 			}, 1000);
 		});
 	}
 }
 
-https.createServer({
-	key: fs.readFileSync("../keys/eurorack_privatekey.pem"),
-	cert: fs.readFileSync("../keys/eurorack_certs.pem")
-}, app).listen(app.get('port'));
+https
+	.createServer(
+		{
+			key: fs.readFileSync('../keys/eurorack_privatekey.pem'),
+			cert: fs.readFileSync('../keys/eurorack_certs.pem')
+		},
+		app
+	)
+	.listen(app.get('port'));
+
+console.log('Setting up messenger profile...');
+FacebookSend.setUpMessengerProfile();
 
 module.exports = app;

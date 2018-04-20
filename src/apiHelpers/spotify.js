@@ -15,7 +15,8 @@ var state = '';
  */
 const generateRandomString = function(length) {
 	let text = '';
-	const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+	const possible =
+		'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
 	for (let i = 0; i < length; i++) {
 		text += possible.charAt(Math.floor(Math.random() * possible.length));
@@ -27,14 +28,16 @@ const generateRandomString = function(length) {
 module.exports.login = function(req, res) {
 	state = generateRandomString(16);
 
-	res.redirect('https://accounts.spotify.com/authorize?' +
-		querystring.stringify({
-			'response_type': 'code',
-			'client_id': CLIENT_ID,
-			'scope': 'user-read-private user-read-email user-top-read',
-			'redirect_uri': CALLBACK_URL,
-			'state': state
-		}));
+	res.redirect(
+		'https://accounts.spotify.com/authorize?' +
+			querystring.stringify({
+				response_type: 'code',
+				client_id: CLIENT_ID,
+				scope: 'user-read-private user-read-email user-top-read',
+				redirect_uri: CALLBACK_URL,
+				state: state
+			})
+	);
 };
 
 module.exports.callback = function(req, res) {
@@ -50,7 +53,9 @@ module.exports.callback = function(req, res) {
 			grant_type: 'authorization_code'
 		},
 		headers: {
-			'Authorization': 'Basic ' + (new Buffer(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64'))
+			Authorization:
+				'Basic ' +
+				new Buffer(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64')
 		},
 		json: true
 	};
@@ -62,18 +67,17 @@ module.exports.callback = function(req, res) {
 					accessToken: body.access_token,
 					refreshToken: body.refresh_token
 				});
-			}
-			else {
+			} else {
 				reject();
 			}
 		});
 	});
-}
+};
 
 module.exports.getInfoAboutMyself = function(accessToken) {
 	const options = {
 		url: 'https://api.spotify.com/v1/me',
-		headers: { 'Authorization': 'Bearer ' + accessToken },
+		headers: { Authorization: 'Bearer ' + accessToken },
 		json: true
 	};
 
@@ -82,12 +86,12 @@ module.exports.getInfoAboutMyself = function(accessToken) {
 			resolve(body);
 		});
 	});
-}
+};
 
 module.exports.getTopArtists = function(accessToken) {
 	const options = {
 		url: 'https://api.spotify.com/v1/me/top/artists',
-		headers: { 'Authorization': 'Bearer ' + accessToken },
+		headers: { Authorization: 'Bearer ' + accessToken },
 		json: true
 	};
 
@@ -96,4 +100,4 @@ module.exports.getTopArtists = function(accessToken) {
 			resolve(body);
 		});
 	});
-}
+};
