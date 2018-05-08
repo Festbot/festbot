@@ -41,7 +41,7 @@ module.exports.verifyRequestSignature = function(req, res, buf) {
 	if (!signature) {
 		// For testing, let's log an error. In production, you should throw an
 		// error.
-		console.error('Couldn\'t validate the signature.');
+		console.error("Couldn't validate the signature.");
 	} else {
 		const elements = signature.split('=');
 		const method = elements[0];
@@ -53,7 +53,7 @@ module.exports.verifyRequestSignature = function(req, res, buf) {
 			.digest('hex');
 
 		if (signatureHash != expectedHash) {
-			throw new Error('Couldn\'t validate the request signature.');
+			throw new Error("Couldn't validate the request signature.");
 		}
 	}
 };

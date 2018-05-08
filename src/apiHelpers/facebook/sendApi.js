@@ -1,7 +1,5 @@
 const config = require('config');
 const request = require('request-promise');
-const getPersistentMenu = requrire('./getPersistentMenu');
-const getGreetings = require('./greetings');
 
 const PAGE_ACCESS_TOKEN = config.get('pageAccessToken');
 
@@ -18,35 +16,55 @@ const callSendAPI = function(messageData) {
 		});
 };
 
-module.exports.sendMessage = function(recipientId, message) {
-	callSendAPI({
-		messaging_type: 'RESPONSE',
-		recipient: { id: recipientId },
-		message: { text: message }
+const sendTyping = function(recipientId, timeout) {
+	return new Promise((resolve, reject) => {
+		callSendAPI({
+			recipient: {
+				id: recipientId
+			},
+			sender_action: 'typing_on'
+		});
+
+		setTimeout(function() {
+			callSendAPI({
+				recipient: {
+					id: recipientId
+				},
+				sender_action: 'typing_off'
+			});
+
+			resolve();
+		}, timeout);
 	});
 };
 
-module.exports.setUpMessengerProfile = async function() {
-	try {
-		const response = await request({
-			uri: 'https://graph.facebook.com/v2.6/me/messenger_profile',
-			qs: { access_token: PAGE_ACCESS_TOKEN },
-			method: 'POST',
-			json: {
-				greeting: getGreetings(),
-				get_started: {
-					payload: 'ez kizard dolog, mert nem tudom'
-				},
-				persistent_menu: getPersistentMenu()
-			}
-		});
-		console.log(response);
-	} catch (e) {
-		console.log('fb api error: ', e);
+module.exports.sendMessage = async function(
+	recipientId,
+	message,
+	quickReplies = []
+) {
+	await sendTyping(recipientId, message.length * 100);
+
+	const obj = {
+		messaging_type: 'RESPONSE',
+		recipient: { id: recipientId },
+		message: {
+			text: message,
+		}
 	}
+
+	if (quickReplies.length > 0) {
+		obj.message.quick_replies = quickReplies.map(quickReply => ({
+			content_type: 'text',
+			title: quickReply.title,
+			payload: quickReply.payload
+		}));
+	}
+
+	callSendAPI(obj);
 };
 
-module.exports.sendLoginButton = function(recipientId, buttonUrl) {
+module.exports.sendLoginButton = function(recipientId, text, buttonUrl) {
 	callSendAPI({
 		recipient: { id: recipientId },
 		message: {
@@ -54,7 +72,7 @@ module.exports.sendLoginButton = function(recipientId, buttonUrl) {
 				type: 'template',
 				payload: {
 					template_type: 'button',
-					text: 'Tap the log in button!',
+					text: text,
 					buttons: [
 						{
 							type: 'account_link',
@@ -66,6 +84,22 @@ module.exports.sendLoginButton = function(recipientId, buttonUrl) {
 		}
 	});
 };
+
+module.exports.sendButtons = function(recipientId, text, buttons) {
+	callSendAPI({
+		recipient: { id: recipientId },
+		message: {
+			attachment: {
+				type: 'template',
+				payload: {
+					template_type: 'button',
+					text: text,
+					buttons: buttons
+				}
+			}
+		}
+	});
+}
 
 module.exports.sendImage = function(recipientId, imageUrl) {
 	callSendAPI({
