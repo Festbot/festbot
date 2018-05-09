@@ -6,28 +6,7 @@ const CLIENT_ID = config.get('spotify.clientId');
 const CLIENT_SECRET = config.get('spotify.clientSecret');
 const CALLBACK_URL = config.get('spotify.callbackUrl');
 
-var state = '';
-
-/**
- * Generates a random string containing numbers and letters
- * @param  {number} length The length of the string
- * @return {string} The generated string
- */
-const generateRandomString = function(length) {
-	let text = '';
-	const possible =
-		'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-	for (let i = 0; i < length; i++) {
-		text += possible.charAt(Math.floor(Math.random() * possible.length));
-	}
-
-	return text;
-};
-
 module.exports.login = function(req, res) {
-	state = generateRandomString(16);
-
 	res.redirect(
 		'https://accounts.spotify.com/authorize?' +
 			querystring.stringify({
@@ -35,13 +14,14 @@ module.exports.login = function(req, res) {
 				client_id: CLIENT_ID,
 				scope: 'user-read-private user-read-email user-top-read',
 				redirect_uri: CALLBACK_URL,
-				state: state
+				state: req.query.psid
 			})
 	);
 };
 
 module.exports.callback = function(req, res) {
 	const code = req.query.code || null;
+	const psid = req.query.state;
 
 	res.sendStatus(200);
 
@@ -65,7 +45,8 @@ module.exports.callback = function(req, res) {
 			if (!error && response.statusCode === 200) {
 				resolve({
 					accessToken: body.access_token,
-					refreshToken: body.refresh_token
+					refreshToken: body.refresh_token,
+					psid: psid
 				});
 			} else {
 				reject();

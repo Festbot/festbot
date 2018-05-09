@@ -37,7 +37,7 @@ module.exports.setUpMessengerProfile = async function() {
 				],
 				greeting: getGreetings(),
 				get_started: {
-					payload: 'getStarted'
+					payload: '/get-started'
 				},
 				persistent_menu: getPersistentMenu()
 			}
