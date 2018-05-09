@@ -30,7 +30,7 @@ module.exports = {
 
 		await FacebookSend.sendMessage(
 			psid,
-			i18n('Wouldn’t mind if I ask you little bit about you? ☺️', locale),
+			i18n('Wouldn’t mind if I ask you little bit about you?', locale) + ' ☺️',
 			[
 				{
 					title: i18n('No problem', locale) + ' ☺️',

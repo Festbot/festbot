@@ -1,6 +1,5 @@
 const config = require('config');
 const request = require('request-promise');
-const querystring = require('querystring');
 const md5 = require('md5');
 
 const ERROR_NOT_FOUND = 'not_found';
@@ -17,52 +16,42 @@ function generateDefaultUserData() {
 	};
 }
 
-async function getUserData(userId) {
+module.exports.getUserData = async function(userId) {
 	return request.get({
 		url: 'https://api.festbot.com/users/' + userId,
 		json: true
 	});
-}
+};
 
-async function addUser(userId) {
+module.exports.addUser = async function(userId) {
+	const userData = generateDefaultUserData();
+
 	const options = {
 		url: 'https://api.festbot.com/users/' + userId,
-		json: generateDefaultUserData()
+		json: userData
+	};
+
+	const response = await request.put(options);
+
+	console.log('adduser', response);
+
+	return {
+		...userData,
+		_id: response.id,
+		_rev: response.rev
+	};
+};
+
+module.exports.updateUserData = async function(userId, rev, data) {
+	const options = {
+		url: 'https://api.festbot.com/users/' + userId,
+		headers: { 'If-Match': rev },
+		json: data
 	};
 
 	return request.put(options);
-}
-
-async function updateUser(userId, rev, data) {
-	const options = {
-		url: 'https://api.festbot.com/users/' + userId,
-		headers: {'If-Match': rev},
-		json: data
-	}
-
-	return request.put(options);
-}
-
-const hashFacebookPSID = function(psid) {
-	return md5(psid);
 };
 
-module.exports.getUserDataCreateNewIfDoesntExists = async function(psid, userData) {
-	const userId = hashFacebookPSID(psid);
-
-	try {
-		const userData = await getUserData(userId);
-		return userData;
-	} catch ({ error }) {
-		console.log('error', error);
-		await addUser(userId);
-		return {
-			_id: userId,
-			...generateDefaultUserData(),
-			gender: userData.gender,
-			timezone: userData.timezone,
-			locale: userData.locale,
-			name: userData.name
-		};
-	}
+module.exports.hashFacebookPSID = function(psid) {
+	return md5(psid);
 };

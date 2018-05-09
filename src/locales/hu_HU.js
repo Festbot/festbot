@@ -5,11 +5,18 @@ module.exports = {
 	// Persistent menu
 	'At the festival': 'Fesztiválos dolgok',
 	'I need to pee': 'Pisilnem kell',
-	'I\'m hungry': 'Kajás vagyok',
+	"I'm hungry": 'Kajás vagyok',
 	'My agenda': 'Programom',
 	'Discover artists': 'Fellépők keresése',
 	'Change festival': 'Fesztivál aktiválása',
 
 	// Chats
-	'Hi! 👋  Lemme check out your Spotify profile so I can learn more about your musical taste.': 'Mutasad mar az idot tesa, de a telefonodon'
+	'Hey {name} I’m here to assist you with festival related questions and more.':
+		'Hey {name} I’m here to assist you with festival related questions and more.',
+	'I am so excited to getting know you better.':
+		'I am so excited to getting know you better.',
+	'Some of my services are based on your personal musical taste.':
+		'Some of my services are based on your personal musical taste.',
+	'Wouldn’t mind if I ask you little bit about you?':
+		'Wouldn’t mind if I ask you little bit about you?'
 };
