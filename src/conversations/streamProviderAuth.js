@@ -49,5 +49,12 @@ module.exports = {
 			'Tap the login button to connect your Spotify account!',
 			'https://eurorack.haveinstock.com:5000/spotify-login?psid=' + psid
 		);
+	},
+
+	dataReceived: async function({ psid, topArtists }) {
+		await FacebookSend.sendMessage(
+			psid,
+			'Wow! I see you like ' + topArtists[0] + ' and ' + topArtists[1] + ' 😏'
+		);
 	}
 };

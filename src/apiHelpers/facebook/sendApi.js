@@ -17,14 +17,14 @@ const callSendAPI = function(messageData) {
 };
 
 const sendTyping = function(recipientId, timeout) {
-	return new Promise((resolve, reject) => {
-		callSendAPI({
-			recipient: {
-				id: recipientId
-			},
-			sender_action: 'typing_on'
-		});
+	callSendAPI({
+		recipient: {
+			id: recipientId
+		},
+		sender_action: 'typing_on'
+	});
 
+	return new Promise((resolve, reject) => {
 		setTimeout(function() {
 			callSendAPI({
 				recipient: {
@@ -43,7 +43,7 @@ module.exports.sendMessage = async function(
 	message,
 	quickReplies = []
 ) {
-	await sendTyping(recipientId, message.length * 100);
+	await sendTyping(recipientId, message.length * 50);
 
 	const obj = {
 		messaging_type: 'RESPONSE',

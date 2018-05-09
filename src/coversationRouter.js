@@ -8,6 +8,7 @@ const routes = {
 	'/stream-provider-auth/select': StreamProviderAuth.select,
 	'/stream-provider-auth/select-later': StreamProviderAuth.selectLater,
 	'/stream-provider-auth/spotify': StreamProviderAuth.spotify,
+	'/stream-provider-auth/data-received': StreamProviderAuth.dataReceived
 };
 
 module.exports = async function(payload, context) {

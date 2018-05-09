@@ -21,16 +21,18 @@ app.use(bodyParser.json({ verify: FacebookAuth.verifyRequestSignature }));
 app.use(express.static('public'));
 
 app.get('/spotify-login', SpotifyApi.login);
-app.get('/spotify-callback', (req, res) => {
-	SpotifyApi.callback(req, res).then(({accessToken, psid}) => {
-		SpotifyApi.getInfoAboutMyself(accessToken).then(data => {
-			ContextProvider.set(psid, {
-				spotifyId: data.id,
-				spotifyCountry: data.country,
-				spotifyAccessToken: accessToken
-			});
-		});
+app.get('/spotify-callback', async function(req, res) {
+	const { accessToken, psid } = await SpotifyApi.callback(req, res);
+	const spotifyDdata = await SpotifyApi.getInfoAboutMyself(accessToken);
+	const topArtists = await SpotifyApi.getTopArtists(accessToken);
+	const newContext = await ContextProvider.set(psid, {
+		spotifyData: spotifyDdata,
+		spotifyTopArtists: topArtists,
+		topArtists: topArtists.items.map(artist => artist.name),
+		topGenres: topArtists.items.map(artist => artist.genres[0])
 	});
+
+	conversationRouter('/stream-provider-auth/data-received', newContext);
 });
 app.get('/webhook', FacebookAuth.validateWebhook);
 app.get('/authorize', FacebookAuth.authorize);
@@ -68,8 +70,16 @@ app.post('/webhook', function(req, res) {
 	res.sendStatus(200);
 });
 
-async function receivedPostback(senderId, payload) {
-	const context = await ContextProvider.get(senderId);
+async function receivedPostback(psid, payload) {
+	const context = await ContextProvider.get(psid);
+	const facebookData = await FacebookGraph.getUserInformation(psid);
+	if (!context.facebookData) {
+		await ContextProvider.set(psid, {
+			facebookData: facebookData,
+			name: facebookData.first_name
+		});
+	}
+
 	conversationRouter(payload, context);
 }
 

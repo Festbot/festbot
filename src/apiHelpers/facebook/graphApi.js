@@ -6,22 +6,16 @@ const getGreetings = require('./greetings');
 const PAGE_ACCESS_TOKEN = config.get('pageAccessToken');
 
 module.exports.getUserInformation = async function(psid) {
-	const userData = await request({
+	return await request({
 		uri: 'https://graph.facebook.com/v2.6/' + psid,
 		qs: {
-			fields: 'first_name,locale,timezone,gender',
+			fields:
+				'first_name,last_name,locale,timezone,gender,last_ad_referral,profile_pic,is_payment_enabled',
 			access_token: PAGE_ACCESS_TOKEN
 		},
 		method: 'GET',
 		json: true
 	});
-
-	return {
-		gender: userData.gender,
-		name: userData.first_name,
-		locale: userData.locale,
-		timezone: userData.timezone
-	}
 };
 
 module.exports.setUpMessengerProfile = async function() {

@@ -4,8 +4,8 @@ const NodeCache = require('node-cache');
 const cache = new NodeCache();
 
 const ConversationContextProvider = {
-	get: async function(psid) {
-		if (cache.get(psid)) {
+	get: async function(psid, force) {
+		if (cache.get(psid) && !force) {
 			return cache.get(psid);
 		}
 
@@ -19,12 +19,18 @@ const ConversationContextProvider = {
 			userData = await FestbotApi.addUser(festbotId);
 		}
 
-		cache.set(psid, userData);
-		return userData;
+		cache.set(psid, {
+			...userData,
+			psid: psid
+		});
+		return {
+			...userData,
+			psid: psid
+		};
 	},
 
 	set: async function(psid, newData) {
-		const oldData = await ConversationContextProvider.get(psid);
+		const oldData = await ConversationContextProvider.get(psid, true);
 
 		const userData = {
 			...oldData,
@@ -32,6 +38,8 @@ const ConversationContextProvider = {
 		};
 		await FestbotApi.updateUserData(oldData._id, oldData._rev, userData);
 		cache.set(psid, userData);
+
+		return userData;
 	}
 };
 
