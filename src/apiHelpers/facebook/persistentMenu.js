@@ -31,7 +31,8 @@ module.exports = function getPersistentMenu() {
 				type: 'nested',
 				call_to_actions: [
 					{
-						title: '🎧 ' + i18n('Connect streaming services', locale),
+						title:
+							'🎧 ' + i18n('Connect streaming services', locale),
 						type: 'postback',
 						payload: '/stream-provider-auth/confirm-select'
 					},
@@ -52,23 +53,34 @@ module.exports = function getPersistentMenu() {
 				]
 			},
 			{
-				title: '👩‍⚖️ ' + i18n('Legal stuff', locale),
+				title: '⚙️ ' + i18n('Settings & Help', locale),
 				type: 'nested',
 				call_to_actions: [
 					{
-						title: '🇪🇺 ' + i18n('GDPR', locale),
-						type: 'postback',
-						payload: '/legal/gdpr'
+						title: '👩‍⚖️  ' + i18n('Legal stuff', locale),
+						type: 'nested',
+						call_to_actions: [
+							{
+								title: '🇪🇺 ' + i18n('GDPR', locale),
+								type: 'postback',
+								payload: '/legal/gdpr'
+							},
+							{
+								title: '📗 ' + i18n('Terms of use', locale),
+								type: 'postback',
+								payload: '/legal/terms-of-use'
+							},
+							{
+								title: '🔒 ' + i18n('Privacy policy', locale),
+								type: 'postback',
+								payload: '/legal/privacy-policy'
+							}
+						]
 					},
 					{
-						title: '📗 ' + i18n('Terms of use', locale),
+						title: '🌐 ' + i18n('Language', locale),
 						type: 'postback',
-						payload: '/legal/terms-of-use'
-					},
-					{
-						title: '🔒 ' + i18n('Privacy policy', locale),
-						type: 'postback',
-						payload: '/legal/privacy-policy'
+						payload: '/settings/ask-language'
 					}
 				]
 			}

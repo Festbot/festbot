@@ -49,7 +49,9 @@ const StreamProviderAuth = {
 		);
 	},
 
-	dontWant: async function({ psid, locale }) {
+	dontWant: async function(context, router) {
+		const { psid, locale } = context;
+
 		await FacebookSend.sendMessage(
 			psid,
 			i18n('Cool. I heard that cassette is the new thing now.', locale) +
@@ -62,6 +64,8 @@ const StreamProviderAuth = {
 				locale
 			) + ' 😉'
 		);
+
+		router('/favorite-genres/random-artist', context);
 	},
 
 	spotify: async function({ psid, locale }) {

@@ -12,7 +12,7 @@ const bodyParser = require('body-parser'),
 	SpotifyApi = require('./apiHelpers/spotify'),
 	ContextProvider = require('./conversationContextProvider'),
 	FacebookGraph = require('./apiHelpers/facebook/graphApi'),
-	conversationRouter = require('./coversationRouter');
+	conversationRouter = require('./conversationRouter');
 
 const app = express();
 app.set('port', process.env.PORT || 5000);

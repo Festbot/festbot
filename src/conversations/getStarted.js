@@ -17,20 +17,21 @@ module.exports = {
 
 		await FacebookSend.sendMessage(
 			psid,
-			i18n('I am so excited to getting know you better.', locale) + ' 😍'
+			i18n("I can't wait to get to know you more!", locale) + ' 😍'
 		);
 
 		await FacebookSend.sendMessage(
 			psid,
 			i18n(
-				'Some of my services are based on your personal musical taste.',
+				'Some of my services are based on your musical taste.',
 				locale
 			) + ' 🧐'
 		);
 
 		await FacebookSend.sendMessage(
 			psid,
-			i18n('Wouldn’t mind if I ask you little bit about you?', locale) + ' ☺️',
+			i18n('I hope you wouldn’t mind if I ask a little bit about you.', locale) +
+				' ☺️',
 			[
 				{
 					title: i18n('No problem', locale) + ' ☺️',

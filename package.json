@@ -20,6 +20,7 @@
     "express": "^4.13.4",
     "md5": "^2.2.1",
     "node-cache": "^4.2.0",
+    "path-to-regexp": "^2.2.1",
     "ramda": "^0.25.0",
     "request": "^2.85.0",
     "request-promise": "^4.2.2"
