@@ -19,13 +19,13 @@ module.exports.login = function(req, res) {
 	);
 };
 
-module.exports.getAccessToken = function(req, res) {
+module.exports.getAccessToken = async function(req, res) {
 	const code = req.query.code || null;
 	const psid = req.query.state;
 
 	res.sendStatus(200);
 
-	const authOptions = {
+	const { access_token, refresh_token } = await request.post({
 		url: 'https://accounts.spotify.com/api/token',
 		form: {
 			code: code,
@@ -38,34 +38,20 @@ module.exports.getAccessToken = function(req, res) {
 				new Buffer(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64')
 		},
 		json: true
-	};
-
-	return new Promise((resolve, reject) => {
-		request.post(authOptions, function(error, response, body) {
-			if (!error && response.statusCode === 200) {
-				resolve({
-					accessToken: body.access_token,
-					refreshToken: body.refresh_token,
-					psid: psid
-				});
-			} else {
-				reject();
-			}
-		});
 	});
+
+	return {
+		accessToken: access_token,
+		refreshToken: refresh_token,
+		psid: psid
+	};
 };
 
-module.exports.getInfoAboutMyself = function(accessToken) {
-	const options = {
+module.exports.getInfoAboutMyself = async function(accessToken) {
+	return await request.get({
 		url: 'https://api.spotify.com/v1/me',
 		headers: { Authorization: 'Bearer ' + accessToken },
 		json: true
-	};
-
-	return new Promise((resolve, reject) => {
-		request.get(options, function(error, response, body) {
-			resolve(body);
-		});
 	});
 };
 
