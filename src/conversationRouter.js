@@ -21,8 +21,8 @@ const routes = [
 		handler: StreamProviderAuth.dontWant
 	},
 	{
-		route: '/stream-provider-auth/spotify',
-		handler: StreamProviderAuth.spotify
+		route: '/stream-provider-auth/auth/:provider',
+		handler: StreamProviderAuth.auth
 	},
 	{
 		route: '/stream-provider-auth/data-received',

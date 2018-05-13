@@ -1,20 +1,19 @@
 'use strict';
 
-var senderId = null;
-
-const bodyParser = require('body-parser'),
-	config = require('config'),
-	express = require('express'),
-	https = require('https'),
-	fs = require('fs'),
-	FacebookAuth = require('./apiHelpers/facebook/auth'),
-	FacebookSend = require('./apiHelpers/facebook/sendApi'),
-	SpotifyApi = require('./apiHelpers/spotify'),
-	ContextProvider = require('./conversationContextProvider'),
-	FacebookGraph = require('./apiHelpers/facebook/graphApi'),
-	conversationRouter = require('./conversationRouter');
-
+const bodyParser = require('body-parser');
+const config = require('config');
+const express = require('express');
+const https = require('https');
+const fs = require('fs');
+const FacebookAuth = require('./apiHelpers/facebook/auth');
+const FacebookSend = require('./apiHelpers/facebook/sendApi');
+const SpotifyApi = require('./apiHelpers/spotify');
+const ContextProvider = require('./conversationContextProvider');
+const FacebookGraph = require('./apiHelpers/facebook/graphApi');
+const DeezerApi = require('./apiHelpers/deezer');
+const conversationRouter = require('./conversationRouter');
 const app = express();
+
 app.set('port', process.env.PORT || 5000);
 app.set('view engine', 'ejs');
 app.use(bodyParser.json({ verify: FacebookAuth.verifyRequestSignature }));
@@ -30,6 +29,21 @@ app.get('/spotify-callback', async function(req, res) {
 		spotifyTopArtists: topArtists,
 		topArtists: topArtists.items.map(artist => artist.name),
 		topGenres: topArtists.items.map(artist => artist.genres[0])
+	});
+
+	conversationRouter('/stream-provider-auth/data-received', newContext);
+});
+app.get('/deezer-login', DeezerApi.login);
+app.get('/deezer-callback', async function(req, res) {
+	const { accessToken, psid } = DeezerApi.callback(req, res);
+
+	const spotifyDdata = await DeezerApi.getInfoAboutMyself(accessToken);
+	const topArtists = await DeezerApi.getTopArtists(accessToken);
+	const newContext = await ContextProvider.set(psid, {
+		deezerData: deezerData,
+		deezerTopArtists: topArtists
+		//topArtists: topArtists.items.map(artist => artist.name),
+		// topGenres: topArtists.items.map(artist => artist.genres[0])
 	});
 
 	conversationRouter('/stream-provider-auth/data-received', newContext);

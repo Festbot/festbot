@@ -7,5 +7,10 @@
       "clientId": "a9e2d9e4fbd845e3ac54b4ab24c6a44d",
       "clientSecret": "56318a6ca19f4bbd85c66c81a36c5cca",
       "callbackUrl": "https://eurorack.haveinstock.com:5000/spotify-callback"
+    },
+    "deezer": {
+      "applicationId": "280064",
+      "secretKey": "f06e541eb08c9426b6ec5eb3fccae779",
+      "callbackUrl": "https://eurorack.haveinstock.com:5000/deezer-callback"
     }
 }

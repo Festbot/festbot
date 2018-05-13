@@ -33,17 +33,17 @@ const StreamProviderAuth = {
 				{
 					type: 'postback',
 					title: 'Spotify',
-					payload: '/stream-provider-auth/spotify'
+					payload: '/stream-provider-auth/auth/spotify'
 				},
 				{
 					type: 'postback',
 					title: 'Apple Music',
-					payload: '/stream-provider-auth/applemusic'
+					payload: '/stream-provider-auth/auth/applemusic'
 				},
 				{
 					type: 'postback',
 					title: 'Deezer',
-					payload: '/stream-provider-auth/deezer'
+					payload: '/stream-provider-auth/auth/deezer'
 				}
 			]
 		);
@@ -68,15 +68,31 @@ const StreamProviderAuth = {
 		router('/favorite-genres/random-artist', context);
 	},
 
-	spotify: async function({ psid, locale }) {
-		await FacebookSend.sendLoginButton(
-			psid,
-			i18n(
-				'At this point I have to ask you to login using your Spotify account, at which I will retrieve the list of your most listened artists from Spotify.',
-				locale
-			),
-			'https://eurorack.haveinstock.com:5000/spotify-login?psid=' + psid
-		);
+	auth: async function({ psid, locale }, router, param) {
+		switch (param) {
+			case 'spotify':
+				await FacebookSend.sendLoginButton(
+					psid,
+					i18n(
+						'At this point I have to ask you to login using your Spotify account, at which I will retrieve the list of your most listened artists from Spotify.',
+						locale
+					),
+					'https://eurorack.haveinstock.com:5000/spotify-login?psid=' +
+						psid
+				);
+				break;
+			case 'deezer':
+				await FacebookSend.sendLoginButton(
+					psid,
+					i18n(
+						'At this point I have to ask you to login using your Deezer account, at which I will retrieve the list of your most listened artists from Deezer.',
+						locale
+					),
+					'https://eurorack.haveinstock.com:5000/deezer-login?psid=' +
+						psid
+				);
+				break;
+		}
 	},
 
 	dataReceived: async function({ psid, topArtists, locale }) {
