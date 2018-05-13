@@ -1,5 +1,5 @@
 const config = require('config');
-const request = require('request');
+const request = require('request-promise');
 const querystring = require('querystring');
 
 const CLIENT_ID = config.get('spotify.clientId');
@@ -19,7 +19,7 @@ module.exports.login = function(req, res) {
 	);
 };
 
-module.exports.callback = function(req, res) {
+module.exports.getAccessToken = function(req, res) {
 	const code = req.query.code || null;
 	const psid = req.query.state;
 
@@ -69,16 +69,11 @@ module.exports.getInfoAboutMyself = function(accessToken) {
 	});
 };
 
-module.exports.getTopArtists = function(accessToken) {
-	const options = {
+module.exports.getTopArtists = async function(accessToken) {
+	const data = await request.get({
 		url: 'https://api.spotify.com/v1/me/top/artists',
 		headers: { Authorization: 'Bearer ' + accessToken },
 		json: true
-	};
-
-	return new Promise((resolve, reject) => {
-		request.get(options, function(error, response, body) {
-			resolve(body);
-		});
 	});
+	return data.items.map(artist => artist.name);
 };

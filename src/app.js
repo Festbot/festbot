@@ -21,29 +21,22 @@ app.use(express.static('public'));
 
 app.get('/spotify-login', SpotifyApi.login);
 app.get('/spotify-callback', async function(req, res) {
-	const { accessToken, psid } = await SpotifyApi.callback(req, res);
-	const spotifyDdata = await SpotifyApi.getInfoAboutMyself(accessToken);
-	const topArtists = await SpotifyApi.getTopArtists(accessToken);
+	const { accessToken, psid } = await SpotifyApi.getAccessToken(req, res);
 	const newContext = await ContextProvider.set(psid, {
-		spotifyData: spotifyDdata,
-		spotifyTopArtists: topArtists,
-		topArtists: topArtists.items.map(artist => artist.name),
-		topGenres: topArtists.items.map(artist => artist.genres[0])
+		spotifyAccessToken: accessToken,
+		topArtists: await SpotifyApi.getTopArtists(accessToken),
+		topGenres: ['pinarock']
 	});
 
 	conversationRouter('/stream-provider-auth/data-received', newContext);
 });
 app.get('/deezer-login', DeezerApi.login);
 app.get('/deezer-callback', async function(req, res) {
-	const { accessToken, psid } = DeezerApi.callback(req, res);
-
-	const spotifyDdata = await DeezerApi.getInfoAboutMyself(accessToken);
-	const topArtists = await DeezerApi.getTopArtists(accessToken);
+	const { accessToken, psid } = await DeezerApi.getAccessToken(req, res);
 	const newContext = await ContextProvider.set(psid, {
-		deezerData: deezerData,
-		deezerTopArtists: topArtists
-		//topArtists: topArtists.items.map(artist => artist.name),
-		// topGenres: topArtists.items.map(artist => artist.genres[0])
+		deezerAccesToken: accessToken,
+		topArtists: await DeezerApi.getTopArtists(accessToken),
+		topGenres: ['pinarock']
 	});
 
 	conversationRouter('/stream-provider-auth/data-received', newContext);
