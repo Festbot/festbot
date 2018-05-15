@@ -4,6 +4,7 @@ const AtTheFestival = require('./conversations/atTheFestival');
 const FavoriteGenres = require('./conversations/favroiteGenres');
 const Settings = require('./conversations/settings');
 const pathToRegexp = require('path-to-regexp');
+const SobrietyTest = require('./conversations/sobrietyTest');
 
 const routes = [
 	{ route: '/get-started', handler: GetStarted.getStarted },
@@ -39,11 +40,31 @@ const routes = [
 	},
 
 	{ route: '/settings/ask-language', handler: Settings.askLanguage },
-	{ route: '/settings/set-language/:language', handler: Settings.setLanguage }
+	{
+		route: '/settings/set-language/:language',
+		handler: Settings.setLanguage
+	},
+
+	{
+		route: '/sobriety-test/how-many-drinks',
+		handler: SobrietyTest.howManyDrinks
+	},
+	{
+		route: '/sobriety-test/how-many-fingers/:drunkness',
+		handler: SobrietyTest.howManyFingers
+	},
+	{
+		route: '/sobriety-test/dont-text-your-ex/:drunkness',
+		handler: SobrietyTest.dontTextYourEx
+	},
+	{
+		route: '/sobriety-test/do-you-know-where-you-are',
+		handler: SobrietyTest.doYouknowWhereYouAre
+	}
+
 ].map(route => ({ ...route, regex: pathToRegexp(route.route) }));
 
 const router = async function(payload, context) {
-
 	for (let i = 0; i < routes.length; i++) {
 		if (routes[i].regex.test(payload)) {
 			[, param] = payload.match(routes[i].regex);

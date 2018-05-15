@@ -1,22 +1,16 @@
-const FacebookSend = require('../apiHelpers/facebook/sendApi');
+const Send = require('../send');
 const i18n = require('../i18n');
 
 module.exports = {
-	toilet: async function({ name, locale, psid }) {
-		await FacebookSend.sendMessage(
-			psid,
-			i18n('And now what? Go to the toilet!', locale) + ' 🚽'
-		);
+	toilet: async function(context) {
+		await Send.message(context, 'And now what? Go to the toilet!', '🚽');
 	},
 
-	food: async function({ name, locale, psid }) {
-		await FacebookSend.sendMessage(psid, i18n('Mee too...', locale) + ' 😞');
+	food: async function(context) {
+		await Send.message(context, 'Mee too...', '😞');
 	},
 
-	agenda: async function({ name, locale, psid }) {
-		await FacebookSend.sendMessage(
-			psid,
-			i18n('Sorry, what?', locale) + ' 😕'
-		);
+	agenda: async function(context) {
+		await Send.message(context, 'Sorry, what?', '😕');
 	}
 };

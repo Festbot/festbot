@@ -23,6 +23,11 @@ module.exports = function getPersistentMenu() {
 						title: '📅  ' + i18n('My agenda', locale),
 						type: 'postback',
 						payload: '/at-the-festival/agenda'
+					},
+					{
+						title: '😜 ' + i18n('Sobriety test', locale),
+						type: 'postback',
+						payload: '/sobriety-test/how-many-drinks'
 					}
 				]
 			},

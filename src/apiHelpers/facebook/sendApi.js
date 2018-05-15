@@ -54,11 +54,7 @@ module.exports.sendMessage = async function(
 	}
 
 	if (quickReplies.length > 0) {
-		obj.message.quick_replies = quickReplies.map(quickReply => ({
-			content_type: 'text',
-			title: quickReply.title,
-			payload: quickReply.payload
-		}));
+		obj.message.quick_replies = quickReplies;
 	}
 
 	callSendAPI(obj);
