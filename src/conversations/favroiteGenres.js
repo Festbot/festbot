@@ -1,4 +1,4 @@
-const FacebookSend = require('../apiHelpers/facebook/sendApi');
+const Send = require('../send');
 const i18n = require('../i18n');
 
 function getRandomArtist(voltmar) {
@@ -18,19 +18,20 @@ function isRock(artist) {
 module.exports = {
 	randomArtist: async function({ psid, locale }) {
 		const artist = getRandomArtist();
+		const t = i18n(locale);
 
-		FacebookSend.sendMessage(psid, 'Do you like ' + artist.name + '?', [
+		Send.message(psid, t`Do you like ${artist.name}?`, [
 			{
-				title: i18n('Yes', locale) + isRock(artist) ? ' 😎🎸🤘' : ' 😍',
-				payload: '/favorite-genres/like/' + '0'
+				title: t`Yes` + isRock(artist) ? ' 😎🎸🤘' : ' 😍',
+				to: '/favorite-genres/like/' + '0'
 			},
 			{
-				title: i18n('Not really', locale) + ' 🙄',
-				payload: '/favorite-genres/dont-like/' + '0'
+				title: t`Not really` + ' 🙄',
+				to: '/favorite-genres/dont-like/' + '0'
 			},
 			{
-				title: i18n('Never heard of it', locale) + ' 😅',
-				payload: '/favorite-genres/dont-like/' + '0'
+				title: t`Never heard of it` + ' 😅',
+				to: '/favorite-genres/dont-like/' + '0'
 			}
 		]);
 	}

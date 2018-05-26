@@ -1,42 +1,39 @@
 const Send = require('../send');
+const i18n = require('../i18n');
 
 module.exports = {
-	howManyDrinks: async function(context) {
+	howManyDrinks: async function({ psid, locale }) {
+		const t = i18n(locale);
+
 		await Send.message(
-			context,
-			"Okay, let's do this! How many drinks have you had?",
-			'🍺🍷🍸',
+			psid,
+			t`Okay, let's do this! How many drinks have you had?` + ' 🍺🍷🍸',
 			[
 				{
-					title: 'Just one',
-					emoji: '😊',
+					title: t`Just one` + '😊',
 					to: '/sobriety-test/not-drunk/'
 				},
 				{
-					title: 'Two',
-					emoji: '😎️',
+					title: t`Two` + ' 😎️',
 					to: '/sobriety-test/how-many-fingers/' + 2
 				},
 				{
-					title: 'Three',
-					emoji: '🙄',
+					title: t`Three` + ' 🙄',
 					to: '/sobriety-test/how-many-fingers/' + 3
 				},
 				{
-					title: 'Four or more',
-					emoji: '😜',
+					title: t`Four or more` + ' 😜',
 					to: '/sobriety-test/how-many-fingers/' + 4
 				},
 				{
-					title: "I didn't count",
-					emoji: '😗',
+					title: t`I didn't count` + ' 😗',
 					to: '/sobriety-test/how-many-fingers/' + 5
 				}
 			]
 		);
 	},
 
-	howManyFingers: async function(context, router, param) {
+	howManyFingers: async function({ psid, locale }, router, param) {
 		const drunkness = parseInt(param, 10);
 		const random = Math.floor(Math.random() * 7) + 3;
 		const coin = Math.random() > 0.5;
@@ -53,11 +50,11 @@ module.exports = {
 			'🖐️✌️🤞',
 			'🖐️🖐️'
 		];
+		const t = i18n(locale);
 
 		await Send.message(
-			context,
-			'How many fingers am I holding up?',
-			fingers[random],
+			psid,
+			t`How many fingers am I holding up?` + ' ' + fingers[random],
 			[
 				{
 					title: random + (coin ? 1 : -1),
@@ -79,44 +76,39 @@ module.exports = {
 		);
 	},
 
-	dontTextYourEx: async function(context) {
+	dontTextYourEx: async function({ psid, locale }) {
+		const t = i18n(locale);
 		await Send.message(
-			context,
-			"I hope you're not planning to text your ex!",
-			'🙄',
+			psid,
+			t`I hope you're not planning to text your ex!` + ' 🙄',
 			[
 				{
-					title: 'I just did',
-					emoji: '😗',
+					title: t`I just did` + ' 😗',
 					to: '/sobriety-test/do-you-know-where-you-are'
 				},
 				{
-					title: 'Good idea!',
-					emoji: '😁',
+					title: t`Good idea!` + ' 😁',
 					to: '/sobriety-test/do-you-know-where-you-are'
 				},
-				{ title: 'Not gonna happen', emoji: '😅', to: '' }
+				{
+					title: t`Not gonna happen` + ' 😅',
+					to: ''
+				}
 			]
 		);
 	},
 
-	doYouknowWhereYouAre: async function(context) {
-		await Send.message(
-			context,
-			'Do you know where you are?',
-			'🙄',
-			[
-				{
-					title: 'With my friends',
-					emoji: '😗',
-					to: '/sobriety-test/stop-drinking'
-				},
-				{
-					title: 'What does it matter?',
-					emoji: '😗',
-					to: '/sobriety-test/stop-drinking'
-				}
-			]
-		);
+	doYouknowWhereYouAre: async function({ psid, locale }) {
+		const t = i18n(locale);
+		await Send.message(psid, t`Do you know where you are?` + ' 🙄', [
+			{
+				title: t`With my friends` + ' 😗',
+				to: '/sobriety-test/stop-drinking'
+			},
+			{
+				title: t`What does it matter?` + ' 😗',
+				to: '/sobriety-test/stop-drinking'
+			}
+		]);
 	}
 };

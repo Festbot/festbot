@@ -1,19 +1,29 @@
 const FacebookSendApi = require('./apiHelpers/facebook/sendApi');
-const i18n = require('./i18n');
 
-module.exports.message = function(
-	{ psid, locale },
-	message,
-	emoji,
-	quickReplies
-) {
+module.exports.message = function(psid, message, quickReplies = []) {
 	FacebookSendApi.sendMessage(
 		psid,
-		i18n(message, locale) + ' ' + emoji,
+		message,
 		quickReplies.map(quickReply => ({
 			content_type: 'text',
 			payload: quickReply.to,
-			title: i18n(quickReply.title, locale) + ' ' + quickReply.emoji
+			title: quickReply.title
+		}))
+	);
+};
+
+module.exports.loginButton = function(psid, message, url) {
+	FacebookSendApi.sendLoginButton(psid, message, url);
+};
+
+module.exports.buttons = function(psid, message, buttons) {
+	FacebookSendApi.sendButtons(
+		psid,
+		message,
+		buttons.map(button => ({
+			type: 'postback',
+			title: button.title,
+			payload: button.to
 		}))
 	);
 };

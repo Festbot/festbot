@@ -1,45 +1,38 @@
-const FacebookSend = require('../apiHelpers/facebook/sendApi');
-const FacebookGraph = require('../apiHelpers/facebook/graphApi');
-const FestbotApi = require('../apiHelpers/festbot');
+const Send = require('../send');
 const i18n = require('../i18n');
 
 module.exports = {
-	getStarted: async function({ name, locale, psid }) {
-		await FacebookSend.sendMessage(
+	getStarted: async function({ psid, locale, name }) {
+		const t = i18n(locale);
+
+		await Send.message(
 			psid,
-			i18n(
-				'Hey ' +
-					name +
-					', I’m here to assist you with festival related questions and more.',
-				locale
-			) + ' 😎'
+			t`Hey ${name}, I’m here to assist you with festival related things.` +
+				' 😎'
 		);
 
-		await FacebookSend.sendMessage(
+		await Send.message(
 			psid,
-			i18n("I can't wait to get to know you more!", locale) + ' 😍'
+			t`I can't wait to get to know you more!` + ' 😍'
 		);
 
-		await FacebookSend.sendMessage(
+		await Send.message(
 			psid,
-			i18n(
-				'Some of my services are based on your musical taste.',
-				locale
-			) + ' 🧐'
+			t`Some of my services are based on your musical taste.` + ' 🧐'
 		);
 
-		await FacebookSend.sendMessage(
+		await Send.message(
 			psid,
-			i18n('I hope you wouldn’t mind if I ask a little bit about you.', locale) +
+			t`I hope you wouldn’t mind if I ask a little bit about you.` +
 				' ☺️',
 			[
 				{
-					title: i18n('No problem', locale) + ' ☺️',
-					payload: '/stream-provider-auth/confirm-select'
+					title: t`No problem` + ' ☺️',
+					to: '/stream-provider-auth/confirm-select'
 				},
 				{
-					title: i18n('Maybe later', locale) + ' 🤔',
-					payload: '/stream-provider-auth/select-later'
+					title: t`Maybe later` + ' 🤔',
+					to: '/stream-provider-auth/select-later'
 				}
 			]
 		);

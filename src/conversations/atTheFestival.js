@@ -2,15 +2,18 @@ const Send = require('../send');
 const i18n = require('../i18n');
 
 module.exports = {
-	toilet: async function(context) {
-		await Send.message(context, 'And now what? Go to the toilet!', '🚽');
+	toilet: async function({ psid, locale }) {
+		const t = i18n(locale);
+		await Send.message(psid, t`And now what? Go to the toilet!` + ' 🚽');
 	},
 
-	food: async function(context) {
-		await Send.message(context, 'Mee too...', '😞');
+	food: async function({ psid, locale }) {
+		const t = i18n(locale);
+		await Send.message(psid, t`Mee too...` + ' 😞');
 	},
 
-	agenda: async function(context) {
-		await Send.message(context, 'Sorry, what?', '😕');
+	agenda: async function({ psid, locale }) {
+		const t = i18n(locale);
+		await Send.message(psid, t`Sorry, what?` + ' 😕');
 	}
 };

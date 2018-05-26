@@ -1,49 +1,42 @@
-const FacebookSend = require('../apiHelpers/facebook/sendApi');
+const Send = require('../send');
 const i18n = require('../i18n');
 
 const StreamProviderAuth = {
 	confirmSelect: async function({ psid, locale }) {
-		await FacebookSend.sendMessage(
+		const t = i18n(locale);
+		await Send.message(
 			psid,
-			i18n(
-				'Do you use Spotify, Apple Music or Deezer to stream music?',
-				locale
-			),
+			t`Do you use Spotify, Apple Music or Deezer to stream music?`,
 			[
 				{
-					title: i18n('Yes', locale) + ' 😎',
-					payload: '/stream-provider-auth/select'
+					title: t`Yes` + ' 😎',
+					to: '/stream-provider-auth/select'
 				},
 				{
-					title: i18n('Only vinyl', locale) + ' 🤓',
-					payload: '/stream-provider-auth/dont-want'
+					title: t`Only vinyl` + ' 🤓',
+					to: '/stream-provider-auth/dont-want'
 				}
 			]
 		);
 	},
 
 	select: async function({ psid, locale }) {
-		await FacebookSend.sendButtons(
+		const t = i18n(locale);
+		await Send.buttons(
 			psid,
-			i18n(
-				'Please select your music streaming provider from the list below:',
-				locale
-			),
+			t`Please select your music streaming provider from the list below:`,
 			[
 				{
-					type: 'postback',
 					title: 'Spotify',
-					payload: '/stream-provider-auth/auth/spotify'
+					to: '/stream-provider-auth/auth/spotify'
 				},
 				{
-					type: 'postback',
 					title: 'Apple Music',
-					payload: '/stream-provider-auth/auth/applemusic'
+					to: '/stream-provider-auth/auth/applemusic'
 				},
 				{
-					type: 'postback',
 					title: 'Deezer',
-					payload: '/stream-provider-auth/auth/deezer'
+					to: '/stream-provider-auth/auth/deezer'
 				}
 			]
 		);
@@ -51,43 +44,37 @@ const StreamProviderAuth = {
 
 	dontWant: async function(context, router) {
 		const { psid, locale } = context;
+		const t = i18n(locale);
 
-		await FacebookSend.sendMessage(
+		await Send.message(
 			psid,
-			i18n('Cool. I heard that cassette is the new thing now.', locale) +
-				' 😉'
+			t`Cool. I heard that cassette is the new thing now.` + ' 😉'
 		);
-		await FacebookSend.sendMessage(
+		await Send.message(
 			psid,
-			i18n(
-				'If you ever change your mind, you can reach this function from the menu.',
-				locale
-			) + ' 😉'
+			t`If you ever change your mind, you can reach this function from the menu.` +
+				' 😉'
 		);
 
 		router('/favorite-genres/random-artist', context);
 	},
 
 	auth: async function({ psid, locale }, router, param) {
+		const t = i18n(locale);
+
 		switch (param) {
 			case 'spotify':
-				await FacebookSend.sendLoginButton(
+				await Send.loginButton(
 					psid,
-					i18n(
-						'At this point I have to ask you to login using your Spotify account, at which I will retrieve the list of your most listened artists from Spotify.',
-						locale
-					),
+					t`At this point I have to ask you to login using your Spotify account, at which I will retrieve the list of your most listened artists from Spotify.`,
 					'https://eurorack.haveinstock.com:5000/spotify-login?psid=' +
 						psid
 				);
 				break;
 			case 'deezer':
-				await FacebookSend.sendLoginButton(
+				await Send.loginButton(
 					psid,
-					i18n(
-						'At this point I have to ask you to login using your Deezer account, at which I will retrieve the list of your most listened artists from Deezer.',
-						locale
-					),
+					t`At this point I have to ask you to login using your Deezer account, at which I will retrieve the list of your most listened artists from Deezer.`,
 					'https://eurorack.haveinstock.com:5000/deezer-login?psid=' +
 						psid
 				);
@@ -95,28 +82,21 @@ const StreamProviderAuth = {
 		}
 	},
 
-	dataReceived: async function({ psid, topArtists, locale }) {
-		await FacebookSend.sendMessage(
+	dataReceived: async function(context) {
+		const { psid, topArtists, locale } = context;
+		const t = i18n(locale);
+		await Send.message(
 			psid,
-			i18n(
-				'Wow! I see you like ' +
-					topArtists[0] +
-					' and ' +
-					topArtists[1] +
-					' 😏',
-				locale
-			)
+			t`Wow! I see you like ${topArtists[0]} and ${topArtists[1]}` + ' 😏'
 		);
-
-		StreamProviderAuth.notice({ psid, locale });
+		StreamProviderAuth.notice(context);
 	},
 
 	notice: async function({ psid, locale }) {
-		await FacebookSend.sendMessage(
+		await Send.message(
 			psid,
-			i18n(
-				'Btw. if you ever wan\'t me to forget these things about you, just type "forget me" into the chat. 😉'
-			)
+			`Btw. if you ever wan\'t me to forget these things about you, just type "forget me" into the chat.` +
+				' 😉'
 		);
 	}
 };

@@ -4,8 +4,8 @@
   "description": "",
   "main": "src/app.js",
   "scripts": {
-    "start": "node src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run test && node src/app.js",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
     "ejs": "^2.4.2",
     "express": "^4.13.4",
     "md5": "^2.2.1",
+    "mocha": "^5.2.0",
     "node-cache": "^4.2.0",
     "path-to-regexp": "^2.2.1",
     "ramda": "^0.25.0",

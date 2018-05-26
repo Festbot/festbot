@@ -11,8 +11,8 @@ module.exports = {
 	'Change festival': 'Fesztivál aktiválása',
 
 	// Chats
-	'Hey {name} I’m here to assist you with festival related questions and more.':
-		'Hey {name} I’m here to assist you with festival related questions and more.',
+	'Hey {1}, I’m here to assist you with festival related things.':
+		'Hey {1}, I’m here to assist you with festival related things.',
 	'I am so excited to getting know you better.':
 		'I am so excited to getting know you better.',
 	'Some of my services are based on your personal musical taste.':

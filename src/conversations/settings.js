@@ -1,4 +1,4 @@
-const FacebookSend = require('../apiHelpers/facebook/sendApi');
+const Send = require('../send');
 const i18n = require('../i18n');
 
 const languages = [
@@ -7,22 +7,21 @@ const languages = [
 ];
 
 module.exports = {
-	askLanguage: async function({ psid, locale }) {
-		FacebookSend.sendMessage(
+	askLanguage: async function({ locale, psid }) {
+		const t = i18n(locale);
+		Send.message(
 			psid,
-			i18n('I know a few languages, which one do you prefer?') + ' 😎',
+			t`I know a few languages, which one do you prefer?` + '😎',
 			languages.map(language => ({
 				title: language.title + ' ' + language.emoji,
-				payload: '/settings/set-language/' + language.code
+				to: '/settings/set-language/' + language.code
 			}))
 		);
 	},
 
-	setLanguage: async function({ psid, locale }, router, param) {
-		FacebookSend.sendMessage(
-			psid,
-			i18n('Ezt választottad: ' + param) + ' 😎'
-		);
+	setLanguage: async function({ locale, psid }, router, param) {
+		const t = i18n(locale);
+		Send.message(psid, t`Ezt választottad: ` + param + ' 😎');
 		return { locale: 'hu_HU' };
 	}
 };
