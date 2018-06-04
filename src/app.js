@@ -90,15 +90,9 @@ async function receivedPostback(psid, payload) {
 	conversationRouter(payload, context);
 }
 
-https
-	.createServer(
-		{
-			key: fs.readFileSync('../keys/eurorack_privatekey.pem'),
-			cert: fs.readFileSync('../keys/eurorack_certs.pem')
-		},
-		app
-	)
-	.listen(app.get('port'));
+app.listen(app.get('port'), () => {
+	console.log('Listening on port ' + app.get('port'));
+});
 
 console.log('Setting up messenger profile...');
 FacebookGraph.setUpMessengerProfile();
