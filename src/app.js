@@ -94,7 +94,7 @@ app.listen(app.get('port'), () => {
 	console.log('Listening on port ' + app.get('port'));
 });
 
-console.log('Setting up messenger profile...');
-FacebookGraph.setUpMessengerProfile();
+//console.log('Setting up messenger profile...');
+//FacebookGraph.setUpMessengerProfile();
 
 module.exports = app;
