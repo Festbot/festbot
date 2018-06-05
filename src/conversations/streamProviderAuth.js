@@ -41,7 +41,7 @@ const dontWant = function*({ i18n: t }) {
 		' 😉';
 };
 
-const auth = function*({ i18n: t }, param) {
+const auth = function*({ i18n: t, psid }, param) {
 	switch (param) {
 		case 'spotify':
 			return {
