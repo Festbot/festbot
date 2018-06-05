@@ -4,8 +4,9 @@
   "description": "",
   "main": "src/app.js",
   "scripts": {
-    "start": "npm run test && node src/app.js",
-    "test": "mocha"
+    "start": "node src/app.js",
+    "test": "mocha",
+    "postinstall": "npm run test"
   },
   "repository": {
     "type": "git",
@@ -15,12 +16,10 @@
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.15.0",
-    "chai": "^4.1.2",
     "config": "^1.30.0",
     "ejs": "^2.4.2",
     "express": "^4.13.4",
     "md5": "^2.2.1",
-    "mocha": "^5.2.0",
     "node-cache": "^4.2.0",
     "path-to-regexp": "^2.2.1",
     "ramda": "^0.25.0",
@@ -32,6 +31,8 @@
     "npm": ">=5.6.0"
   },
   "devDependencies": {
-    "is-generator-function": "^1.0.7"
+    "is-generator-function": "^1.0.7",
+    "mocha": "^5.2.0",
+    "chai": "^4.1.2"
   }
 }
