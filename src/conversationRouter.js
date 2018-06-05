@@ -80,7 +80,7 @@ const matchRoute = function(routes, payload) {
 };
 
 const router = async function(payload, context) {
-	const route = matchRoute(routes);
+	const route = matchRoute(routes, payload);
 	let message = '';
 	while ((message = route.handler(context, router, param).next().value)) {
 		if (typeof message === 'string') {
