@@ -27,7 +27,7 @@ const howManyDrinks = function*({ i18n: t }) {
 	};
 };
 
-const howManyFingers = function*({ i18n: t }, router, param) {
+const howManyFingers = function*({ i18n: t }, param) {
 	const drunkness = parseInt(param, 10);
 	const random = Math.floor(Math.random() * 7) + 3;
 	const coin = Math.random() > 0.5;

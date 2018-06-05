@@ -34,16 +34,14 @@ const select = function*({ i18n: t }) {
 	};
 };
 
-const dontWant = function*(context, router) {
-	const { i18n: t } = context;
-
+const dontWant = function*({ i18n: t }) {
 	yield t`Cool. I heard that cassette is the new thing now.` + ' 😉';
 
 	yield t`If you ever change your mind, you can reach this function from the menu.` +
 		' 😉';
 };
 
-const auth = function*({ i18n: t }, router, param) {
+const auth = function*({ i18n: t }, param) {
 	switch (param) {
 		case 'spotify':
 			return {
@@ -70,7 +68,7 @@ const notice = function*({ i18n: t }) {
 };
 
 const dataReceived = function*(context) {
-	const { i18n: t, topArtists } = context;
+	const { i18n: t, topArtists = [] } = context;
 	return t`Wow! I see you like ${topArtists[0]} and ${topArtists[1]}` + ' 😏';
 	notice(context);
 };

@@ -1,4 +1,9 @@
-const { routes, matchRoute } = require('../src/conversationRouter');
+const {
+	routes,
+	matchRoute,
+	router,
+	execRoute
+} = require('../src/conversationRouter');
 const assert = require('chai').assert;
 const isGeneratorFunction = require('is-generator-function');
 
@@ -18,7 +23,7 @@ describe('testing routes', function() {
 
 describe('testing matchRoute', function() {
 	routes.forEach(route => {
-		it ('route ' + route.route + ' should match', function() {
+		it('route ' + route.route + ' should match', function() {
 			assert.doesNotThrow(function() {
 				matchRoute(routes, route.route);
 			}, Error);
@@ -36,8 +41,19 @@ describe('testing matchRoute', function() {
 	});
 
 	it('matches param', function() {
-		const { param } = matchRoute(routes, '/settings/set-language/hu_HU')
+		const { param } = matchRoute(routes, '/settings/set-language/hu_HU');
 		assert.isString(param);
 		assert.strictEqual(param, 'hu_HU');
+	});
+});
+
+describe('testing execRoute', function() {
+	routes.forEach(route => {
+		it('route ' + route.route + ' should match', function() {
+			assert.doesNotThrow(function() {
+				const match = matchRoute(routes, route.route);
+				execRoute(match, {}, function() {});
+			}, Error);
+		});
 	});
 });

@@ -79,24 +79,38 @@ const matchRoute = function(routes, payload) {
 	throw new Error('Unhandled route: ' + payload);
 };
 
-const router = async function(payload, context) {
-	const route = matchRoute(routes, payload);
+const execRoute = async function(route, context, callback) {
+	const iterator = route.handler(
+		{ ...context, i18n: i18n(context.locale) },
+		route.param
+	);
 	let message = '';
-	while (
-		(message = route
-			.handler({ ...context, i18n: i18n(context.locale) }, router, param)
-			.next().value)
-	) {
-		if (typeof message === 'string') {
-			await Send.message(context.psid, message);
-		} else if (message.quickReplies) {
-			await Send.message(context.psid, message.message, message.quickReplies);
-		} else if (message.buttons) {
-			await Send.buttons(context.psid, message.message, message.buttons);
-		} else if (message.loginButton) {
-			await Send.loginButton(context.psid, message.message, message.loginButton);
-		}
+	while ((message = iterator.next().value)) {
+		await callback(message);
 	}
 };
 
-module.exports = { router, routes, matchRoute };
+const router = async function(payload, context) {
+	const route = matchRoute(routes, payload);
+	execRoute(route, context, async function(message) {
+		if (typeof message === 'string') {
+			await Send.message(context.psid, message);
+		} else if (message.quickReplies) {
+			await Send.message(
+				context.psid,
+				message.message,
+				message.quickReplies
+			);
+		} else if (message.buttons) {
+			await Send.buttons(context.psid, message.message, message.buttons);
+		} else if (message.loginButton) {
+			await Send.loginButton(
+				context.psid,
+				message.message,
+				message.loginButton
+			);
+		}
+	});
+};
+
+module.exports = { router, routes, matchRoute, execRoute };
