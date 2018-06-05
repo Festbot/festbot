@@ -88,13 +88,13 @@ const router = async function(payload, context) {
 			.next().value)
 	) {
 		if (typeof message === 'string') {
-			await Send.message(psid, message);
+			await Send.message(context.psid, message);
 		} else if (message.quickReplies) {
-			await Send.message(psid, message.message, message.quickReplies);
+			await Send.message(context.psid, message.message, message.quickReplies);
 		} else if (message.buttons) {
-			await Send.buttons(psid, message.message, message.buttons);
+			await Send.buttons(context.psid, message.message, message.buttons);
 		} else if (message.loginButton) {
-			await Send.loginButton(psid, message.message, message.loginButton);
+			await Send.loginButton(context.psid, message.message, message.loginButton);
 		}
 	}
 };

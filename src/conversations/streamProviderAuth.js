@@ -17,7 +17,7 @@ const confirmSelect = function*({ i18n: t }) {
 const select = function*({ i18n: t }) {
 	return {
 		message: t`Please select your music streaming provider from the list below:`,
-		quickReplies: [
+		buttons: [
 			{
 				title: 'Spotify',
 				to: '/stream-provider-auth/auth/spotify'
