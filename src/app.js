@@ -11,14 +11,14 @@ const SpotifyApi = require('./apiHelpers/spotify');
 const ContextProvider = require('./conversationContextProvider');
 const FacebookGraph = require('./apiHelpers/facebook/graphApi');
 const DeezerApi = require('./apiHelpers/deezer');
-const conversationRouter = require('./conversationRouter');
+const conversationRouter = require('./conversationRouter').router;
+const StatusPage = require('./statusPage');
 const app = express();
 
 app.set('port', process.env.PORT || 5000);
 app.set('view engine', 'ejs');
 app.use(bodyParser.json({ verify: FacebookAuth.verifyRequestSignature }));
-app.use(express.static('public'));
-
+app.get('/', StatusPage.statusPage);
 app.get('/spotify-login', SpotifyApi.login);
 app.get('/spotify-callback', async function(req, res) {
 	const { accessToken, psid } = await SpotifyApi.getAccessToken(req, res);

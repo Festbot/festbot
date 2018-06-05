@@ -6,22 +6,22 @@ const languages = [
 	{ title: 'English', code: 'en_US', emoji: '🇬🇧🇺🇸' }
 ];
 
-module.exports = {
-	askLanguage: async function({ locale, psid }) {
-		const t = i18n(locale);
-		Send.message(
-			psid,
-			t`I know a few languages, which one do you prefer?` + '😎',
-			languages.map(language => ({
-				title: language.title + ' ' + language.emoji,
-				to: '/settings/set-language/' + language.code
-			}))
-		);
-	},
-
-	setLanguage: async function({ locale, psid }, router, param) {
-		const t = i18n(locale);
-		Send.message(psid, t`Ezt választottad: ` + param + ' 😎');
-		return { locale: 'hu_HU' };
-	}
+const askLanguage = function*({ i18n: t }) {
+	return {
+		message: t`I know a few languages, which one do you prefer?` + '😎',
+		quickReplies: languages.map(language => ({
+			title: language.title + ' ' + language.emoji,
+			to: '/settings/set-language/' + language.code
+		}))
+	};
 };
+
+const setLanguage = function*(context, router, param) {
+	const { i18n: t } = context;
+	return {
+		message: t`Ezt választottad: ` + param + ' 😎',
+		newContext: { ...context, locale: 'hu_HU' }
+	};
+};
+
+module.exports = { askLanguage, setLanguage };

@@ -11,11 +11,12 @@
     "type": "git",
     "url": "https://github.com/festbot/festbot.git"
   },
-  "author": "",
+  "author": "Andor Polgar",
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.15.0",
-    "config": "^1.20.4",
+    "chai": "^4.1.2",
+    "config": "^1.30.0",
     "ejs": "^2.4.2",
     "express": "^4.13.4",
     "md5": "^2.2.1",
@@ -29,5 +30,8 @@
   "engines": {
     "node": ">=8.11.2",
     "npm": ">=5.6.0"
+  },
+  "devDependencies": {
+    "is-generator-function": "^1.0.7"
   }
 }

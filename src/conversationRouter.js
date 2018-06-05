@@ -5,6 +5,8 @@ const FavoriteGenres = require('./conversations/favroiteGenres');
 const Settings = require('./conversations/settings');
 const pathToRegexp = require('path-to-regexp');
 const SobrietyTest = require('./conversations/sobrietyTest');
+const Send = require('./send');
+const i18n = require('./i18n');
 
 const routes = [
 	{ route: '/get-started', handler: GetStarted.getStarted },
@@ -61,18 +63,36 @@ const routes = [
 		route: '/sobriety-test/do-you-know-where-you-are',
 		handler: SobrietyTest.doYouknowWhereYouAre
 	}
-
 ].map(route => ({ ...route, regex: pathToRegexp(route.route) }));
 
-const router = async function(payload, context) {
+const matchRoute = function(routes, payload) {
 	for (let i = 0; i < routes.length; i++) {
 		if (routes[i].regex.test(payload)) {
 			[, param] = payload.match(routes[i].regex);
-			return routes[i].handler(context, router, param);
+			return {
+				handler: routes[i].handler,
+				param: param
+			};
 		}
 	}
 
-	console.log('Unhandled route:', payload);
+	throw new Error('Unhandled route: ' + payload);
 };
 
-module.exports = router;
+const router = async function(payload, context) {
+	const route = matchRoute(routes);
+	let message = '';
+	while ((message = route.handler(context, router, param).next().value)) {
+		if (typeof message === 'string') {
+			await Send.message(psid, message);
+		} else if (message.quickReplies) {
+			await Send.message(psid, message.message, message.quickReplies);
+		} else if (message.buttons) {
+			await Send.buttons(psid, message.message, message.buttons);
+		} else if (message.loginButton) {
+			await Send.loginButton(psid, message.message, message.loginButton);
+		}
+	}
+};
+
+module.exports = { router, routes, matchRoute };

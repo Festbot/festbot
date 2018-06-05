@@ -1,7 +1,4 @@
-const Send = require('../send');
-const i18n = require('../i18n');
-
-function getRandomArtist(voltmar) {
+const getRandomArtist = function(voltmar) {
 	const artists = [
 		{ name: 'Lana del Rey', genres: ['dance pop', 'pop'] },
 		{ name: 'Kendrick Lamar', genres: ['hip hop', 'rap'] },
@@ -9,18 +6,18 @@ function getRandomArtist(voltmar) {
 	];
 
 	return artists[Math.floor(Math.random() * artists.length)];
-}
+};
 
-function isRock(artist) {
+const isRock = function(artist) {
 	return artist.genres.indexOf('rock') !== -1;
-}
+};
 
-module.exports = {
-	randomArtist: async function({ psid, locale }) {
-		const artist = getRandomArtist();
-		const t = i18n(locale);
+const randomArtist = function*({ i18n: t }) {
+	const artist = getRandomArtist();
 
-		Send.message(psid, t`Do you like ${artist.name}?`, [
+	return {
+		message: t`Do you like ${artist.name}?`,
+		quickReplies: [
 			{
 				title: t`Yes` + isRock(artist) ? ' 😎🎸🤘' : ' 😍',
 				to: '/favorite-genres/like/' + '0'
@@ -33,6 +30,8 @@ module.exports = {
 				title: t`Never heard of it` + ' 😅',
 				to: '/favorite-genres/dont-like/' + '0'
 			}
-		]);
-	}
+		]
+	};
 };
+
+module.exports = { randomArtist };
