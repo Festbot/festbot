@@ -82,7 +82,11 @@ const matchRoute = function(routes, payload) {
 const router = async function(payload, context) {
 	const route = matchRoute(routes, payload);
 	let message = '';
-	while ((message = route.handler(context, router, param).next().value)) {
+	while (
+		(message = route
+			.handler({ ...context, i18n: i18n(context.locale) }, router, param)
+			.next().value)
+	) {
 		if (typeof message === 'string') {
 			await Send.message(psid, message);
 		} else if (message.quickReplies) {
