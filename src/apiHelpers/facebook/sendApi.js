@@ -1,7 +1,6 @@
-const config = require('config');
 const request = require('request-promise');
 
-const PAGE_ACCESS_TOKEN = config.get('pageAccessToken');
+const PAGE_ACCESS_TOKEN = process.env.FACEBOOK_ACCESS_TOKEN;
 
 const callSendAPI = function(messageData) {
 	request({

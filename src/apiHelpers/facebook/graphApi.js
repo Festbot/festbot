@@ -1,9 +1,8 @@
-const config = require('config');
 const request = require('request-promise');
 const getPersistentMenu = require('./persistentMenu');
 const getGreetings = require('./greetings');
 
-const PAGE_ACCESS_TOKEN = config.get('pageAccessToken');
+const PAGE_ACCESS_TOKEN = process.env.FACEBOOK_ACCESS_TOKEN;
 
 module.exports.getUserInformation = async function(psid) {
 	return await request({

@@ -6,8 +6,8 @@ module.exports.login = function(req, res) {
 	res.redirect(
 		'https://connect.deezer.com/oauth/auth.php?' +
 			querystring.stringify({
-				app_id: config.get('deezer.applicationId'),
-				redirect_uri: config.get('deezer.callbackUrl'),
+				app_id: process.env.DEEZER_APP_ID,
+				redirect_uri: 'https://' + process.env.HOST + '/deezer-callback',
 				perms: 'basic_access,listening_history,offline_access',
 				state: req.query.psid
 			})
@@ -23,8 +23,8 @@ module.exports.getAccessToken = async function(req, res) {
 	const body = await request.post({
 		url: 'https://connect.deezer.com/oauth/access_token.php?',
 		form: {
-			app_id: config.get('deezer.applicationId'),
-			secret: config.get('deezer.secretKey'),
+			app_id: process.env.DEEZER_APP_ID,
+			secret: process.env.DEEZER_APP_SECRET,
 			code: code,
 			output: 'json'
 		},

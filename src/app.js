@@ -1,7 +1,6 @@
 'use strict';
 
 const bodyParser = require('body-parser');
-const config = require('config');
 const express = require('express');
 const https = require('https');
 const fs = require('fs');

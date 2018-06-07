@@ -1,10 +1,9 @@
-const config = require('config');
 const request = require('request-promise');
 const querystring = require('querystring');
 
-const CLIENT_ID = config.get('spotify.clientId');
-const CLIENT_SECRET = config.get('spotify.clientSecret');
-const CALLBACK_URL = config.get('spotify.callbackUrl');
+const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
+const CLIENT_SECRET = process.env.SPOTIFY_SECRET;
+const CALLBACK_URL = 'https://' + process.env.HOST + '/spotify-callback';
 
 module.exports.login = function(req, res) {
 	res.redirect(

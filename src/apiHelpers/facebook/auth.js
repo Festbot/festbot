@@ -1,13 +1,12 @@
 const crypto = require('crypto');
-const config = require('config');
 const request = require('request-promise');
 
 // App Secret can be retrieved from the App Dashboard
-const APP_SECRET = config.get('appSecret');
+const APP_SECRET = process.env.FACEBOOK_APP_SECRET;
 // Arbitrary value used to validate a webhook
-const VALIDATION_TOKEN = config.get('validationToken');
+const VALIDATION_TOKEN = process.env.FACEBOOK_VALIDATION_TOKEN;
 // // Generate a page access token for your page from the App Dashboard
-const PAGE_ACCESS_TOKEN = config.get('pageAccessToken');
+const PAGE_ACCESS_TOKEN = process.env.FACEBOOK_ACCESS_TOKEN;
 
 module.exports.authorize = function(req, res) {
 	const accountLinkingToken = req.query.account_linking_token;

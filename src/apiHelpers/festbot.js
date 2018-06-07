@@ -1,4 +1,3 @@
-const config = require('config');
 const request = require('request-promise');
 const md5 = require('md5');
 
