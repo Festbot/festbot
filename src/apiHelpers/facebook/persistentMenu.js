@@ -45,14 +45,14 @@ module.exports = function getPersistentMenu() {
 						{
 							title: '🌍  ' + t`Discover artists`,
 							type: 'web_url',
-							url: 'https://chatbot.festbot.com/discover',
+							url: 'https://webview.festbot.com/discover',
 							webview_height_ratio: 'full',
 							messenger_extensions: true
 						},
 						{
 							title: '🎤  ' + t`Change festival`,
 							type: 'web_url',
-							url: 'https://chatbot.festbot.com',
+							url: 'https://webview.festbot.com',
 							webview_height_ratio: 'full',
 							messenger_extensions: true
 						}
