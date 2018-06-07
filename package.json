@@ -23,7 +23,8 @@
     "path-to-regexp": "^2.2.1",
     "ramda": "^0.25.0",
     "request": "^2.85.0",
-    "request-promise": "^4.2.2"
+    "request-promise": "^4.2.2",
+    "throng": "4.0.0"
   },
   "engines": {
     "node": ">=8.11.2",
