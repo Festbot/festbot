@@ -9,9 +9,8 @@ const i18n = function i18n(locale) {
 
 		if (translations && translations[key]) {
 			return i18n.replaceKeys(translations[key], keys);
-		} else {
-			return key;
 		}
+		return i18n.replaceKeys(key, keys);
 	};
 };
 
@@ -21,7 +20,7 @@ i18n.buildKey = function(strings) {
 		string += `{${i}}${strings[i]}`;
 	}
 	return strings[0] + string;
-}
+};
 
 i18n.replaceKeys = function(translation, keys) {
 	let replaced = translation;
@@ -29,6 +28,6 @@ i18n.replaceKeys = function(translation, keys) {
 		replaced = replaced.replace(`{${i + 1}}`, keys[i]);
 	}
 	return replaced;
-}
+};
 
 module.exports = i18n;
