@@ -85,6 +85,7 @@ const execRoute = async function(route, context, callback) {
 		route.param
 	);
 	let message = '';
+
 	while ((message = iterator.next().value)) {
 		await callback(message);
 	}
@@ -92,7 +93,7 @@ const execRoute = async function(route, context, callback) {
 
 const router = async function(payload, context) {
 	const route = matchRoute(routes, payload);
-	execRoute(route, context, async function(message) {
+	await execRoute(route, context, async function(message) {
 		if (typeof message === 'string') {
 			await Send.message(context.psid, message);
 		} else if (message.quickReplies) {
@@ -102,9 +103,9 @@ const router = async function(payload, context) {
 				message.quickReplies
 			);
 		} else if (message.buttons) {
-			await Send.buttons(context.psid, message.message, message.buttons);
+			Send.buttons(context.psid, message.message, message.buttons);
 		} else if (message.loginButton) {
-			await Send.loginButton(
+			Send.loginButton(
 				context.psid,
 				message.message,
 				message.loginButton

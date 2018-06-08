@@ -1,7 +1,7 @@
 const FacebookSendApi = require('./apiHelpers/facebook/sendApi');
 
-module.exports.message = function(psid, message, quickReplies = []) {
-	FacebookSendApi.sendMessage(
+module.exports.message = async function(psid, message, quickReplies = []) {
+	await FacebookSendApi.sendMessage(
 		psid,
 		message,
 		quickReplies.map(quickReply => ({
