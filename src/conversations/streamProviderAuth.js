@@ -3,6 +3,7 @@ const {
 	sendQuickReply,
 	sendLoginButton,
 	sendButtons,
+	getSpotifyArtists,
 } = require('../actions');
 const i18n = require('../i18n');
 
@@ -90,6 +91,16 @@ const auth = function*({ locale, psid }, param) {
 	}
 };
 
+const spotifyTokenReceived = function*({ locale, psid }, accessToken) {
+	const spotifyArtists = yield getSpotifyArtists(accessToken);
+
+	return sendReply(
+		t`Wow! I see you like ${spotifyArtists[0]} and ${spotifyArtists[1]}` +
+			' 😏',
+		psid
+	);
+};
+
 const notice = function*({ locale, psid }) {
 	const t = i18n(locale);
 
@@ -116,4 +127,5 @@ module.exports = {
 	auth,
 	notice,
 	dataReceived,
+	spotifyTokenReceived,
 };

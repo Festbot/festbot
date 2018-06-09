@@ -26,8 +26,8 @@ const routes = [
 		handler: StreamProviderAuth.auth,
 	},
 	{
-		route: '/stream-provider-auth/data-received',
-		handler: StreamProviderAuth.dataReceived,
+		route: '/stream-provider-auth/token-received/spotify/:accessToken',
+		handler: StreamProviderAuth.spotifyTokenReceived,
 	},
 
 	{ route: '/at-the-festival/food', handler: AtTheFestival.food },

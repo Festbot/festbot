@@ -31,6 +31,13 @@ throng(
 				req,
 				res
 			);
+
+			const { handler, param } = matchRoute(
+				routes,
+				'/stream-provider-auth/token-received/spotify/' + accessToken
+			);
+			await processAction(handler, param, psid);
+
 			//const newContext = await ContextProvider.set(psid, {
 			//	spotifyAccessToken: accessToken,
 			//	topArtists: await SpotifyApi.getTopArtists(accessToken),

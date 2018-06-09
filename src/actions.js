@@ -5,6 +5,7 @@ const {
 	SEND_BUTTONS,
 	SEND_LOGIN_BUTTON,
 	GET_FACEBOOK_DATA,
+	GET_SPOTIFY_ARTISTS,
 } = require('./actionTypes');
 
 const sendReply = (message, psid) => ({
@@ -31,6 +32,11 @@ const setContext = payload => ({ type: SET_CONTEXT, payload });
 
 const getFacebookData = psid => ({ type: GET_FACEBOOK_DATA, payload: psid });
 
+const getSpotifyArtists = accessToken => ({
+	type: GET_SPOTIFY_ARTISTS,
+	payload: accessToken,
+});
+
 module.exports = {
 	sendReply,
 	setContext,
@@ -38,4 +44,5 @@ module.exports = {
 	sendButtons,
 	sendLoginButton,
 	getFacebookData,
+	getSpotifyArtists,
 };

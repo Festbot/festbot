@@ -8,10 +8,13 @@ const {
 	SEND_BUTTONS,
 	SEND_LOGIN_BUTTON,
 	GET_FACEBOOK_DATA,
+	GET_SPOTIFY_ARTISTS,
 } = require('./actionTypes');
 
 async function executeAction({ type, payload }) {
 	switch (type) {
+		case GET_SPOTIFY_ARTISTS:
+			return await SpotifyApi.getTopArtists(payload);
 		case GET_FACEBOOK_DATA:
 			return await FacebookGraph.getUserInformation(payload);
 		case SEND_REPLY:

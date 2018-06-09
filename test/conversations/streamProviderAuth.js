@@ -5,6 +5,7 @@ const {
 	auth,
 	notice,
 	dataReceived,
+	spotifyTokenReceived,
 } = require('../../src/conversations/streamProviderAuth');
 const { isAction, actionTypeMatches } = require('../helpers/actions');
 const {
@@ -12,6 +13,7 @@ const {
 	SEND_QUICK_REPLY,
 	SEND_BUTTONS,
 	SEND_LOGIN_BUTTON,
+	GET_SPOTIFY_ARTISTS,
 } = require('../../src/actionTypes');
 
 const contextMock = {
@@ -82,5 +84,16 @@ describe('dataReceived', function() {
 
 		isAction(value);
 		actionTypeMatches(value, SEND_REPLY);
+	});
+});
+
+describe('spotifyTokenReceived', function() {
+	const generator = spotifyTokenReceived(contextMock, 'token');
+
+	it('returns an action', function() {
+		const { value } = generator.next();
+
+		isAction(value);
+		actionTypeMatches(value, GET_SPOTIFY_ARTISTS);
 	});
 });

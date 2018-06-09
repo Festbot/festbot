@@ -1,25 +1,23 @@
 const { sendReply, getFacebookData, sendQuickReply } = require('../actions');
 const i18n = require('../i18n');
 
-getStarted = function*(context) {
-	const t = i18n(context.locale);
-	const newContext = yield getFacebookData(context.psid);
+getStarted = function*({ locale, psid }) {
+	const t = i18n(locale);
+	console.log('ez van a psidben', psid);
+	const newContext = yield getFacebookData(psid);
 
 	yield sendReply(
 		t`Hey ${
 			newContext.name
 		}, I’m here to assist you with festival related things.` + ' 😎',
-		newContext.psid
+		psid
 	);
 
-	yield sendReply(
-		t`I can't wait to get to know you more!` + ' 😍',
-		newContext.psid
-	);
+	yield sendReply(t`I can't wait to get to know you more!` + ' 😍', psid);
 
 	yield sendReply(
 		t`Some of my services are based on your musical taste.` + ' 🧐',
-		newContext.psid
+		psid
 	);
 
 	yield sendQuickReply(
@@ -38,7 +36,7 @@ getStarted = function*(context) {
 				},
 			],
 		},
-		newContext.psid
+		psid
 	);
 };
 
