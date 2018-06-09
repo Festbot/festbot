@@ -111,6 +111,10 @@ const router = async function(payload, context) {
 				message.loginButton
 			);
 		}
+
+		if (context.isGod) {
+			Send.message(context.psid, 'debug: ' + JSON.stringify(context));
+		}
 	});
 };
 

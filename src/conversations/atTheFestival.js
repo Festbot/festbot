@@ -7,11 +7,12 @@ const noActiveFestival = function*({ i18n: t, gender = 'female' }) {
 const noFestivalData = function*({ i18n: t }) {
 	yield t`Oops, looks like the organizers of this festival dind't send me the map yet.` +
 		' 😩';
-	yield t`Sorry about that... I will let them know.` + ' 😞';
+	yield t`Sorry about that.` + ' 😞';
+	yield t`I will let them know...`;
 };
 
 const toilet = function*({ i18n: t, activeFestival }) {
-	yield t`Lemme see...`;
+	yield t`Lemme see...` + ' 🧐';
 
 	if (activeFestival === null) {
 		yield* noActiveFestival.apply(null, arguments);
@@ -21,7 +22,7 @@ const toilet = function*({ i18n: t, activeFestival }) {
 };
 
 const food = function*({ i18n: t, activeFestival }) {
-	yield t`Lemme see...`;
+	yield t`Lemme see...` + ' 🧐';
 
 	if (activeFestival === null) {
 		yield* noActiveFestival.apply(null, arguments);
@@ -31,7 +32,7 @@ const food = function*({ i18n: t, activeFestival }) {
 };
 
 const agenda = function*({ i18n: t, activeFestival }) {
-	yield t`Lemme see...`;
+	yield t`Lemme see...` + ' 🧐';
 
 	if (activeFestival === null) {
 		yield* noActiveFestival.apply(null, arguments);
