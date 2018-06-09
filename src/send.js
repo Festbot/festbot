@@ -12,6 +12,10 @@ module.exports.message = async function(psid, message, quickReplies = []) {
 	);
 };
 
+module.exports.debug = async function(psid, message) {
+	await FacebookSendApi.sendDebug(psid, message);
+};
+
 module.exports.loginButton = function(psid, message, url) {
 	FacebookSendApi.sendLoginButton(psid, message, url);
 };

@@ -113,7 +113,7 @@ const router = async function(payload, context) {
 		}
 
 		if (context.isGod) {
-			Send.message(context.psid, 'debug: ' + JSON.stringify(context));
+			Send.debug(context.psid, 'debug: ' + JSON.stringify(context));
 		}
 	});
 };

@@ -59,6 +59,18 @@ module.exports.sendMessage = async function (
 	callSendAPI(obj);
 };
 
+module.exports.sendDebug = async function (recipientId, message) {
+	const obj = {
+		messaging_type: 'RESPONSE',
+		recipient: { id: recipientId },
+		message: {
+			text: message,
+		}
+	}
+
+	callSendAPI(obj);
+};
+
 module.exports.sendLoginButton = function (recipientId, text, buttonUrl) {
 	callSendAPI({
 		recipient: { id: recipientId },
