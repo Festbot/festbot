@@ -27,6 +27,7 @@ module.exports.setUpMessengerProfile = async function() {
 				whitelisted_domains: [
 					'https://chatbot.festbot.com',
 					'https://api.festbot.com',
+					'https://webview.festbot.com',
 					'https://festbot.com'
 				],
 				greeting: getGreetings(),
