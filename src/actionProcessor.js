@@ -8,7 +8,7 @@ const {
 	SEND_BUTTONS,
 	SEND_LOGIN_BUTTON,
 	GET_FACEBOOK_DATA,
-} = require('../actionTypes');
+} = require('./actionTypes');
 
 async function executeAction({ type, payload }) {
 	switch (type) {
