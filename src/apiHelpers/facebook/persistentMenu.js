@@ -76,7 +76,7 @@ module.exports = function getPersistentMenu() {
 									type: 'web_url',
 									url: 'https://festbot.com/privacy',
 									webview_height_ratio: 'tall',
-									messenger_extensions: true
+									messenger_extensions: false
 								}
 							]
 						},
