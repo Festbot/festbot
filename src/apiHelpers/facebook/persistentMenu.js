@@ -46,14 +46,14 @@ module.exports = function getPersistentMenu() {
 							title: '🌍  ' + t`Discover artists`,
 							type: 'web_url',
 							url: 'https://webview.festbot.com/discover',
-							webview_height_ratio: 'full',
+							webview_height_ratio: 'tall',
 							messenger_extensions: true
 						},
 						{
 							title: '🎤  ' + t`Change festival`,
 							type: 'web_url',
 							url: 'https://webview.festbot.com',
-							webview_height_ratio: 'full',
+							webview_height_ratio: 'tall',
 							messenger_extensions: true
 						}
 					]
@@ -63,7 +63,7 @@ module.exports = function getPersistentMenu() {
 					type: 'nested',
 					call_to_actions: [
 						{
-							title: '👩‍⚖️  ' + t`Legal stuff`,
+							title: '🔒 ' + t`Privacy`,
 							type: 'nested',
 							call_to_actions: [
 								{
@@ -72,15 +72,11 @@ module.exports = function getPersistentMenu() {
 									payload: '/legal/gdpr'
 								},
 								{
-									title: '📗 ' + t`Terms of use`,
-									type: 'postback',
-									payload: '/legal/terms-of-use'
-								},
-								{
-									title:
-										'🔒 ' + t`Privacy policy`,
-									type: 'postback',
-									payload: '/legal/privacy-policy'
+									title: '👩‍⚖️ ' + t`Privacy policy`,
+									type: 'web_url',
+									url: 'https://festbot.com/privacy',
+									webview_height_ratio: 'tall',
+									messenger_extensions: true
 								}
 							]
 						},
