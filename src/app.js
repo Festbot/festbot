@@ -2,15 +2,12 @@
 
 const bodyParser = require('body-parser');
 const express = require('express');
-const https = require('https');
-const fs = require('fs');
 const FacebookAuth = require('./apiHelpers/facebook/auth');
-const FacebookSend = require('./apiHelpers/facebook/sendApi');
 const SpotifyApi = require('./apiHelpers/spotify');
-const ContextProvider = require('./conversationContextProvider');
 const FacebookGraph = require('./apiHelpers/facebook/graphApi');
 const DeezerApi = require('./apiHelpers/deezer');
-const conversationRouter = require('./conversationRouter').router;
+const { matchRoute, routes } = require('./conversationRouter');
+const { process } = require('./actionProcessor');
 const StatusPage = require('./statusPage');
 const app = express();
 const throng = require('throng');
@@ -34,16 +31,11 @@ throng(
 				req,
 				res
 			);
-			const newContext = await ContextProvider.set(psid, {
-				spotifyAccessToken: accessToken,
-				topArtists: await SpotifyApi.getTopArtists(accessToken),
-				topGenres: ['pinarock'],
-			});
-
-			conversationRouter(
-				'/stream-provider-auth/data-received',
-				newContext
-			);
+			//const newContext = await ContextProvider.set(psid, {
+			//	spotifyAccessToken: accessToken,
+			//	topArtists: await SpotifyApi.getTopArtists(accessToken),
+			//	topGenres: ['pinarock'],
+			//});
 		});
 		app.get('/deezer-login', DeezerApi.login);
 		app.get('/deezer-callback', async function(req, res) {
@@ -51,16 +43,16 @@ throng(
 				req,
 				res
 			);
-			const newContext = await ContextProvider.set(psid, {
-				deezerAccesToken: accessToken,
-				topArtists: await DeezerApi.getTopArtists(accessToken),
-				topGenres: ['pinarock'],
-			});
+			//const newContext = await ContextProvider.set(psid, {
+			//	deezerAccesToken: accessToken,
+			//	topArtists: await DeezerApi.getTopArtists(accessToken),
+			//	topGenres: ['pinarock'],
+			//});
 
-			conversationRouter(
-				'/stream-provider-auth/data-received',
-				newContext
-			);
+			//conversationRouter(
+			//	'/stream-provider-auth/data-received',
+			//	newContext
+			//);
 		});
 		app.get('/webhook', FacebookAuth.validateWebhook);
 		app.get('/authorize', FacebookAuth.authorize);
@@ -102,16 +94,8 @@ throng(
 		});
 
 		async function receivedPostback(psid, payload) {
-			const context = await ContextProvider.get(psid);
-			const facebookData = await FacebookGraph.getUserInformation(psid);
-			if (!context.facebookData) {
-				await ContextProvider.set(psid, {
-					facebookData: facebookData,
-					name: facebookData.first_name,
-				});
-			}
-
-			conversationRouter(payload, context);
+			const { handler, param } = matchRoute(routes, payload);
+			await process(handler, param, psid);
 		}
 
 		app.listen(app.get('port'), () => {

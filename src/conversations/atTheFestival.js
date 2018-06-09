@@ -1,43 +1,65 @@
-const noActiveFestival = function*({ i18n: t, gender = 'female' }) {
-	yield t`Looks like you didn't tell me which festival you're at right now.` +
-		(gender === 'female' ? ' 🤷‍♀️' : ' 🤷‍♂️');
-	yield t`Please choose one from this list, and then ask me again!` + ' 😎';
+const { sendReply } = require('../actions');
+const i18n = require('../i18n');
+
+const noActiveFestival = function*({ locale, gender = 'female', psid }) {
+	const t = i18n(locale);
+
+	yield sendReply(
+		t`Looks like you didn't tell me which festival you're at right now.` +
+			(gender === 'female' ? ' 🤷‍♀️' : ' 🤷‍♂️'),
+		psid
+	);
+	yield sendReply(
+		t`Please choose one from this list, and then ask me again!` + ' 😎',
+		psid
+	);
 };
 
-const noFestivalData = function*({ i18n: t }) {
-	yield t`Oops, looks like the organizers of this festival dind't send me the map yet.` +
-		' 😩';
-	yield t`Sorry about that.` + ' 😞';
-	yield t`I will let them know...`;
+const noFestivalData = function*({ locale, psid }) {
+	const t = i18n(locale);
+
+	yield sendReply(
+		t`Oops, looks like the organizers of this festival dind't send me the map yet.` +
+			' 😩',
+		psid
+	);
+	yield sendReply(t`Sorry about that.` + ' 😞', psid);
+	yield sendReply(t`I will let them know...`, psid);
 };
 
-const toilet = function*({ i18n: t, activeFestival }) {
-	yield t`Lemme see...` + ' 🧐';
+const toilet = function*({ locale, activeFestival, psid }) {
+	const t = i18n(locale);
 
-	if (activeFestival === null) {
-		yield* noActiveFestival.apply(null, arguments);
-	} else {
+	yield sendReply(t`Lemme see...` + ' 🧐', psid);
+
+	if (activeFestival) {
 		yield* noFestivalData.apply(null, arguments);
+	} else {
+		yield* noActiveFestival.apply(null, arguments);
 	}
 };
 
-const food = function*({ i18n: t, activeFestival }) {
-	yield t`Lemme see...` + ' 🧐';
+const food = function*({ locale, activeFestival, psid }) {
+	const t = i18n(locale);
 
-	if (activeFestival === null) {
-		yield* noActiveFestival.apply(null, arguments);
-	} else {
+	yield sendReply(t`Lemme see...` + ' 🧐', psid);
+
+	if (activeFestival) {
 		yield* noFestivalData.apply(null, arguments);
+	} else {
+		yield* noActiveFestival.apply(null, arguments);
 	}
 };
 
-const agenda = function*({ i18n: t, activeFestival }) {
-	yield t`Lemme see...` + ' 🧐';
+const agenda = function*({ locale, activeFestival, psid }) {
+	const t = i18n(locale);
 
-	if (activeFestival === null) {
-		yield* noActiveFestival.apply(null, arguments);
-	} else {
+	yield sendReply(t`Lemme see...` + ' 🧐', psid);
+
+	if (activeFestival) {
 		yield* noFestivalData.apply(null, arguments);
+	} else {
+		yield* noActiveFestival.apply(null, arguments);
 	}
 };
 

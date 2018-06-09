@@ -5,8 +5,6 @@ const FavoriteGenres = require('./conversations/favroiteGenres');
 const Settings = require('./conversations/settings');
 const pathToRegexp = require('path-to-regexp');
 const SobrietyTest = require('./conversations/sobrietyTest');
-const Send = require('./send');
-const i18n = require('./i18n');
 
 const routes = [
 	{ route: '/get-started', handler: GetStarted.getStarted },
@@ -79,43 +77,4 @@ const matchRoute = function(routes, payload) {
 	throw new Error('Unhandled route: ' + payload);
 };
 
-const execRoute = async function(route, context, callback) {
-	const iterator = route.handler(
-		{ ...context, i18n: i18n(context.locale) },
-		route.param
-	);
-	let message = '';
-
-	while ((message = iterator.next().value)) {
-		await callback(message);
-	}
-};
-
-const router = async function(payload, context) {
-	const route = matchRoute(routes, payload);
-	await execRoute(route, context, async function(message) {
-		if (typeof message === 'string') {
-			await Send.message(context.psid, message);
-		} else if (message.quickReplies) {
-			await Send.message(
-				context.psid,
-				message.message,
-				message.quickReplies
-			);
-		} else if (message.buttons) {
-			Send.buttons(context.psid, message.message, message.buttons);
-		} else if (message.loginButton) {
-			Send.loginButton(
-				context.psid,
-				message.message,
-				message.loginButton
-			);
-		}
-
-		if (context.isGod) {
-			Send.debug(context.psid, 'debug: ' + JSON.stringify(context));
-		}
-	});
-};
-
-module.exports = { router, routes, matchRoute, execRoute };
+module.exports = { routes, matchRoute };

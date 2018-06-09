@@ -2,34 +2,34 @@ const request = require('request-promise');
 
 const PAGE_ACCESS_TOKEN = process.env.FACEBOOK_ACCESS_TOKEN;
 
-const callSendAPI = function (messageData) {
+const callSendAPI = function(messageData) {
 	request({
 		uri: 'https://graph.facebook.com/v2.6/me/messages',
 		qs: { access_token: PAGE_ACCESS_TOKEN },
 		method: 'POST',
-		json: messageData
+		json: messageData,
 	})
-		.then(data => { })
+		.then(data => {})
 		.catch(data => {
 			console.log('fb api error: ', data.error.error.message);
 		});
 };
 
-const sendTyping = function (recipientId, timeout) {
+const sendTyping = function(recipientId, timeout) {
 	callSendAPI({
 		recipient: {
-			id: recipientId
+			id: recipientId,
 		},
-		sender_action: 'typing_on'
+		sender_action: 'typing_on',
 	});
 
 	return new Promise((resolve, reject) => {
-		setTimeout(function () {
+		setTimeout(function() {
 			callSendAPI({
 				recipient: {
-					id: recipientId
+					id: recipientId,
 				},
-				sender_action: 'typing_off'
+				sender_action: 'typing_off',
 			});
 
 			resolve();
@@ -37,7 +37,7 @@ const sendTyping = function (recipientId, timeout) {
 	});
 };
 
-module.exports.sendMessage = async function (
+module.exports.sendMessage = async function(
 	recipientId,
 	message,
 	quickReplies = []
@@ -49,8 +49,8 @@ module.exports.sendMessage = async function (
 		recipient: { id: recipientId },
 		message: {
 			text: message,
-		}
-	}
+		},
+	};
 
 	if (quickReplies.length > 0) {
 		obj.message.quick_replies = quickReplies;
@@ -59,19 +59,19 @@ module.exports.sendMessage = async function (
 	callSendAPI(obj);
 };
 
-module.exports.sendDebug = async function (recipientId, message) {
+module.exports.sendDebug = async function(recipientId, message) {
 	const obj = {
 		messaging_type: 'RESPONSE',
 		recipient: { id: recipientId },
 		message: {
 			text: message,
-		}
-	}
+		},
+	};
 
 	callSendAPI(obj);
 };
 
-module.exports.sendLoginButton = function (recipientId, text, buttonUrl) {
+module.exports.sendLoginButton = function(recipientId, text, buttonUrl) {
 	callSendAPI({
 		recipient: { id: recipientId },
 		message: {
@@ -83,16 +83,16 @@ module.exports.sendLoginButton = function (recipientId, text, buttonUrl) {
 					buttons: [
 						{
 							type: 'account_link',
-							url: buttonUrl
-						}
-					]
-				}
-			}
-		}
+							url: buttonUrl,
+						},
+					],
+				},
+			},
+		},
 	});
 };
 
-module.exports.sendButtons = function (recipientId, text, buttons) {
+module.exports.sendButtons = function(recipientId, text, buttons) {
 	callSendAPI({
 		recipient: { id: recipientId },
 		message: {
@@ -101,14 +101,14 @@ module.exports.sendButtons = function (recipientId, text, buttons) {
 				payload: {
 					template_type: 'button',
 					text: text,
-					buttons: buttons
-				}
-			}
-		}
+					buttons: buttons,
+				},
+			},
+		},
 	});
-}
+};
 
-module.exports.sendImage = function (recipientId, imageUrl) {
+module.exports.sendImage = function(recipientId, imageUrl) {
 	callSendAPI({
 		messaging_type: 'RESPONSE',
 		recipient: { id: recipientId },
@@ -117,17 +117,17 @@ module.exports.sendImage = function (recipientId, imageUrl) {
 				type: 'image',
 				payload: {
 					url: imageUrl,
-					is_reusable: true
-				}
-			}
-		}
+					is_reusable: true,
+				},
+			},
+		},
 	});
 };
 
-module.exports.sendWebviewButton = function (recipientId) {
+module.exports.sendWebviewButton = function(recipientId) {
 	callSendAPI({
 		recipient: {
-			id: recipientId
+			id: recipientId,
 		},
 		message: {
 			attachment: {
@@ -141,11 +141,11 @@ module.exports.sendWebviewButton = function (recipientId) {
 							url: 'https://grumpy-parrot-29.localtunnel.me',
 							title: 'URL Button',
 							webview_height_ratio: 'full',
-							messenger_extensions: 'false'
-						}
-					]
-				}
-			}
-		}
+							messenger_extensions: 'false',
+						},
+					],
+				},
+			},
+		},
 	});
 };

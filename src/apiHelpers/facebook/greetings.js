@@ -5,7 +5,7 @@ module.exports = function getGreetings() {
 		const t = i18n(locale);
 		return {
 			locale: locale,
-			text: t`Hello {{user_first_name}}! \nI'm here to help you plan your next festival visit, discover new artists, and meet new people.`
+			text: t`Hello {{user_first_name}}! \nI'm here to help you plan your next festival visit, discover new artists, and meet new people.`,
 		};
 	});
 };

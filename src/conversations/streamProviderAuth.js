@@ -1,76 +1,112 @@
-const confirmSelect = function*({ i18n: t }) {
-	return {
-		message: t`Do you use Spotify, Apple Music or Deezer to stream music?`,
-		quickReplies: [
-			{
-				title: t`Yes` + ' 😎',
-				to: '/stream-provider-auth/select',
-			},
-			{
-				title: t`Only vinyl` + ' 🤓',
-				to: '/stream-provider-auth/dont-want',
-			},
-		],
-	};
-};
+const {
+	sendReply,
+	sendQuickReply,
+	sendLoginButton,
+	sendButtons,
+} = require('../actions');
+const i18n = require('../i18n');
 
-const select = function*({ i18n: t }) {
-	return {
-		message: t`Please select your music streaming provider from the list below:`,
-		buttons: [
-			{
-				title: 'Spotify',
-				to: '/stream-provider-auth/auth/spotify',
-			},
-			{
-				title: 'Apple Music',
-				to: '/stream-provider-auth/auth/applemusic',
-			},
-			{
-				title: 'Deezer',
-				to: '/stream-provider-auth/auth/deezer',
-			},
-		],
-	};
-};
+const confirmSelect = function*({ locale, psid }) {
+	const t = i18n(locale);
 
-const dontWant = function*({ i18n: t }) {
-	yield t`Cool. I heard that cassette is the new thing now.` + ' 😉';
-
-	yield t`If you ever change your mind, you can reach this function from the menu.` +
-		' 😉';
-};
-
-const auth = function*({ i18n: t, psid }, param) {
-	switch (param) {
-		case 'spotify':
-			return {
-				message: t`At this point I have to ask you to login using your Spotify account, at which I will retrieve the list of your most listened artists from Spotify.`,
-				loginButton:
-					'https://eurorack.haveinstock.com:5000/spotify-login?psid=' +
-					psid,
-			};
-		case 'deezer':
-			return {
-				message: t`At this point I have to ask you to login using your Deezer account, at which I will retrieve the list of your most listened artists from Deezer.`,
-				loginButton:
-					'https://eurorack.haveinstock.com:5000/deezer-login?psid=' +
-					psid,
-			};
-	}
-};
-
-const notice = function*({ i18n: t }) {
-	return (
-		t`Btw. if you ever wan\'t me to forget these things about you, just type "forget me" into the chat.` +
-		' 😉'
+	return sendQuickReply(
+		{
+			message: t`Do you use Spotify, Apple Music or Deezer to stream music?`,
+			quickReplies: [
+				{
+					title: t`Yes` + ' 😎',
+					to: '/stream-provider-auth/select',
+				},
+				{
+					title: t`Only vinyl` + ' 🤓',
+					to: '/stream-provider-auth/dont-want',
+				},
+			],
+		},
+		psid
 	);
 };
 
-const dataReceived = function*(context) {
-	const { i18n: t, topArtists = [] } = context;
-	return t`Wow! I see you like ${topArtists[0]} and ${topArtists[1]}` + ' 😏';
-	notice(context);
+const select = function*({ locale, psid }) {
+	const t = i18n(locale);
+
+	return sendButtons(
+		{
+			message: t`Please select your music streaming provider from the list below:`,
+			buttons: [
+				{
+					title: 'Spotify',
+					to: '/stream-provider-auth/auth/spotify',
+				},
+				{
+					title: 'Deezer',
+					to: '/stream-provider-auth/auth/deezer',
+				},
+			],
+		},
+		psid
+	);
+};
+
+const dontWant = function*({ locale, psid }) {
+	const t = i18n(locale);
+
+	yield sendReply(
+		t`Cool. I heard that cassette is the new thing now.` + ' 😉',
+		psid
+	);
+
+	yield sendReply(
+		t`If you ever change your mind, you can reach this function from the menu.` +
+			' 😉',
+		psid
+	);
+};
+
+const auth = function*({ locale, psid }, param) {
+	const t = i18n(locale);
+
+	switch (param) {
+		case 'spotify':
+			return sendLoginButton(
+				{
+					message: t`At this point I have to ask you to login using your Spotify account, at which I will retrieve the list of your most listened artists from Spotify.`,
+					url:
+						'https://eurorack.haveinstock.com:5000/spotify-login?psid=' +
+						psid,
+				},
+				psid
+			);
+		case 'deezer':
+			return sendLoginButton(
+				{
+					message: t`At this point I have to ask you to login using your Deezer account, at which I will retrieve the list of your most listened artists from Deezer.`,
+					url:
+						'https://eurorack.haveinstock.com:5000/deezer-login?psid=' +
+						psid,
+				},
+				psid
+			);
+	}
+};
+
+const notice = function*({ locale, psid }) {
+	const t = i18n(locale);
+
+	return sendReply(
+		t`Btw. if you ever wan\'t me to forget these things about you, just type "forget me" into the chat.` +
+			' 😉',
+		psid
+	);
+};
+
+const dataReceived = function*({ locale, topArtists = [], psid }) {
+	const t = i18n(locale);
+
+	return sendReply(
+		t`Wow! I see you like ${topArtists[0]} and ${topArtists[1]}` + ' 😏',
+		psid
+	);
 };
 
 module.exports = {

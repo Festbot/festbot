@@ -1,9 +1,4 @@
-const {
-	routes,
-	matchRoute,
-	router,
-	execRoute,
-} = require('../src/conversationRouter');
+const { routes, matchRoute } = require('../src/conversationRouter');
 const assert = require('chai').assert;
 const isGeneratorFunction = require('is-generator-function');
 
@@ -44,16 +39,5 @@ describe('testing matchRoute', function() {
 		const { param } = matchRoute(routes, '/settings/set-language/hu_HU');
 		assert.isString(param);
 		assert.strictEqual(param, 'hu_HU');
-	});
-});
-
-describe('testing execRoute', function() {
-	routes.forEach(route => {
-		it('route ' + route.route + ' should match', function() {
-			assert.doesNotThrow(function() {
-				const match = matchRoute(routes, route.route);
-				execRoute(match, {}, function() {});
-			}, Error);
-		});
 	});
 });

@@ -8,7 +8,7 @@ const VALIDATION_TOKEN = process.env.FACEBOOK_VALIDATION_TOKEN;
 // // Generate a page access token for your page from the App Dashboard
 const PAGE_ACCESS_TOKEN = process.env.FACEBOOK_ACCESS_TOKEN;
 
-module.exports.authorize = function (req, res) {
+module.exports.authorize = function(req, res) {
 	const accountLinkingToken = req.query.account_linking_token;
 	const redirectURI = req.query.redirect_uri;
 
@@ -22,7 +22,7 @@ module.exports.authorize = function (req, res) {
 	res.render('authorize', {
 		accountLinkingToken: accountLinkingToken,
 		redirectURI: redirectURI,
-		redirectURISuccess: redirectURISuccess
+		redirectURISuccess: redirectURISuccess,
 	});
 };
 
@@ -34,7 +34,7 @@ module.exports.authorize = function (req, res) {
  * https://developers.facebook.com/docs/graph-api/webhooks#setup
  *
  */
-module.exports.verifyRequestSignature = function (req, res, buf) {
+module.exports.verifyRequestSignature = function(req, res, buf) {
 	const signature = req.headers['x-hub-signature'];
 
 	if (!signature) {
@@ -57,7 +57,7 @@ module.exports.verifyRequestSignature = function (req, res, buf) {
 	}
 };
 
-module.exports.validateWebhook = function (req, res) {
+module.exports.validateWebhook = function(req, res) {
 	if (
 		req.query['hub.mode'] === 'subscribe' &&
 		req.query['hub.verify_token'] === VALIDATION_TOKEN
