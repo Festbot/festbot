@@ -48,7 +48,7 @@ async function executeAction({ type, payload }) {
 	}
 }
 
-const process = async function(conversation, param, psid) {
+const processAction = async function(conversation, param, psid) {
 	const context = await ConversationContextProvider.get(psid);
 
 	const generator = conversation(context, param);
@@ -62,4 +62,4 @@ const process = async function(conversation, param, psid) {
 	}
 };
 
-module.exports = { process };
+module.exports = { processAction };

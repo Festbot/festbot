@@ -7,7 +7,7 @@ const SpotifyApi = require('./apiHelpers/spotify');
 const FacebookGraph = require('./apiHelpers/facebook/graphApi');
 const DeezerApi = require('./apiHelpers/deezer');
 const { matchRoute, routes } = require('./conversationRouter');
-const { process } = require('./actionProcessor');
+const { processAction } = require('./actionProcessor');
 const StatusPage = require('./statusPage');
 const app = express();
 const throng = require('throng');
@@ -95,7 +95,7 @@ throng(
 
 		async function receivedPostback(psid, payload) {
 			const { handler, param } = matchRoute(routes, payload);
-			await process(handler, param, psid);
+			await processAction(handler, param, psid);
 		}
 
 		app.listen(app.get('port'), () => {
