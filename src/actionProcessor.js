@@ -1,6 +1,6 @@
 const FacebookSendApi = require('./apiHelpers/facebook/sendApi');
 const FacebookGraph = require('./apiHelpers/facebook/graphApi');
-const ConversationContextProvider = reuqire('./conversationContextProvider');
+const ConversationContextProvider = require('./conversationContextProvider');
 
 const {
 	SEND_REPLY,
