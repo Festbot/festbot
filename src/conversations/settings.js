@@ -9,13 +9,11 @@ const languages = [
 const askLanguage = function*({ locale, psid }) {
 	const t = i18n(locale);
 	return sendQuickReply(
-		{
-			message: t`I know a few languages, which one do you prefer?` + '😎',
-			quickReplies: languages.map(language => ({
-				title: language.title + ' ' + language.emoji,
-				to: '/settings/set-language/' + language.code,
-			})),
-		},
+		t`I know a few languages, which one do you prefer?` + '😎',
+		languages.map(language => ({
+			title: language.title + ' ' + language.emoji,
+			to: '/settings/set-language/' + language.code,
+		})),
 		psid
 	);
 };

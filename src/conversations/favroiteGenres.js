@@ -20,23 +20,21 @@ const randomArtist = function*({ locale, psid }) {
 	const artist = getRandomArtist();
 
 	return sendQuickReply(
-		{
-			message: t`Do you like ${artist.name}?`,
-			quickReplies: [
-				{
-					title: t`Yes` + isRock(artist) ? ' 😎🎸🤘' : ' 😍',
-					to: '/favorite-genres/like/' + '0',
-				},
-				{
-					title: t`Not really` + ' 🙄',
-					to: '/favorite-genres/dont-like/' + '0',
-				},
-				{
-					title: t`Never heard of it` + ' 😅',
-					to: '/favorite-genres/dont-like/' + '0',
-				},
-			],
-		},
+		t`Do you like ${artist.name}?`,
+		[
+			{
+				title: t`Yes` + isRock(artist) ? ' 😎🎸🤘' : ' 😍',
+				to: '/favorite-genres/like/' + '0',
+			},
+			{
+				title: t`Not really` + ' 🙄',
+				to: '/favorite-genres/dont-like/' + '0',
+			},
+			{
+				title: t`Never heard of it` + ' 😅',
+				to: '/favorite-genres/dont-like/' + '0',
+			},
+		],
 		psid
 	);
 };

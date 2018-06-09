@@ -5,33 +5,29 @@ const howManyDrinks = function*({ locale, psid }) {
 	const t = i18n(locale);
 
 	return sendQuickReply(
-		{
-			message:
-				t`Okay, let's do this! How many drinks have you had?` +
-				' 🍺🍷🍸',
-			quickReplies: [
-				{
-					title: t`Just one` + '😊',
-					to: '/sobriety-test/not-drunk/',
-				},
-				{
-					title: t`Two` + ' 😎️',
-					to: '/sobriety-test/how-many-fingers/' + 2,
-				},
-				{
-					title: t`Three` + ' 🙄',
-					to: '/sobriety-test/how-many-fingers/' + 3,
-				},
-				{
-					title: t`Four or more` + ' 😜',
-					to: '/sobriety-test/how-many-fingers/' + 4,
-				},
-				{
-					title: t`I didn't count` + ' 😗',
-					to: '/sobriety-test/how-many-fingers/' + 5,
-				},
-			],
-		},
+		t`Okay, let's do this! How many drinks have you had?` + ' 🍺🍷🍸',
+		[
+			{
+				title: t`Just one` + '😊',
+				to: '/sobriety-test/not-drunk/',
+			},
+			{
+				title: t`Two` + ' 😎️',
+				to: '/sobriety-test/how-many-fingers/' + 2,
+			},
+			{
+				title: t`Three` + ' 🙄',
+				to: '/sobriety-test/how-many-fingers/' + 3,
+			},
+			{
+				title: t`Four or more` + ' 😜',
+				to: '/sobriety-test/how-many-fingers/' + 4,
+			},
+			{
+				title: t`I didn't count` + ' 😗',
+				to: '/sobriety-test/how-many-fingers/' + 5,
+			},
+		],
 		psid
 	);
 };
@@ -56,28 +52,25 @@ const howManyFingers = function*({ locale, psid }, param) {
 	];
 
 	return sendQuickReply(
-		{
-			message:
-				t`How many fingers am I holding up?` + ' ' + fingers[random],
-			quickReplies: [
-				{
-					title: random + (coin ? 1 : -1),
-					to: '/sobriety-test/dont-text-your-ex/' + (drunkness + 1),
-				},
-				{
-					title: random,
-					to: '/sobriety-test/dont-text-your-ex/' + drunkness,
-				},
-				{
-					title: random + 2,
-					to: '/sobriety-test/dont-text-your-ex/' + (drunkness + 3),
-				},
-				{
-					title: random + (coin ? -1 : 1),
-					to: '/sobriety-test/dont-text-your-ex/' + (drunkness + 1),
-				},
-			],
-		},
+		t`How many fingers am I holding up?` + ' ' + fingers[random],
+		[
+			{
+				title: random + (coin ? 1 : -1),
+				to: '/sobriety-test/dont-text-your-ex/' + (drunkness + 1),
+			},
+			{
+				title: random,
+				to: '/sobriety-test/dont-text-your-ex/' + drunkness,
+			},
+			{
+				title: random + 2,
+				to: '/sobriety-test/dont-text-your-ex/' + (drunkness + 3),
+			},
+			{
+				title: random + (coin ? -1 : 1),
+				to: '/sobriety-test/dont-text-your-ex/' + (drunkness + 1),
+			},
+		],
 		psid
 	);
 };
@@ -86,23 +79,21 @@ const dontTextYourEx = function*({ locale, psid }) {
 	const t = i18n(locale);
 
 	return sendQuickReply(
-		{
-			message: t`I hope you're not planning to text your ex!` + ' 🙄',
-			quickReplies: [
-				{
-					title: t`I just did` + ' 😗',
-					to: '/sobriety-test/do-you-know-where-you-are',
-				},
-				{
-					title: t`Good idea!` + ' 😁',
-					to: '/sobriety-test/do-you-know-where-you-are',
-				},
-				{
-					title: t`Not gonna happen` + ' 😅',
-					to: '',
-				},
-			],
-		},
+		t`I hope you're not planning to text your ex!` + ' 🙄',
+		[
+			{
+				title: t`I just did` + ' 😗',
+				to: '/sobriety-test/do-you-know-where-you-are',
+			},
+			{
+				title: t`Good idea!` + ' 😁',
+				to: '/sobriety-test/do-you-know-where-you-are',
+			},
+			{
+				title: t`Not gonna happen` + ' 😅',
+				to: '',
+			},
+		],
 		psid
 	);
 };
@@ -111,19 +102,17 @@ const doYouknowWhereYouAre = function*({ locale, psid }) {
 	const t = i18n(locale);
 
 	return sendQuickReply(
-		{
-			message: t`Do you know where you are?` + ' 🙄',
-			quickReplies: [
-				{
-					title: t`With my friends` + ' 😗',
-					to: '/sobriety-test/stop-drinking',
-				},
-				{
-					title: t`What does it matter?` + ' 😗',
-					to: '/sobriety-test/stop-drinking',
-				},
-			],
-		},
+		t`Do you know where you are?` + ' 🙄',
+		[
+			{
+				title: t`With my friends` + ' 😗',
+				to: '/sobriety-test/stop-drinking',
+			},
+			{
+				title: t`What does it matter?` + ' 😗',
+				to: '/sobriety-test/stop-drinking',
+			},
+		],
 		psid
 	);
 };

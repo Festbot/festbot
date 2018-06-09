@@ -3,8 +3,9 @@ const i18n = require('../i18n');
 
 getStarted = function*({ locale, psid }) {
 	const t = i18n(locale);
-	console.log('ez van a psidben', psid);
 	const newContext = yield getFacebookData(psid);
+
+	console.log('ezjonvissza', newContext);
 
 	yield sendReply(
 		t`Hey ${
@@ -21,21 +22,17 @@ getStarted = function*({ locale, psid }) {
 	);
 
 	yield sendQuickReply(
-		{
-			message:
-				t`I hope you wouldn’t mind if I ask a little bit about you.` +
-				' ☺️',
-			quickReplies: [
-				{
-					title: t`No problem` + ' ☺️',
-					to: '/stream-provider-auth/confirm-select',
-				},
-				{
-					title: t`Maybe later` + ' 🤔',
-					to: '/stream-provider-auth/select-later',
-				},
-			],
-		},
+		t`I hope you wouldn’t mind if I ask a little bit about you.` + ' ☺️',
+		[
+			{
+				title: t`No problem` + ' ☺️',
+				to: '/stream-provider-auth/confirm-select',
+			},
+			{
+				title: t`Maybe later` + ' 🤔',
+				to: '/stream-provider-auth/select-later',
+			},
+		],
 		psid
 	);
 };

@@ -11,19 +11,17 @@ const confirmSelect = function*({ locale, psid }) {
 	const t = i18n(locale);
 
 	return sendQuickReply(
-		{
-			message: t`Do you use Spotify, Apple Music or Deezer to stream music?`,
-			quickReplies: [
-				{
-					title: t`Yes` + ' 😎',
-					to: '/stream-provider-auth/select',
-				},
-				{
-					title: t`Only vinyl` + ' 🤓',
-					to: '/stream-provider-auth/dont-want',
-				},
-			],
-		},
+		t`Do you use Spotify, Apple Music or Deezer to stream music?`,
+		[
+			{
+				title: t`Yes` + ' 😎',
+				to: '/stream-provider-auth/select',
+			},
+			{
+				title: t`Only vinyl` + ' 🤓',
+				to: '/stream-provider-auth/dont-want',
+			},
+		],
 		psid
 	);
 };
