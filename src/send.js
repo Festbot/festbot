@@ -7,7 +7,7 @@ module.exports.message = async function(psid, message, quickReplies = []) {
 		quickReplies.map(quickReply => ({
 			content_type: 'text',
 			payload: quickReply.to,
-			title: quickReply.title
+			title: quickReply.title,
 		}))
 	);
 };
@@ -23,7 +23,7 @@ module.exports.buttons = function(psid, message, buttons) {
 		buttons.map(button => ({
 			type: 'postback',
 			title: button.title,
-			payload: button.to
+			payload: button.to,
 		}))
 	);
 };

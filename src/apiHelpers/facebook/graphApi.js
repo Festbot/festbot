@@ -4,7 +4,7 @@ const getGreetings = require('./greetings');
 
 const PAGE_ACCESS_TOKEN = process.env.FACEBOOK_ACCESS_TOKEN;
 
-module.exports.getUserInformation = async function(psid) {
+module.exports.getUserInformation = async function (psid) {
 	return await request({
 		uri: 'https://graph.facebook.com/v2.6/' + psid,
 		qs: {
@@ -17,7 +17,7 @@ module.exports.getUserInformation = async function(psid) {
 	});
 };
 
-module.exports.setUpMessengerProfile = async function() {
+module.exports.setUpMessengerProfile = async function () {
 	try {
 		const response = await request({
 			uri: 'https://graph.facebook.com/v2.6/me/messenger_profile',

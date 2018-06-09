@@ -13,23 +13,23 @@ const routes = [
 
 	{
 		route: '/stream-provider-auth/confirm-select',
-		handler: StreamProviderAuth.confirmSelect
+		handler: StreamProviderAuth.confirmSelect,
 	},
 	{
 		route: '/stream-provider-auth/select',
-		handler: StreamProviderAuth.select
+		handler: StreamProviderAuth.select,
 	},
 	{
 		route: '/stream-provider-auth/dont-want',
-		handler: StreamProviderAuth.dontWant
+		handler: StreamProviderAuth.dontWant,
 	},
 	{
 		route: '/stream-provider-auth/auth/:provider',
-		handler: StreamProviderAuth.auth
+		handler: StreamProviderAuth.auth,
 	},
 	{
 		route: '/stream-provider-auth/data-received',
-		handler: StreamProviderAuth.dataReceived
+		handler: StreamProviderAuth.dataReceived,
 	},
 
 	{ route: '/at-the-festival/food', handler: AtTheFestival.food },
@@ -38,31 +38,31 @@ const routes = [
 
 	{
 		route: '/favorite-genres/random-artist',
-		handler: FavoriteGenres.randomArtist
+		handler: FavoriteGenres.randomArtist,
 	},
 
 	{ route: '/settings/ask-language', handler: Settings.askLanguage },
 	{
 		route: '/settings/set-language/:language',
-		handler: Settings.setLanguage
+		handler: Settings.setLanguage,
 	},
 
 	{
 		route: '/sobriety-test/how-many-drinks',
-		handler: SobrietyTest.howManyDrinks
+		handler: SobrietyTest.howManyDrinks,
 	},
 	{
 		route: '/sobriety-test/how-many-fingers/:drunkness',
-		handler: SobrietyTest.howManyFingers
+		handler: SobrietyTest.howManyFingers,
 	},
 	{
 		route: '/sobriety-test/dont-text-your-ex/:drunkness',
-		handler: SobrietyTest.dontTextYourEx
+		handler: SobrietyTest.dontTextYourEx,
 	},
 	{
 		route: '/sobriety-test/do-you-know-where-you-are',
-		handler: SobrietyTest.doYouknowWhereYouAre
-	}
+		handler: SobrietyTest.doYouknowWhereYouAre,
+	},
 ].map(route => ({ ...route, regex: pathToRegexp(route.route) }));
 
 const matchRoute = function(routes, payload) {
@@ -71,7 +71,7 @@ const matchRoute = function(routes, payload) {
 			[, param] = payload.match(routes[i].regex);
 			return {
 				handler: routes[i].handler,
-				param: param
+				param: param,
 			};
 		}
 	}

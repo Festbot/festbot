@@ -15,14 +15,14 @@ function generateDefaultUserData() {
 	};
 }
 
-module.exports.getUserData = async function(userId) {
+module.exports.getUserData = async function (userId) {
 	return request.get({
 		url: 'https://api.festbot.com/users/' + userId,
 		json: true
 	});
 };
 
-module.exports.addUser = async function(userId) {
+module.exports.addUser = async function (userId) {
 	const userData = generateDefaultUserData();
 
 	const options = {
@@ -41,7 +41,7 @@ module.exports.addUser = async function(userId) {
 	};
 };
 
-module.exports.updateUserData = async function(userId, rev, data) {
+module.exports.updateUserData = async function (userId, rev, data) {
 	const options = {
 		url: 'https://api.festbot.com/users/' + userId,
 		headers: { 'If-Match': rev },
@@ -51,6 +51,6 @@ module.exports.updateUserData = async function(userId, rev, data) {
 	return request.put(options);
 };
 
-module.exports.hashFacebookPSID = function(psid) {
+module.exports.hashFacebookPSID = function (psid) {
 	return md5(psid);
 };

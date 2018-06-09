@@ -1,5 +1,4 @@
-const FacebookGraph = require('./apiHelpers/facebook/graphApi');
-const FestbotApi = require('./apiHelpers/festbot');
+const FestbotUsersApi = require('./apiHelpers/festbot/users');
 const NodeCache = require('node-cache');
 const cache = new NodeCache();
 
@@ -9,23 +8,23 @@ const ConversationContextProvider = {
 			return cache.get(psid);
 		}
 
-		const festbotId = FestbotApi.hashFacebookPSID(psid);
+		const festbotId = FestbotUsersApi.hashFacebookPSID(psid);
 		let userData = null;
 
 		try {
-			userData = await FestbotApi.getUserData(festbotId);
+			userData = await FestbotUsersApi.getUserData(festbotId);
 		} catch ({ error }) {
 			console.log('error', error);
-			userData = await FestbotApi.addUser(festbotId);
+			userData = await FestbotUsersApi.addUser(festbotId);
 		}
 
 		cache.set(psid, {
 			...userData,
-			psid: psid
+			psid: psid,
 		});
 		return {
 			...userData,
-			psid: psid
+			psid: psid,
 		};
 	},
 
@@ -34,13 +33,17 @@ const ConversationContextProvider = {
 
 		const userData = {
 			...oldData,
-			...newData
+			...newData,
 		};
-		await FestbotApi.updateUserData(oldData._id, oldData._rev, userData);
+		await FestbotUsersApi.updateUserData(
+			oldData._id,
+			oldData._rev,
+			userData
+		);
 		cache.set(psid, userData);
 
 		return userData;
-	}
+	},
 };
 
 module.exports = ConversationContextProvider;

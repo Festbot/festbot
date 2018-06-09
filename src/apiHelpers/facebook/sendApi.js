@@ -2,20 +2,20 @@ const request = require('request-promise');
 
 const PAGE_ACCESS_TOKEN = process.env.FACEBOOK_ACCESS_TOKEN;
 
-const callSendAPI = function(messageData) {
+const callSendAPI = function (messageData) {
 	request({
 		uri: 'https://graph.facebook.com/v2.6/me/messages',
 		qs: { access_token: PAGE_ACCESS_TOKEN },
 		method: 'POST',
 		json: messageData
 	})
-		.then(data => {})
+		.then(data => { })
 		.catch(data => {
 			console.log('fb api error: ', data.error.error.message);
 		});
 };
 
-const sendTyping = function(recipientId, timeout) {
+const sendTyping = function (recipientId, timeout) {
 	callSendAPI({
 		recipient: {
 			id: recipientId
@@ -24,7 +24,7 @@ const sendTyping = function(recipientId, timeout) {
 	});
 
 	return new Promise((resolve, reject) => {
-		setTimeout(function() {
+		setTimeout(function () {
 			callSendAPI({
 				recipient: {
 					id: recipientId
@@ -37,7 +37,7 @@ const sendTyping = function(recipientId, timeout) {
 	});
 };
 
-module.exports.sendMessage = async function(
+module.exports.sendMessage = async function (
 	recipientId,
 	message,
 	quickReplies = []
@@ -59,7 +59,7 @@ module.exports.sendMessage = async function(
 	callSendAPI(obj);
 };
 
-module.exports.sendLoginButton = function(recipientId, text, buttonUrl) {
+module.exports.sendLoginButton = function (recipientId, text, buttonUrl) {
 	callSendAPI({
 		recipient: { id: recipientId },
 		message: {
@@ -80,7 +80,7 @@ module.exports.sendLoginButton = function(recipientId, text, buttonUrl) {
 	});
 };
 
-module.exports.sendButtons = function(recipientId, text, buttons) {
+module.exports.sendButtons = function (recipientId, text, buttons) {
 	callSendAPI({
 		recipient: { id: recipientId },
 		message: {
@@ -96,7 +96,7 @@ module.exports.sendButtons = function(recipientId, text, buttons) {
 	});
 }
 
-module.exports.sendImage = function(recipientId, imageUrl) {
+module.exports.sendImage = function (recipientId, imageUrl) {
 	callSendAPI({
 		messaging_type: 'RESPONSE',
 		recipient: { id: recipientId },
@@ -112,7 +112,7 @@ module.exports.sendImage = function(recipientId, imageUrl) {
 	});
 };
 
-module.exports.sendWebviewButton = function(recipientId) {
+module.exports.sendWebviewButton = function (recipientId) {
 	callSendAPI({
 		recipient: {
 			id: recipientId

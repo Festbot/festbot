@@ -18,5 +18,9 @@ module.exports = {
 	'Some of my services are based on your personal musical taste.':
 		'Some of my services are based on your personal musical taste.',
 	'Wouldn’t mind if I ask you little bit about you?':
-		'Wouldn’t mind if I ask you little bit about you?'
+		'Wouldn’t mind if I ask you little bit about you?',
+
+	// At the festival
+	"Looks like you didn't tell me which festival you're at right now.":
+		"Looks like you didn't tell me which festival you're at right now.",
 };

@@ -4,13 +4,13 @@ const confirmSelect = function*({ i18n: t }) {
 		quickReplies: [
 			{
 				title: t`Yes` + ' 😎',
-				to: '/stream-provider-auth/select'
+				to: '/stream-provider-auth/select',
 			},
 			{
 				title: t`Only vinyl` + ' 🤓',
-				to: '/stream-provider-auth/dont-want'
-			}
-		]
+				to: '/stream-provider-auth/dont-want',
+			},
+		],
 	};
 };
 
@@ -20,17 +20,17 @@ const select = function*({ i18n: t }) {
 		buttons: [
 			{
 				title: 'Spotify',
-				to: '/stream-provider-auth/auth/spotify'
+				to: '/stream-provider-auth/auth/spotify',
 			},
 			{
 				title: 'Apple Music',
-				to: '/stream-provider-auth/auth/applemusic'
+				to: '/stream-provider-auth/auth/applemusic',
 			},
 			{
 				title: 'Deezer',
-				to: '/stream-provider-auth/auth/deezer'
-			}
-		]
+				to: '/stream-provider-auth/auth/deezer',
+			},
+		],
 	};
 };
 
@@ -48,14 +48,14 @@ const auth = function*({ i18n: t, psid }, param) {
 				message: t`At this point I have to ask you to login using your Spotify account, at which I will retrieve the list of your most listened artists from Spotify.`,
 				loginButton:
 					'https://eurorack.haveinstock.com:5000/spotify-login?psid=' +
-					psid
+					psid,
 			};
 		case 'deezer':
 			return {
 				message: t`At this point I have to ask you to login using your Deezer account, at which I will retrieve the list of your most listened artists from Deezer.`,
 				loginButton:
 					'https://eurorack.haveinstock.com:5000/deezer-login?psid=' +
-					psid
+					psid,
 			};
 	}
 };
@@ -79,5 +79,5 @@ module.exports = {
 	dontWant,
 	auth,
 	notice,
-	dataReceived
+	dataReceived,
 };

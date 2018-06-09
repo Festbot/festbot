@@ -1,7 +1,7 @@
 const GetStarted = require('../src/conversations/getStarted');
 const assert = require('chai').assert;
 
-const TEST_STRING = 'nceiwrfyabhskd';
+const TEST_STRING = '}fpPH0A.XX]6yw<(.}:hD-[)x+r(jm)H';
 
 const i18nTemplateFunction = function() {
 	return TEST_STRING;
@@ -11,7 +11,7 @@ describe('getStarted', function() {
 	const getStarted = GetStarted.getStarted({
 		locale: 'hu_HU',
 		name: 'Andor',
-		i18n: i18nTemplateFunction
+		i18n: i18nTemplateFunction,
 	});
 
 	it('should return string', function() {

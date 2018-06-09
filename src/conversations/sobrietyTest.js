@@ -5,25 +5,25 @@ const howManyDrinks = function*({ i18n: t }) {
 		quickReplies: [
 			{
 				title: t`Just one` + '😊',
-				to: '/sobriety-test/not-drunk/'
+				to: '/sobriety-test/not-drunk/',
 			},
 			{
 				title: t`Two` + ' 😎️',
-				to: '/sobriety-test/how-many-fingers/' + 2
+				to: '/sobriety-test/how-many-fingers/' + 2,
 			},
 			{
 				title: t`Three` + ' 🙄',
-				to: '/sobriety-test/how-many-fingers/' + 3
+				to: '/sobriety-test/how-many-fingers/' + 3,
 			},
 			{
 				title: t`Four or more` + ' 😜',
-				to: '/sobriety-test/how-many-fingers/' + 4
+				to: '/sobriety-test/how-many-fingers/' + 4,
 			},
 			{
 				title: t`I didn't count` + ' 😗',
-				to: '/sobriety-test/how-many-fingers/' + 5
-			}
-		]
+				to: '/sobriety-test/how-many-fingers/' + 5,
+			},
+		],
 	};
 };
 
@@ -42,7 +42,7 @@ const howManyFingers = function*({ i18n: t }, param) {
 		'🖐️✌️',
 		'🖐️🤞☝️',
 		'🖐️✌️🤞',
-		'🖐️🖐️'
+		'🖐️🖐️',
 	];
 
 	return {
@@ -50,21 +50,21 @@ const howManyFingers = function*({ i18n: t }, param) {
 		quickReplies: [
 			{
 				title: random + (coin ? 1 : -1),
-				to: '/sobriety-test/dont-text-your-ex/' + (drunkness + 1)
+				to: '/sobriety-test/dont-text-your-ex/' + (drunkness + 1),
 			},
 			{
 				title: random,
-				to: '/sobriety-test/dont-text-your-ex/' + drunkness
+				to: '/sobriety-test/dont-text-your-ex/' + drunkness,
 			},
 			{
 				title: random + 2,
-				to: '/sobriety-test/dont-text-your-ex/' + (drunkness + 3)
+				to: '/sobriety-test/dont-text-your-ex/' + (drunkness + 3),
 			},
 			{
 				title: random + (coin ? -1 : 1),
-				to: '/sobriety-test/dont-text-your-ex/' + (drunkness + 1)
-			}
-		]
+				to: '/sobriety-test/dont-text-your-ex/' + (drunkness + 1),
+			},
+		],
 	};
 };
 
@@ -74,17 +74,17 @@ const dontTextYourEx = function*({ i18n: t }) {
 		quickReplies: [
 			{
 				title: t`I just did` + ' 😗',
-				to: '/sobriety-test/do-you-know-where-you-are'
+				to: '/sobriety-test/do-you-know-where-you-are',
 			},
 			{
 				title: t`Good idea!` + ' 😁',
-				to: '/sobriety-test/do-you-know-where-you-are'
+				to: '/sobriety-test/do-you-know-where-you-are',
 			},
 			{
 				title: t`Not gonna happen` + ' 😅',
-				to: ''
-			}
-		]
+				to: '',
+			},
+		],
 	};
 };
 
@@ -94,13 +94,13 @@ const doYouknowWhereYouAre = function*({ i18n: t }) {
 		quickReplies: [
 			{
 				title: t`With my friends` + ' 😗',
-				to: '/sobriety-test/stop-drinking'
+				to: '/sobriety-test/stop-drinking',
 			},
 			{
 				title: t`What does it matter?` + ' 😗',
-				to: '/sobriety-test/stop-drinking'
-			}
-		]
+				to: '/sobriety-test/stop-drinking',
+			},
+		],
 	};
 };
 
@@ -108,5 +108,5 @@ module.exports = {
 	howManyDrinks,
 	howManyFingers,
 	dontTextYourEx,
-	doYouknowWhereYouAre
+	doYouknowWhereYouAre,
 };

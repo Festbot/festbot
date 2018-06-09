@@ -8,7 +8,7 @@ const statusPage = function(req, res) {
 		`Memory usage (rss): ${process.memoryUsage().rss}`,
 		`Memory usage (heapTotal): ${process.memoryUsage().heapTotal}`,
 		`Memory usage (heapUsed): ${process.memoryUsage().heapUsed}`,
-		`Memory usage (external): ${process.memoryUsage().external}`
+		`Memory usage (external): ${process.memoryUsage().external}`,
 	].join('<br />');
 
 	res.status(200).send(body);

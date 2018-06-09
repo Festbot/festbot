@@ -13,7 +13,7 @@ module.exports.login = function(req, res) {
 				client_id: CLIENT_ID,
 				scope: 'user-read-private user-read-email user-top-read',
 				redirect_uri: CALLBACK_URL,
-				state: req.query.psid
+				state: req.query.psid,
 			})
 	);
 };
@@ -29,20 +29,20 @@ module.exports.getAccessToken = async function(req, res) {
 		form: {
 			code: code,
 			redirect_uri: CALLBACK_URL,
-			grant_type: 'authorization_code'
+			grant_type: 'authorization_code',
 		},
 		headers: {
 			Authorization:
 				'Basic ' +
-				new Buffer(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64')
+				new Buffer(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64'),
 		},
-		json: true
+		json: true,
 	});
 
 	return {
 		accessToken: access_token,
 		refreshToken: refresh_token,
-		psid: psid
+		psid: psid,
 	};
 };
 
@@ -50,7 +50,7 @@ module.exports.getInfoAboutMyself = async function(accessToken) {
 	return await request.get({
 		url: 'https://api.spotify.com/v1/me',
 		headers: { Authorization: 'Bearer ' + accessToken },
-		json: true
+		json: true,
 	});
 };
 
@@ -58,7 +58,7 @@ module.exports.getTopArtists = async function(accessToken) {
 	const data = await request.get({
 		url: 'https://api.spotify.com/v1/me/top/artists',
 		headers: { Authorization: 'Bearer ' + accessToken },
-		json: true
+		json: true,
 	});
 	return data.items.map(artist => artist.name);
 };

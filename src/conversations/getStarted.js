@@ -13,13 +13,13 @@ getStarted = function*({ name, i18n: t }) {
 		quickReplies: [
 			{
 				title: t`No problem` + ' ☺️',
-				to: '/stream-provider-auth/confirm-select'
+				to: '/stream-provider-auth/confirm-select',
 			},
 			{
 				title: t`Maybe later` + ' 🤔',
-				to: '/stream-provider-auth/select-later'
-			}
-		]
+				to: '/stream-provider-auth/select-later',
+			},
+		],
 	};
 };
 

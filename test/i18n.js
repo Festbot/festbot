@@ -6,7 +6,9 @@ describe('i18n', function() {
 		const name = 'Andor';
 
 		assert.strictEqual(
-			i18n('hu_HU')`Hey ${name}, I’m here to assist you with festival related things.`,
+			i18n(
+				'hu_HU'
+			)`Hey ${name}, I’m here to assist you with festival related things.`,
 			'Hey Andor, I’m here to assist you with festival related things.'
 		);
 	});
@@ -15,7 +17,9 @@ describe('i18n', function() {
 		const name = 'Andor';
 
 		assert.strictEqual(
-			i18n('en_US')`Hey ${name}, I’m here to assist you with festival related things.`,
+			i18n(
+				'en_US'
+			)`Hey ${name}, I’m here to assist you with festival related things.`,
 			'Hey Andor, I’m here to assist you with festival related things.'
 		);
 	});

@@ -19,7 +19,7 @@ const WORKERS = process.env.WEB_CONCURRENCY || 1;
 throng(
 	{
 		workers: WORKERS,
-		lifetime: Infinity
+		lifetime: Infinity,
 	},
 	function() {
 		app.set('port', process.env.PORT || 5000);
@@ -37,7 +37,7 @@ throng(
 			const newContext = await ContextProvider.set(psid, {
 				spotifyAccessToken: accessToken,
 				topArtists: await SpotifyApi.getTopArtists(accessToken),
-				topGenres: ['pinarock']
+				topGenres: ['pinarock'],
 			});
 
 			conversationRouter(
@@ -54,7 +54,7 @@ throng(
 			const newContext = await ContextProvider.set(psid, {
 				deezerAccesToken: accessToken,
 				topArtists: await DeezerApi.getTopArtists(accessToken),
-				topGenres: ['pinarock']
+				topGenres: ['pinarock'],
 			});
 
 			conversationRouter(
@@ -107,7 +107,7 @@ throng(
 			if (!context.facebookData) {
 				await ContextProvider.set(psid, {
 					facebookData: facebookData,
-					name: facebookData.first_name
+					name: facebookData.first_name,
 				});
 			}
 

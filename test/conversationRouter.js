@@ -2,7 +2,7 @@ const {
 	routes,
 	matchRoute,
 	router,
-	execRoute
+	execRoute,
 } = require('../src/conversationRouter');
 const assert = require('chai').assert;
 const isGeneratorFunction = require('is-generator-function');
