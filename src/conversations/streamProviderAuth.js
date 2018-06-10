@@ -30,19 +30,17 @@ const select = function*({ locale, psid }) {
 	const t = i18n(locale);
 
 	return sendButtons(
-		{
-			message: t`Please select your music streaming provider from the list below:`,
-			buttons: [
-				{
-					title: 'Spotify',
-					to: '/stream-provider-auth/auth/spotify',
-				},
-				{
-					title: 'Deezer',
-					to: '/stream-provider-auth/auth/deezer',
-				},
-			],
-		},
+		t`Please select your music streaming provider from the list below:`,
+		[
+			{
+				title: 'Spotify',
+				to: '/stream-provider-auth/auth/spotify',
+			},
+			{
+				title: 'Deezer',
+				to: '/stream-provider-auth/auth/deezer',
+			},
+		],
 		psid
 	);
 };
@@ -68,22 +66,16 @@ const auth = function*({ locale, psid }, param) {
 	switch (param) {
 		case 'spotify':
 			return sendLoginButton(
-				{
-					message: t`At this point I have to ask you to login using your Spotify account, at which I will retrieve the list of your most listened artists from Spotify.`,
-					url:
-						'https://eurorack.haveinstock.com:5000/spotify-login?psid=' +
-						psid,
-				},
+				t`At this point I have to ask you to login using your Spotify account, at which I will retrieve the list of your most listened artists from Spotify.`,
+				'https://eurorack.haveinstock.com:5000/spotify-login?psid=' +
+					psid,
 				psid
 			);
 		case 'deezer':
 			return sendLoginButton(
-				{
-					message: t`At this point I have to ask you to login using your Deezer account, at which I will retrieve the list of your most listened artists from Deezer.`,
-					url:
-						'https://eurorack.haveinstock.com:5000/deezer-login?psid=' +
-						psid,
-				},
+				t`At this point I have to ask you to login using your Deezer account, at which I will retrieve the list of your most listened artists from Deezer.`,
+				'https://eurorack.haveinstock.com:5000/deezer-login?psid=' +
+					psid,
 				psid
 			);
 	}
