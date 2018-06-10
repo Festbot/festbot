@@ -4,6 +4,7 @@ const {
 	sendLoginButton,
 	sendButtons,
 	getSpotifyArtists,
+	setContext,
 } = require('../actions');
 const i18n = require('../i18n');
 
