@@ -67,15 +67,13 @@ const auth = function*({ locale, psid }, param) {
 		case 'spotify':
 			return sendLoginButton(
 				t`At this point I have to ask you to login using your Spotify account, at which I will retrieve the list of your most listened artists from Spotify.`,
-				'https://eurorack.haveinstock.com:5000/spotify-login?psid=' +
-					psid,
+				`https://${process.env.HOST}/spotify-login?psid=` + psid,
 				psid
 			);
 		case 'deezer':
 			return sendLoginButton(
 				t`At this point I have to ask you to login using your Deezer account, at which I will retrieve the list of your most listened artists from Deezer.`,
-				'https://eurorack.haveinstock.com:5000/deezer-login?psid=' +
-					psid,
+				`https://${process.env.HOST}/deezer-login?psid=` + psid,
 				psid
 			);
 	}
