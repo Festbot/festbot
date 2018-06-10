@@ -28,7 +28,10 @@ const sendLoginButton = (message, url, psid) => ({
 	payload: { message, url, psid },
 });
 
-const setContext = payload => ({ type: SET_CONTEXT, payload });
+const setContext = (psid, context) => ({
+	type: SET_CONTEXT,
+	payload: { psid, context },
+});
 
 const getFacebookData = psid => ({ type: GET_FACEBOOK_DATA, payload: psid });
 

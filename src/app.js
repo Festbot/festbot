@@ -36,13 +36,8 @@ throng(
 				routes,
 				'/stream-provider-auth/token-received/spotify/' + accessToken
 			);
-			await processAction(handler, param, psid);
 
-			//const newContext = await ContextProvider.set(psid, {
-			//	spotifyAccessToken: accessToken,
-			//	topArtists: await SpotifyApi.getTopArtists(accessToken),
-			//	topGenres: ['pinarock'],
-			//});
+			await processAction(handler, param, psid);
 		});
 		app.get('/deezer-login', DeezerApi.login);
 		app.get('/deezer-callback', async function(req, res) {

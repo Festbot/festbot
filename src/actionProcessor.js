@@ -13,6 +13,11 @@ const {
 
 async function executeAction({ type, payload }) {
 	switch (type) {
+		case SET_CONTEXT:
+			return await ConversationContextProvider.set(
+				payload.psid,
+				payload.context
+			);
 		case GET_SPOTIFY_ARTISTS:
 			return await SpotifyApi.getTopArtists(payload);
 		case GET_FACEBOOK_DATA:
@@ -53,7 +58,6 @@ async function executeAction({ type, payload }) {
 
 const processAction = async function(conversation, param, psid) {
 	const context = await ConversationContextProvider.get(psid);
-
 	const generator = conversation(context, param);
 	let done;
 	let result;
@@ -61,7 +65,9 @@ const processAction = async function(conversation, param, psid) {
 		const yielded = generator.next(result);
 		result = undefined;
 		done = yielded.done;
-		result = await executeAction(yielded.value);
+		if (yielded.value) {
+			result = await executeAction(yielded.value);
+		}
 	}
 };
 

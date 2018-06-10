@@ -92,6 +92,12 @@ const auth = function*({ locale, psid }, param) {
 const spotifyTokenReceived = function*({ locale, psid }, accessToken) {
 	const spotifyArtists = yield getSpotifyArtists(accessToken);
 
+	const newContext = yield setContext({
+		spotifyAccessToken: accessToken,
+		topArtists: spotifyArtists,
+		topGenres: ['pinarock'],
+	});
+
 	return sendReply(
 		t`Wow! I see you like ${spotifyArtists[0]} and ${spotifyArtists[1]}` +
 			' 😏',

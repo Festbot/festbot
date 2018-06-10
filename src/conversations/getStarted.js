@@ -1,15 +1,26 @@
-const { sendReply, getFacebookData, sendQuickReply } = require('../actions');
+const {
+	sendReply,
+	getFacebookData,
+	sendQuickReply,
+	setContext,
+} = require('../actions');
 const i18n = require('../i18n');
 
 getStarted = function*({ locale, psid }) {
 	const t = i18n(locale);
-	const newContext = yield getFacebookData(psid);
+	const facebookData = yield getFacebookData(psid);
 
-	console.log('ezjonvissza', newContext);
+	const newContext = yield setContext({
+		firstName: facebookData.first_name,
+		lastName: facebookData.last_name,
+		gender: facebookData.gender,
+		locale: facebookData.locale,
+		timezone: facebookData.timezone,
+	});
 
 	yield sendReply(
 		t`Hey ${
-			newContext.name
+			facebookData.first_name
 		}, I’m here to assist you with festival related things.` + ' 😎',
 		psid
 	);
