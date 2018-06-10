@@ -8,8 +8,7 @@ module.exports.getUserInformation = async function(psid) {
 	return await request({
 		uri: 'https://graph.facebook.com/v2.6/' + psid,
 		qs: {
-			fields:
-				'first_name,last_name,locale,timezone,gender,last_ad_referral,profile_pic,is_payment_enabled',
+			fields: 'first_name,last_name,locale,timezone',
 			access_token: PAGE_ACCESS_TOKEN,
 		},
 		method: 'GET',

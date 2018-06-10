@@ -1,12 +1,12 @@
 const { sendReply, sendWebViewButton } = require('../actions');
 const i18n = require('../i18n');
 
-const noActiveFestival = function*({ locale, gender = 'female', psid }) {
+const noActiveFestival = function*({ locale, psid }) {
 	const t = i18n(locale);
 
 	yield sendReply(
 		t`Looks like you didn't tell me which festival you're at right now.` +
-			(gender === 'female' ? ' 🤷‍♀️' : ' 🤷‍♂️'),
+			' 🤷‍',
 		psid
 	);
 	yield sendWebViewButton(
