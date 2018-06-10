@@ -10,7 +10,7 @@ getStarted = function*({ locale, psid }) {
 	const t = i18n(locale);
 	const facebookData = yield getFacebookData(psid);
 
-	const newContext = yield setContext({
+	const newContext = yield setContext(psid, {
 		firstName: facebookData.first_name,
 		lastName: facebookData.last_name,
 		gender: facebookData.gender,

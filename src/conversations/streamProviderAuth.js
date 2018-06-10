@@ -90,9 +90,10 @@ const auth = function*({ locale, psid }, param) {
 };
 
 const spotifyTokenReceived = function*({ locale, psid }, accessToken) {
+	const t = i18n(locale);
 	const spotifyArtists = yield getSpotifyArtists(accessToken);
 
-	const newContext = yield setContext({
+	const newContext = yield setContext(psid, {
 		spotifyAccessToken: accessToken,
 		topArtists: spotifyArtists,
 		topGenres: ['pinarock'],
