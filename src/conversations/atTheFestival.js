@@ -1,4 +1,4 @@
-const { sendReply } = require('../actions');
+const { sendReply, sendWebViewButton } = require('../actions');
 const i18n = require('../i18n');
 
 const noActiveFestival = function*({ locale, gender = 'female', psid }) {
@@ -9,8 +9,10 @@ const noActiveFestival = function*({ locale, gender = 'female', psid }) {
 			(gender === 'female' ? ' 🤷‍♀️' : ' 🤷‍♂️'),
 		psid
 	);
-	yield sendReply(
+	yield sendWebViewButton(
 		t`Please choose one from this list, and then ask me again!` + ' 😎',
+		t`Browse festivals`,
+		'https://webview.festbot.com',
 		psid
 	);
 };

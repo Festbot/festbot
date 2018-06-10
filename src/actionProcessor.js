@@ -11,10 +11,18 @@ const {
 	GET_FACEBOOK_DATA,
 	GET_SPOTIFY_ARTISTS,
 	SET_CONTEXT,
+	SEND_WEBVIEW_BUTTON,
 } = require('./actionTypes');
 
 async function executeAction({ type, payload }) {
 	switch (type) {
+		case SEND_WEBVIEW_BUTTON:
+			return await FacebookSendApi.sendWebviewButton(
+				payload.psid,
+				payload.message,
+				payload.buttonTitle,
+				payload.url
+			);
 		case SET_CONTEXT:
 			return await ConversationContextProvider.set(
 				payload.psid,

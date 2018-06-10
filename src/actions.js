@@ -6,6 +6,7 @@ const {
 	SEND_LOGIN_BUTTON,
 	GET_FACEBOOK_DATA,
 	GET_SPOTIFY_ARTISTS,
+	SEND_WEBVIEW_BUTTON,
 } = require('./actionTypes');
 
 const sendReply = (message, psid) => ({
@@ -28,6 +29,11 @@ const sendLoginButton = (message, url, psid) => ({
 	payload: { message, url, psid },
 });
 
+const sendWebViewButton = (message, buttonTitle, url, psid) => ({
+	type: SEND_WEBVIEW_BUTTON,
+	payload: { message, buttonTitle, url, psid },
+});
+
 const setContext = (psid, context) => ({
 	type: SET_CONTEXT,
 	payload: { psid, context },
@@ -46,6 +52,7 @@ module.exports = {
 	sendQuickReply,
 	sendButtons,
 	sendLoginButton,
+	sendWebViewButton,
 	getFacebookData,
 	getSpotifyArtists,
 };

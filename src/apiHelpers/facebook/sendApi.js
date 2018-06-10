@@ -124,7 +124,12 @@ module.exports.sendImage = function(recipientId, imageUrl) {
 	});
 };
 
-module.exports.sendWebviewButton = function(recipientId) {
+module.exports.sendWebviewButton = function(
+	recipientId,
+	message,
+	buttonTitle,
+	url
+) {
 	callSendAPI({
 		recipient: {
 			id: recipientId,
@@ -134,14 +139,14 @@ module.exports.sendWebviewButton = function(recipientId) {
 				type: 'template',
 				payload: {
 					template_type: 'button',
-					text: 'Try the URL button!',
+					text: message,
 					buttons: [
 						{
 							type: 'web_url',
-							url: 'https://grumpy-parrot-29.localtunnel.me',
-							title: 'URL Button',
-							webview_height_ratio: 'full',
-							messenger_extensions: 'false',
+							url: url,
+							title: buttonTitle,
+							webview_height_ratio: 'tall',
+							messenger_extensions: 'true',
 						},
 					],
 				},
