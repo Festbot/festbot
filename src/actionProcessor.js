@@ -9,6 +9,7 @@ const {
 	SEND_LOGIN_BUTTON,
 	GET_FACEBOOK_DATA,
 	GET_SPOTIFY_ARTISTS,
+	SET_CONTEXT
 } = require('./actionTypes');
 
 async function executeAction({ type, payload }) {
