@@ -77,6 +77,16 @@ const addFood = function*({ locale, psid }) {
 	);
 };
 
+const savePoi = function*({ locale, psid }, location) {
+	const t = i18n(locale);
+
+	yield sendMessage(
+		t`Köszi a zerkelést` + ' 🤟',
+
+		psid
+	);
+};
+
 const requestLocation = function*({ locale, psid }, type) {
 	const t = i18n(locale);
 
@@ -87,4 +97,4 @@ const requestLocation = function*({ locale, psid }, type) {
 	);
 };
 
-module.exports = { addPoi, requestLocation, addFood };
+module.exports = { addPoi, requestLocation, addFood, savePoi };

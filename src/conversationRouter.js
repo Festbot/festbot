@@ -51,6 +51,10 @@ const routes = [
 		handler: AddPoi.addPoi,
 	},
 	{
+		route: '/add-poi/save-poi/:location',
+		handler: AddPoi.savePoi,
+	},
+	{
 		route: '/add-poi/add-food',
 		handler: AddPoi.addFood,
 	},
