@@ -3,8 +3,8 @@ const {
 	sendLocation,
 	getFacebookData,
 	sendQuickReply,
-  setContext,
-  sendMessage,
+	setContext,
+	sendMessage,
 } = require('../actions');
 const i18n = require('../i18n');
 
