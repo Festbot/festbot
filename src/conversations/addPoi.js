@@ -48,4 +48,4 @@ const requestLocation = function*({ locale, psid }, type) {
 	);
 };
 
-module.exports = { addPoi, addWc };
+module.exports = { addPoi, requestLocation };
