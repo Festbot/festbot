@@ -29,7 +29,23 @@ addPoi = function*({ locale, psid }) {
 				to: '/add-poi/add-entrance',
 			},
 			{
-				title: t`Bejárat` + ' 🚕',
+				title: t`Hiénát` + ' 🚕',
+				to: '/add-poi/add-taxi',
+			},
+			{
+				title: t`Toalett` + ' 🚻',
+				to: '/add-poi/add-wc',
+			},
+			{
+				title: t`Kemping` + ' ⛺',
+				to: '/add-poi/add-camping',
+			},
+			{
+				title: t`Bejárat` + ' ⛩️',
+				to: '/add-poi/add-entrance',
+			},
+			{
+				title: t`Hiénát` + ' 🚕',
 				to: '/add-poi/add-taxi',
 			},
 		],
