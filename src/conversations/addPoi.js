@@ -4,7 +4,7 @@ const {
 	getFacebookData,
 	sendQuickReply,
 	setContext,
-	sendMessage,
+	sendReply,
 } = require('../actions');
 const i18n = require('../i18n');
 
@@ -81,7 +81,7 @@ const addFood = function*({ locale, psid }) {
 const savePoi = function*({ locale, psid }, location) {
 	const t = i18n(locale);
 
-	yield sendMessage(
+	yield sendReply(
 		t`Köszi a zerkelést` + ' 🤟',
 
 		psid
