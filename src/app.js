@@ -83,6 +83,25 @@ throng(
 							messagingEvent.sender.id,
 							messagingEvent.message.quick_reply.payload
 						);
+					} else if (
+						messagingEvent.message &&
+						messagingEvent.attachments.length > 0 &&
+						messagingEvent.attachments[0].type === 'location'
+					) {
+						const {
+							coordinates,
+						} = messagingEvent.attachments[0].payload;
+						receivedPostback(
+							messagingEvent.sender.id,
+							'add-poi/save-poi/' +
+								coordinates.lat +
+								':' +
+								coordinates.long
+						);
+						console.log(
+							'location postback',
+							messagingEvent.attachments[0]
+						);
 					} else if (messagingEvent.postback) {
 						receivedPostback(
 							messagingEvent.sender.id,
