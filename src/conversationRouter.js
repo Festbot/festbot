@@ -5,6 +5,7 @@ const FavoriteGenres = require('./conversations/favroiteGenres');
 const Settings = require('./conversations/settings');
 const pathToRegexp = require('path-to-regexp');
 const SobrietyTest = require('./conversations/sobrietyTest');
+const AddPoi = require('./conversations/addPoi');
 
 const routes = [
 	{ route: '/get-started', handler: GetStarted.getStarted },
@@ -43,6 +44,11 @@ const routes = [
 	{
 		route: '/settings/set-language/:language',
 		handler: Settings.setLanguage,
+	},
+
+	{
+		route: '/add-poi/add-poi',
+		handler: AddPoi.addPoi,
 	},
 
 	{

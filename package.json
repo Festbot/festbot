@@ -35,7 +35,7 @@
     "chai": "^4.1.2",
     "is-generator-function": "^1.0.7",
     "mocha": "^5.2.0",
-    "prettier": "1.13.5",
+    "prettier": "^1.13.5",
     "prettier-check": "2.0.0"
   }
 }

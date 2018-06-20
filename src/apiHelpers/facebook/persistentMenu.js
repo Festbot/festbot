@@ -85,6 +85,11 @@ module.exports = function getPersistentMenu() {
 							type: 'postback',
 							payload: '/settings/ask-language',
 						},
+						{
+							title: '📍 ' + t`POI hozzáadás`,
+							type: 'postback',
+							payload: '/add-poi/add-poi',
+						},
 					],
 				},
 			],
