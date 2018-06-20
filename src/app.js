@@ -85,9 +85,10 @@ throng(
 						);
 					} else if (
 						messagingEvent.message &&
-						messagingEvent.attachments &&
-						messagingEvent.attachments.length > 0 &&
-						messagingEvent.attachments[0].type === 'location'
+						messagingEvent.message.attachments &&
+						messagingEvent.message.attachments.length > 0 &&
+						messagingEvent.message.attachments[0].type ===
+							'location'
 					) {
 						const {
 							coordinates,
