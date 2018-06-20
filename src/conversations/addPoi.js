@@ -1,6 +1,5 @@
 const {
 	sendReply,
-	sendButtons,
 	getFacebookData,
 	sendQuickReply,
 	setContext,
@@ -10,7 +9,7 @@ const i18n = require('../i18n');
 addPoi = function*({ locale, psid }) {
 	const t = i18n(locale);
 
-	yield sendButtons(
+	yield sendQuickReply(
 		t`Mit szeretnél hozzáadni` + ' 📍',
 		[
 			{
