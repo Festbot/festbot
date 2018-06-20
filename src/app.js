@@ -85,6 +85,7 @@ throng(
 						);
 					} else if (
 						messagingEvent.message &&
+						messagingEvent.attachments &&
 						messagingEvent.attachments.length > 0 &&
 						messagingEvent.attachments[0].type === 'location'
 					) {
