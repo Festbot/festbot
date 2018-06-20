@@ -95,14 +95,14 @@ throng(
 						} = messagingEvent.message.attachments[0].payload;
 						receivedPostback(
 							messagingEvent.sender.id,
-							'add-poi/save-poi/' +
+							'/add-poi/save-poi/' +
 								coordinates.lat +
 								':' +
 								coordinates.long
 						);
 						console.log(
 							'location postback',
-							messagingEvent.attachments[0]
+							messagingEvent.message.attachments[0]
 						);
 					} else if (messagingEvent.postback) {
 						receivedPostback(
