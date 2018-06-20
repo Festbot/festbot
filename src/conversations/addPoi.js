@@ -33,6 +33,45 @@ const addPoi = function*({ locale, psid }) {
 				title: t`Hiénák` + ' 🚕🚕🚕🚕',
 				to: '/add-poi/request-location/taxi',
 			},
+			{
+				title: t`Kaja` + ' 🍽️',
+				to: '/add-poi/add-food',
+			},
+			{
+				title: t`Bolt` + ' 🛒',
+				to: '/add-poi/request-location/supermarket',
+			},
+		],
+		psid
+	);
+};
+
+const addFood = function*({ locale, psid }) {
+	const t = i18n(locale);
+
+	yield sendQuickReply(
+		t`Konyha jellege` + ' 🍽️',
+		[
+			{
+				title: t`Amerikai` + ' 🍔 🌭',
+				to: '/add-poi/request-location/hotdoghamburger',
+			},
+			{
+				title: t`Pizza` + ' 🍕',
+				to: '/add-poi/request-location/pizza',
+			},
+			{
+				title: t`Mexikói` + ' 🌮',
+				to: '/add-poi/request-location/mexican',
+			},
+			{
+				title: t`Gyros`,
+				to: '/add-poi/request-location/gyros',
+			},
+			{
+				title: t`Egészséges` + ' 🥗',
+				to: '/add-poi/request-location/healty',
+			},
 		],
 		psid
 	);
@@ -48,4 +87,4 @@ const requestLocation = function*({ locale, psid }, type) {
 	);
 };
 
-module.exports = { addPoi, requestLocation };
+module.exports = { addPoi, requestLocation, addFood };
