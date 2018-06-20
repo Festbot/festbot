@@ -51,8 +51,8 @@ const routes = [
 		handler: AddPoi.addPoi,
 	},
 	{
-		route: '/add-poi/add-wc',
-		handler: AddPoi.addWc,
+		route: '/add-poi/request-location/:type',
+		handler: AddPoi.requestLocation,
 	},
 
 	{

@@ -15,30 +15,30 @@ const addPoi = function*({ locale, psid }) {
 		[
 			{
 				title: t`Színpad` + ' 😎',
-				to: '/add-poi/add-stage',
+				to: '/add-poi/request-location/stage',
 			},
 			{
 				title: t`Toalett` + ' 🚻🚻🚻',
-				to: '/add-poi/add-wc',
+				to: '/add-poi/request-location/wc',
 			},
 			{
 				title: t`Kemping` + ' ⛺⛺⛺⛺',
-				to: '/add-poi/add-camping',
+				to: '/add-poi/request-location/camping',
 			},
 			{
 				title: t`Bejárat` + ' ⛩️',
-				to: '/add-poi/add-entrance',
+				to: '/add-poi/request-location/entrance',
 			},
 			{
 				title: t`Hiénák` + ' 🚕🚕🚕🚕',
-				to: '/add-poi/add-taxi',
+				to: '/add-poi/request-location/taxi',
 			},
 		],
 		psid
 	);
 };
 
-const addWc = function*({ locale, psid }) {
+const requestLocation = function*({ locale, psid }, type) {
 	const t = i18n(locale);
 
 	yield sendLocation(
