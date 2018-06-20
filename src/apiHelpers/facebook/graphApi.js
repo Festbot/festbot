@@ -38,6 +38,6 @@ module.exports.setUpMessengerProfile = async function() {
 		});
 		console.log(response);
 	} catch (e) {
-		console.log('fb api error: ', e);
+		console.log('fb api error: ', e.body.error);
 	}
 };
