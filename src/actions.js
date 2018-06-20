@@ -7,6 +7,7 @@ const {
 	GET_FACEBOOK_DATA,
 	GET_SPOTIFY_ARTISTS,
 	SEND_WEBVIEW_BUTTON,
+	SEND_LOCATION,
 } = require('./actionTypes');
 
 const sendReply = (message, psid) => ({
@@ -39,6 +40,11 @@ const setContext = (psid, context) => ({
 	payload: { psid, context },
 });
 
+const sendLocation = (message, psid) => ({
+	type: SEND_LOCATION,
+	payload: { message, psid },
+});
+
 const getFacebookData = psid => ({ type: GET_FACEBOOK_DATA, payload: psid });
 
 const getSpotifyArtists = accessToken => ({
@@ -52,6 +58,7 @@ module.exports = {
 	sendQuickReply,
 	sendButtons,
 	sendLoginButton,
+	sendLocation,
 	sendWebViewButton,
 	getFacebookData,
 	getSpotifyArtists,

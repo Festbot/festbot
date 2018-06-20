@@ -12,6 +12,7 @@ const {
 	GET_SPOTIFY_ARTISTS,
 	SET_CONTEXT,
 	SEND_WEBVIEW_BUTTON,
+	SEND_LOCATION,
 } = require('./actionTypes');
 
 async function executeAction({ type, payload }) {
@@ -62,6 +63,12 @@ async function executeAction({ type, payload }) {
 				payload.psid,
 				payload.message,
 				payload.url
+			);
+		case SEND_LOCATION:
+			return await FacebookSendApi.sendMessage(
+				payload.psid,
+				payload.message,
+				[{ content_type: 'location' }]
 			);
 	}
 }
