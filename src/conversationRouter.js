@@ -50,6 +50,10 @@ const routes = [
 		route: '/add-poi/add-poi',
 		handler: AddPoi.addPoi,
 	},
+	{
+		route: '/add-poi/add-wc',
+		handler: AddPoi.addWc,
+	},
 
 	{
 		route: '/sobriety-test/how-many-drinks',

@@ -48,4 +48,4 @@ const addWc = function*({ locale, psid }) {
 	);
 };
 
-module.exports = { addPoi };
+module.exports = { addPoi, addWc };
