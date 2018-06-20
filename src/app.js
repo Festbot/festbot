@@ -92,7 +92,7 @@ throng(
 					) {
 						const {
 							coordinates,
-						} = messagingEvent.attachments[0].payload;
+						} = messagingEvent.message.attachments[0].payload;
 						receivedPostback(
 							messagingEvent.sender.id,
 							'add-poi/save-poi/' +
