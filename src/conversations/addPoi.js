@@ -127,7 +127,7 @@ const addService = function*({ locale, psid }) {
 			},
 			{
 				title: t`Telefontöltés` + ' 🔋',
-				to: '/add-poi/request-location/wine',
+				to: '/add-poi/request-location/charging_station',
 			},
 			{
 				title: t`Elsősegély` + ' 🏥',
@@ -171,6 +171,10 @@ const addFood = function*({ locale, psid }) {
 			{
 				title: t`Reggeli` + ' 🍳',
 				to: '/add-poi/request-location/breakfast',
+			},
+			{
+				title: t`Fish` + ' 🐟',
+				to: '/add-poi/request-location/fish',
 			},
 		],
 		psid
