@@ -10,7 +10,7 @@ const addPoi = async function(
 	await createDoc('pois', uuid, {
 		festivalId,
 		category,
-		coordinates : { lat, lng }
+		coordinates: { lat, lng },
 	});
 };
 
