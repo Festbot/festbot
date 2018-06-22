@@ -100,6 +100,13 @@ throng(
 								':' +
 								coordinates.long
 						);
+						receivedPostback(
+							messagingEvent.sender.id,
+							'/get-poi/send-poi/' +
+								coordinates.lat +
+								':' +
+								coordinates.long
+						);
 					} else if (messagingEvent.postback) {
 						receivedPostback(
 							messagingEvent.sender.id,

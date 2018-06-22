@@ -182,9 +182,13 @@ const addFood = function*({ locale, psid }) {
 };
 
 const savePoi = function*(
-	{ locale, psid, activeFestival, lastAskedLocation },
+	{ locale, psid, activeFestival, lastAskedLocation, sendOrSave },
 	location
 ) {
+	if (sendOrSave !== 'save') {
+		return;
+	}
+
 	const t = i18n(locale);
 
 	const [lat, lng] = location.split(':');
@@ -199,6 +203,7 @@ const requestLocation = function*({ locale, psid }, type) {
 
 	yield setContext(psid, {
 		lastAskedLocation: type,
+		sendOrSave: 'save',
 	});
 
 	yield sendLocation(t`Add meg a helyzetét!` + ' 📍', psid);

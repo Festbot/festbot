@@ -6,6 +6,7 @@ const contextMock = {
 	locale: 'hu_HU',
 	psid: 1,
 	activeFestival: 2,
+	sendOrSave: 'save',
 };
 
 describe('savePoi', function() {
