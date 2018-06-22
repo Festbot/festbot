@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/app.js",
     "prettier": "prettier './**/*.js' --write",
-    "test": "prettier-check './**/*.js' --loglevel log && mocha --recursive",
+    "prettier-check": "prettier-check './**/*.js' --loglevel log",
+    "test": "mocha --recursive",
     "postinstall": "npm run test"
   },
   "repository": {

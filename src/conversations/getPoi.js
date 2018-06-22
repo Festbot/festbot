@@ -199,7 +199,9 @@ const sendPoi = function*(
 		const poi = pois[0];
 		yield sendReply(t`Találtam egyet, mindjárt küldöm...` + ' 🤟', psid);
 		yield sendReply(
-			`http://maps.apple.com/maps?q=${poi.lat},${poi.lng}&z=16`,
+			`http://maps.apple.com/maps?q=${poi.coordinates.lat},${
+				poi.coordinates.lng
+			}&z=16`,
 			psid
 		);
 	} else {
