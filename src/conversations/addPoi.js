@@ -12,9 +12,10 @@ const noActiveFestival = function*({ locale, psid }) {
 	const t = i18n(locale);
 
 	yield sendReply(
-		t`Nekem nem is írtad, hogy melyik fesztiválon vagy...` + ' 🤷‍',
+		t`Nem is írtad, hogy melyik fesztiválon vagy...` + ' 🤷‍',
 		psid
 	);
+
 	yield sendWebViewButton(
 		t`Válaszd ki erről a listáról, aztán próbáld újra!` + ' 😎',
 		t`Fesztiválok böngészése`,
