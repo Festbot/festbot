@@ -2,6 +2,7 @@ const FacebookSendApi = require('./apiHelpers/facebook/sendApi');
 const FacebookGraph = require('./apiHelpers/facebook/graphApi');
 const ConversationContextProvider = require('./conversationContextProvider');
 const SpotifyApi = require('./apiHelpers/spotify');
+const PoiApi = require('./apiHelpers/festbot/pois');
 
 const {
 	SEND_REPLY,
@@ -13,6 +14,7 @@ const {
 	SET_CONTEXT,
 	SEND_WEBVIEW_BUTTON,
 	SEND_LOCATION,
+	ADD_POI,
 } = require('./actionTypes');
 
 async function executeAction({ type, payload }) {
@@ -69,6 +71,13 @@ async function executeAction({ type, payload }) {
 				payload.psid,
 				payload.message,
 				[{ content_type: 'location' }]
+			);
+		case ADD_POI:
+			return await PoiApi.addPoi(
+				payload.festivalId,
+				payload.category,
+				payload.lat,
+				payload.lng
 			);
 	}
 }

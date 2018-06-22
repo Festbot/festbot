@@ -8,6 +8,7 @@ const {
 	GET_SPOTIFY_ARTISTS,
 	SEND_WEBVIEW_BUTTON,
 	SEND_LOCATION,
+	ADD_POI,
 } = require('./actionTypes');
 
 const sendReply = (message, psid) => ({
@@ -52,6 +53,11 @@ const getSpotifyArtists = accessToken => ({
 	payload: accessToken,
 });
 
+const addPoi = (festivalId, category, lat, lng) => ({
+	type: ADD_POI,
+	payload: { festivalId, category, lat, lng },
+});
+
 module.exports = {
 	sendReply,
 	setContext,
@@ -62,4 +68,5 @@ module.exports = {
 	sendWebViewButton,
 	getFacebookData,
 	getSpotifyArtists,
+	addPoi,
 };

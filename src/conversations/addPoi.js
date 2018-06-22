@@ -1,9 +1,8 @@
 const {
 	sendReply,
 	sendLocation,
-	getFacebookData,
 	sendQuickReply,
-	setContext,
+	addPoi: addPoiToDb,
 } = require('../actions');
 const i18n = require('../i18n');
 
@@ -77,24 +76,20 @@ const addFood = function*({ locale, psid }) {
 	);
 };
 
-const savePoi = function*({ locale, psid }, location) {
+const savePoi = function*({ locale, psid, activeFestival }, location) {
 	const t = i18n(locale);
 
-	yield sendReply(
-		t`Köszi a zerkelést` + ' 🤟',
+	const [lat, lng] = location.split(':');
 
-		psid
-	);
+	yield addPoiToDb(activeFestival, 'proba', lat, lng);
+
+	yield sendReply(t`Köszi a zerkelést!` + ' 🤟', psid);
 };
 
 const requestLocation = function*({ locale, psid }, type) {
 	const t = i18n(locale);
 
-	yield sendLocation(
-		t`Add meg a helyzetét` + ' 📍',
-
-		psid
-	);
+	yield sendLocation(t`Add meg a helyzetét!` + ' 📍', psid);
 };
 
 module.exports = { addPoi, requestLocation, addFood, savePoi };
