@@ -100,10 +100,6 @@ throng(
 								':' +
 								coordinates.long
 						);
-						console.log(
-							'location postback',
-							messagingEvent.message.attachments[0]
-						);
 					} else if (messagingEvent.postback) {
 						receivedPostback(
 							messagingEvent.sender.id,
