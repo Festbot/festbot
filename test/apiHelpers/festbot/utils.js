@@ -1,4 +1,8 @@
-const { getUUID, createDoc } = require('../../../src/apiHelpers/festbot/utils');
+const {
+	getUUID,
+	createDoc,
+	find,
+} = require('../../../src/apiHelpers/festbot/utils');
 const assert = require('chai').assert;
 
 describe('festbot api utils: getUUID', function() {
@@ -14,5 +18,23 @@ describe('festbot api utils: createDoc', function() {
 		const response = await createDoc('test', id, { foo: 'bar' });
 		assert.isObject(response);
 		assert.isTrue(response.ok);
+	});
+});
+
+describe('festbot api utils: find', function() {
+	it('should return with an object', async function() {
+		const response = await find('pois', {
+			category: 'wc',
+			festivalId: 'f442bee64bb034de9a00e5b3bd985e70',
+		});
+		assert.isObject(response);
+	});
+
+	it('should return with an object', async function() {
+		const response = await find('pois', {
+			category: 'semmi',
+			festivalId: '',
+		});
+		assert.isObject(response);
 	});
 });

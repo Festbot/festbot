@@ -17,4 +17,13 @@ const addPoi = async function(
 	});
 };
 
-module.exports = { addPoi };
+const getPois = async function(festivalId = null, category = '') {
+	const { docs } = await find('pois', {
+		festivalId,
+		category,
+	});
+
+	return docs;
+};
+
+module.exports = { addPoi, getPois };

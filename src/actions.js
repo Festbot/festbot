@@ -9,6 +9,7 @@ const {
 	SEND_WEBVIEW_BUTTON,
 	SEND_LOCATION,
 	ADD_POI,
+	GET_POIS,
 } = require('./actionTypes');
 
 const sendReply = (message, psid) => ({
@@ -58,6 +59,11 @@ const addPoi = (festivalId, category, lat, lng) => ({
 	payload: { festivalId, category, lat, lng },
 });
 
+const getPois = (festivalId, category, lat, lng) => ({
+	type: GET_POIS,
+	payload: { festivalId, category, lat, lng },
+});
+
 module.exports = {
 	sendReply,
 	setContext,
@@ -69,4 +75,5 @@ module.exports = {
 	getFacebookData,
 	getSpotifyArtists,
 	addPoi,
+	getPois,
 };

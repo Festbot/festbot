@@ -6,6 +6,7 @@ const Settings = require('./conversations/settings');
 const pathToRegexp = require('path-to-regexp');
 const SobrietyTest = require('./conversations/sobrietyTest');
 const AddPoi = require('./conversations/addPoi');
+const GetPoi = require('./conversations/getPoi');
 
 const routes = [
 	{ route: '/get-started', handler: GetStarted.getStarted },
@@ -69,6 +70,31 @@ const routes = [
 	{
 		route: '/add-poi/request-location/:type',
 		handler: AddPoi.requestLocation,
+	},
+
+	{
+		route: '/get-poi/get-poi',
+		handler: GetPoi.getPoi,
+	},
+	{
+		route: '/get-poi/send-poi/:location',
+		handler: GetPoi.sendPoi,
+	},
+	{
+		route: '/get-poi/get-food',
+		handler: GetPoi.getFood,
+	},
+	{
+		route: '/get-poi/get-bar',
+		handler: GetPoi.getBar,
+	},
+	{
+		route: '/get-poi/get-service',
+		handler: GetPoi.getService,
+	},
+	{
+		route: '/get-poi/request-location/:type',
+		handler: GetPoi.requestLocation,
 	},
 
 	{

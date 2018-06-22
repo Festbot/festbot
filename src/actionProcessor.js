@@ -15,6 +15,7 @@ const {
 	SEND_WEBVIEW_BUTTON,
 	SEND_LOCATION,
 	ADD_POI,
+	GET_POIS,
 } = require('./actionTypes');
 
 async function executeAction({ type, payload }) {
@@ -74,6 +75,13 @@ async function executeAction({ type, payload }) {
 			);
 		case ADD_POI:
 			return await PoiApi.addPoi(
+				payload.festivalId,
+				payload.category,
+				payload.lat,
+				payload.lng
+			);
+		case GET_POIS:
+			return await PoiApi.getPois(
 				payload.festivalId,
 				payload.category,
 				payload.lat,

@@ -19,4 +19,16 @@ const createDoc = async function(db, id, data) {
 	return response;
 };
 
-module.exports = { getUUID, createDoc };
+const find = async function(db, selector) {
+	const options = {
+		url: 'https://api.festbot.com/' + db + '/_find',
+		json: {
+			selector,
+		},
+	};
+
+	const response = await request.post(options);
+	return response;
+};
+
+module.exports = { getUUID, createDoc, find };

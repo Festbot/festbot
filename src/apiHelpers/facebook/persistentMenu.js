@@ -12,19 +12,19 @@ module.exports = function getPersistentMenu() {
 					type: 'nested',
 					call_to_actions: [
 						{
-							title: '💦  ' + t`I need to pee`,
+							title: '💦 ' + t`Szomjas vagyok`,
 							type: 'postback',
-							payload: '/at-the-festival/toilet',
+							payload: '/get-poi/get-bar',
 						},
 						{
-							title: '🍔  ' + t`I'm hungry`,
+							title: '🍔 ' + t`Kajás vagyok`,
 							type: 'postback',
-							payload: '/at-the-festival/food',
+							payload: '/get-poi/get-food',
 						},
 						{
-							title: '📅  ' + t`My agenda`,
+							title: 'ℹ️ ' + t`Keresek dolgokat`,
 							type: 'postback',
-							payload: '/at-the-festival/agenda',
+							payload: '/get-poi/get-poi',
 						},
 						{
 							title: '😜 ' + t`Sobriety test`,
