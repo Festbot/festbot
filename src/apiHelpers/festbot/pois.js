@@ -1,4 +1,4 @@
-const { getUUID, createDoc } = require('./utils');
+const { getUUID, createDoc, find } = require('./utils');
 
 const addPoi = async function(
 	festivalId = null,
