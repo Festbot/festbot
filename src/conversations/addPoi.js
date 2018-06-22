@@ -3,6 +3,7 @@ const {
 	sendLocation,
 	sendQuickReply,
 	addPoi: addPoiToDb,
+	setContext,
 } = require('../actions');
 const i18n = require('../i18n');
 
@@ -53,7 +54,7 @@ const addFood = function*({ locale, psid }) {
 		[
 			{
 				title: t`Amerikai` + ' 🍔 🌭',
-				to: '/add-poi/request-location/hotdoghamburger',
+				to: '/add-poi/request-location/hotdog_hamburger',
 			},
 			{
 				title: t`Pizza` + ' 🍕',
@@ -69,25 +70,32 @@ const addFood = function*({ locale, psid }) {
 			},
 			{
 				title: t`Egészséges` + ' 🥗',
-				to: '/add-poi/request-location/healty',
+				to: '/add-poi/request-location/healty_food',
 			},
 		],
 		psid
 	);
 };
 
-const savePoi = function*({ locale, psid, activeFestival }, location) {
+const savePoi = function*(
+	{ locale, psid, activeFestival, lastAskedLocation },
+	location
+) {
 	const t = i18n(locale);
 
 	const [lat, lng] = location.split(':');
 
-	yield addPoiToDb(activeFestival, 'proba', lat, lng);
+	yield addPoiToDb(activeFestival, lastAskedLocation, lat, lng);
 
 	yield sendReply(t`Köszi a zerkelést!` + ' 🤟', psid);
 };
 
 const requestLocation = function*({ locale, psid }, type) {
 	const t = i18n(locale);
+
+	yield setContext(psid, {
+		lastAskedLocation: type,
+	});
 
 	yield sendLocation(t`Add meg a helyzetét!` + ' 📍', psid);
 };
