@@ -26,7 +26,7 @@ const addPoi = function*({ locale, psid, activeFestival }) {
 	const t = i18n(locale);
 
 	if (!activeFestival) {
-		yield* noActiveFestival();
+		yield* noActiveFestival.apply(null, arguments);
 		return;
 	}
 
