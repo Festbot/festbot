@@ -63,6 +63,14 @@ const addPoi = function*({ locale, psid, activeFestival }) {
 				title: t`Bolt` + ' 🛒',
 				to: '/add-poi/request-location/supermarket',
 			},
+			{
+				title: t`Parkoló` + ' 🅿️',
+				to: '/add-poi/request-location/parking',
+			},
+			{
+				title: t`Dohánybolt` + ' 🚬',
+				to: '/add-poi/request-location/tobacco',
+			},
 		],
 		psid
 	);
