@@ -4,6 +4,7 @@ const {
 	sendQuickReply,
 	addPoi: addPoiToDb,
 	setContext,
+	sendWebViewButton,
 } = require('../actions');
 const i18n = require('../i18n');
 
