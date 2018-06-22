@@ -59,6 +59,10 @@ const routes = [
 		handler: AddPoi.addFood,
 	},
 	{
+		route: '/add-poi/add-bar',
+		handler: AddPoi.addBar,
+	},
+	{
 		route: '/add-poi/request-location/:type',
 		handler: AddPoi.requestLocation,
 	},
