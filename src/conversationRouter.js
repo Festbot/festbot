@@ -63,6 +63,10 @@ const routes = [
 		handler: AddPoi.addBar,
 	},
 	{
+		route: '/add-poi/add-service',
+		handler: AddPoi.addService,
+	},
+	{
 		route: '/add-poi/request-location/:type',
 		handler: AddPoi.requestLocation,
 	},
