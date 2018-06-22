@@ -198,7 +198,7 @@ const sendPoi = function*(
 	if (pois.length > 0) {
 		const poi = pois[0];
 		yield sendReply(t`Találtam egyet, mindjárt küldöm...` + ' 🤟', psid);
-		yield SendReply(
+		yield sendReply(
 			`http://maps.apple.com/maps?q=${poi.lat},${poi.lng}&z=16`,
 			psid
 		);
