@@ -196,8 +196,12 @@ const sendPoi = function*(
 	const pois = yield getPois(activeFestival, lastAskedLocation, lat, lng);
 
 	if (pois.length > 0) {
-		console.log('ez jott vissza', pois);
+		const poi = pois[0];
 		yield sendReply(t`Találtam egyet, mindjárt küldöm...` + ' 🤟', psid);
+		yield SendReply(
+			`http://maps.apple.com/maps?q=${poi.lat},${poi.lng}&z=16`,
+			psid
+		);
 	} else {
 		yield sendReply(
 			t`Nem találtam ilyen helyet a fesztiválon, vagy a szervezők nem adták meg.` +
