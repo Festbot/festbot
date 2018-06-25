@@ -219,7 +219,7 @@ const saveStage = function*(
 	const [lat, lng] = location.split(':');
 
 	yield updateVenueLocation(lastAskedLocation, lat, lng);
-	yield sendReply(t`Köszi, így most már megvan!` + ' 🤟', psid);
+	yield sendReply(t`Köszi, most már megvan a színpad!` + ' 🤟', psid);
 };
 
 module.exports = {
