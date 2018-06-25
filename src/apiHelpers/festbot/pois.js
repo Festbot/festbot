@@ -6,8 +6,7 @@ const addPoi = async function(
 	lat = 0,
 	lng = 0
 ) {
-	const uuid = await getUUID();
-	await createDoc('pois', uuid, {
+	await createDoc('pois', {
 		festivalId,
 		category,
 		coordinates: {
@@ -36,6 +35,10 @@ const getVenues = async function(festivalId, category) {
 };
 
 const updateVenueLocation = async function(venueId, lat, lng) {
+	updateDoc('venues', venueId, {
+		coordinates: { lat, lng },
+	});
+
 	return;
 };
 

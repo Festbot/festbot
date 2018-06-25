@@ -75,6 +75,10 @@ const routes = [
 		route: '/add-poi/add-stage',
 		handler: AddPoi.addStage,
 	},
+	{
+		route: '/add-poi/save-stage/:location',
+		handler: AddPoi.saveStage,
+	},
 
 	{
 		route: '/get-poi/get-poi',

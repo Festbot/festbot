@@ -9,14 +9,31 @@ const getUUID = async function() {
 	return uuids[0];
 };
 
-const createDoc = async function(db, id, data) {
+const getDoc = async function(db, id) {
+	const options = {
+		url: 'https://api.festbot.com/' + db + '/' + id,
+		json: true,
+	};
+
+	return await request.get(options);
+};
+
+const createDoc = async function(db, data) {
+	const options = {
+		url: 'https://api.festbot.com/' + db,
+		json: data,
+	};
+
+	return await request.post(options);
+};
+
+const createDocWithId = async function(db, id, data) {
 	const options = {
 		url: 'https://api.festbot.com/' + db + '/' + id,
 		json: data,
 	};
 
-	const response = await request.put(options);
-	return response;
+	return await request.put(options);
 };
 
 const find = async function(db, selector) {
@@ -27,8 +44,27 @@ const find = async function(db, selector) {
 		},
 	};
 
-	const response = await request.post(options);
-	return response;
+	return await request.post(options);
 };
 
-module.exports = { getUUID, createDoc, find };
+const updateDoc = async function(db, id, data = {}) {
+	const doc = await getDoc(db, id);
+	const options = {
+		url: 'https://api.festbot.com/' + db + '/' + id + '?rev=' + doc._rev,
+		json: {
+			...doc,
+			...data,
+		},
+	};
+
+	return await request.put(options);
+};
+
+module.exports = {
+	getUUID,
+	createDoc,
+	createDocWithId,
+	find,
+	updateDoc,
+	getDoc,
+};
