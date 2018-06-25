@@ -36,7 +36,10 @@ const getVenues = async function(festivalId, category) {
 
 const updateVenueLocation = async function(venueId, lat, lng) {
 	updateDoc('venues', venueId, {
-		coordinates: { lat, lng },
+		coordinates: {
+			lat: parseFloat(lat),
+			lng: parseFloat(lng),
+		},
 	});
 
 	return;
