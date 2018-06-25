@@ -8,6 +8,7 @@ const {
 	getVenues,
 	updateVenueLocation,
 } = require('../actions');
+
 const {
 	HOTDOG_HAMBURGER,
 	PIZZA,
