@@ -17,7 +17,7 @@ const {
 	ADD_POI,
 	GET_POIS,
 	GET_VENUES,
-	UPDATE_VENUE_LOACTION,
+	UPDATE_VENUE_LOCATION,
 } = require('./actionTypes');
 
 async function executeAction({ type, payload }) {
@@ -103,7 +103,7 @@ async function executeAction({ type, payload }) {
 		case GET_VENUES:
 			return await PoiApi.getVenues(payload.festivalId, payload.category);
 			break;
-		case UPDATE_VENUE_LOACTION:
+		case UPDATE_VENUE_LOCATION:
 			return await PoiApi.updateVenueLocation(
 				payload.venueId,
 				payload.lat,
