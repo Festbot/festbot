@@ -102,6 +102,13 @@ throng(
 						);
 						receivedPostback(
 							messagingEvent.sender.id,
+							'/add-poi/save-stage/' +
+								coordinates.lat +
+								':' +
+								coordinates.long
+						);
+						receivedPostback(
+							messagingEvent.sender.id,
 							'/get-poi/send-poi/' +
 								coordinates.lat +
 								':' +

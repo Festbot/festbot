@@ -182,10 +182,10 @@ const getFood = function*({ locale, psid }) {
 };
 
 const sendPoi = function*(
-	{ locale, psid, activeFestival, lastAskedLocation, sendOrSave },
+	{ locale, psid, activeFestival, lastAskedLocation, locationRequestedFor },
 	location
 ) {
-	if (sendOrSave !== 'send') {
+	if (locationRequestedFor !== 'send-poi') {
 		return;
 	}
 
@@ -218,7 +218,7 @@ const requestLocation = function*({ locale, psid }, type) {
 
 	yield setContext(psid, {
 		lastAskedLocation: type,
-		sendOrSave: 'send',
+		locationRequestedFor: 'send-poi',
 	});
 
 	yield sendLocation(t`Mondd meg, hogy hol vagy!` + ' 📍', psid);
