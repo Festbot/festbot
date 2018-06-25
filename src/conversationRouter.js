@@ -71,6 +71,10 @@ const routes = [
 		route: '/add-poi/request-location/:type',
 		handler: AddPoi.requestLocation,
 	},
+	{
+		route: '/add-poi/add-stage',
+		handler: AddPoi.addStage,
+	},
 
 	{
 		route: '/get-poi/get-poi',

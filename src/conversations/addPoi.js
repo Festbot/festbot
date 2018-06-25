@@ -5,7 +5,10 @@ const {
 	addPoi: addPoiToDb,
 	setContext,
 	sendWebViewButton,
+	getVenues,
+	updateVenueLocation,
 } = require('../actions');
+
 const i18n = require('../i18n');
 
 const noActiveFestival = function*({ locale, psid }) {
@@ -37,7 +40,7 @@ const addPoi = function*({ locale, psid, activeFestival }) {
 		[
 			{
 				title: t`Színpadot` + ' 😎',
-				to: '/add-poi/request-location/stage',
+				to: '/add-poi/add-stage',
 			},
 			{
 				title: t`Kaját` + ' 🍽️',
@@ -181,6 +184,21 @@ const addFood = function*({ locale, psid }) {
 	);
 };
 
+const addStage = function*({ locale, psid, activeFestival }) {
+	const t = i18n(locale);
+
+	const stages = yield getVenues(activeFestival, 'stage');
+
+	yield sendQuickReply(
+		t`Melyik színpadot?`,
+		stages.map(stage => ({
+			title: stage.name,
+			to: '/add-poi/request-location-for-stage/' + stage._id,
+		})),
+		psid
+	);
+};
+
 const savePoi = function*(
 	{ locale, psid, activeFestival, lastAskedLocation, sendOrSave },
 	location
@@ -216,4 +234,5 @@ module.exports = {
 	savePoi,
 	addBar,
 	addService,
+	addStage,
 };

@@ -10,6 +10,8 @@ const {
 	SEND_LOCATION,
 	ADD_POI,
 	GET_POIS,
+	GET_VENUES,
+	UPDATE_VENUE_LOCATION,
 } = require('./actionTypes');
 
 const sendReply = (message, psid) => ({
@@ -64,6 +66,16 @@ const getPois = (festivalId, category, lat, lng) => ({
 	payload: { festivalId, category, lat, lng },
 });
 
+const getVenues = (festivalId, category) => ({
+	type: GET_VENUES,
+	payload: { festivalId, category },
+});
+
+const updateVenueLocation = (venueId, lat, lng) => ({
+	type: UPDATE_VENUE_LOCATION,
+	payload: { venueId, lat, lng },
+});
+
 module.exports = {
 	sendReply,
 	setContext,
@@ -76,4 +88,6 @@ module.exports = {
 	getSpotifyArtists,
 	addPoi,
 	getPois,
+	getVenues,
+	updateVenueLocation,
 };

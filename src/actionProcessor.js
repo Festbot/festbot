@@ -16,6 +16,8 @@ const {
 	SEND_LOCATION,
 	ADD_POI,
 	GET_POIS,
+	GET_VENUES,
+	UPDATE_VENUE_LOACTION,
 } = require('./actionTypes');
 
 async function executeAction({ type, payload }) {
@@ -27,20 +29,25 @@ async function executeAction({ type, payload }) {
 				payload.buttonTitle,
 				payload.url
 			);
+			break;
 		case SET_CONTEXT:
 			return await ConversationContextProvider.set(
 				payload.psid,
 				payload.context
 			);
+			break;
 		case GET_SPOTIFY_ARTISTS:
 			return await SpotifyApi.getTopArtists(payload);
+			break;
 		case GET_FACEBOOK_DATA:
 			return await FacebookGraph.getUserInformation(payload);
+			break;
 		case SEND_REPLY:
 			return await FacebookSendApi.sendMessage(
 				payload.psid,
 				payload.message
 			);
+			break;
 		case SEND_QUICK_REPLY:
 			return await FacebookSendApi.sendMessage(
 				payload.psid,
@@ -51,6 +58,7 @@ async function executeAction({ type, payload }) {
 					title: quickReply.title,
 				}))
 			);
+			break;
 		case SEND_BUTTONS:
 			return await FacebookSendApi.sendButtons(
 				payload.psid,
@@ -61,18 +69,21 @@ async function executeAction({ type, payload }) {
 					payload: button.to,
 				}))
 			);
+			break;
 		case SEND_LOGIN_BUTTON:
 			return await FacebookSendApi.sendLoginButton(
 				payload.psid,
 				payload.message,
 				payload.url
 			);
+			break;
 		case SEND_LOCATION:
 			return await FacebookSendApi.sendMessage(
 				payload.psid,
 				payload.message,
 				[{ content_type: 'location' }]
 			);
+			break;
 		case ADD_POI:
 			return await PoiApi.addPoi(
 				payload.festivalId,
@@ -80,6 +91,7 @@ async function executeAction({ type, payload }) {
 				payload.lat,
 				payload.lng
 			);
+			break;
 		case GET_POIS:
 			return await PoiApi.getPois(
 				payload.festivalId,
@@ -87,6 +99,17 @@ async function executeAction({ type, payload }) {
 				payload.lat,
 				payload.lng
 			);
+			break;
+		case GET_VENUES:
+			return await PoiApi.getVenues(payload.festivalId, payload.category);
+			break;
+		case UPDATE_VENUE_LOACTION:
+			return await PoiApi.updateVenueLocation(
+				payload.venueId,
+				payload.lat,
+				payload.lng
+			);
+			break;
 	}
 }
 

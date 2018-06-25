@@ -26,4 +26,17 @@ const getPois = async function(festivalId = null, category = '') {
 	return docs;
 };
 
-module.exports = { addPoi, getPois };
+const getVenues = async function(festivalId, category) {
+	const { docs } = await find('venues', {
+		festivalId,
+		category,
+	});
+
+	return docs;
+};
+
+const updateVenueLocation = async function(venueId, lat, lng) {
+	return;
+};
+
+module.exports = { addPoi, getPois, getVenues, updateVenueLocation };
