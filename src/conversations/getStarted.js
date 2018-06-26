@@ -19,16 +19,54 @@ getStarted = function*({ locale, psid }) {
 	});
 
 	yield sendReply(
-		t`Hey ${
+		t`Szia ${
 			facebookData.first_name
-		}, I’m here to assist you with festival related things.` + ' 😎',
+		}, Itt vagyok, hogy segítek a fesztiválos kérdéseidben.` + ' 😎',
 		psid
 	);
 
-	yield sendReply(t`I can't wait to get to know you more!` + ' 😍', psid);
+	yield sendReply(
+		t`Kérdéseid a képernyő alján található menü segítségével irányíthatod.`,
+		psid
+	);
 
 	yield sendReply(
-		t`Some of my services are based on your musical taste.` + ' 🧐',
+		t`Kérlek majd szánj rá néhány percet, hogy átnézd ezt a menünt.`,
+		psid
+	);
+
+	yield sendReply(
+		t`Fontos, hogy bizonyos fesztiválos kérdésekhez az adott fesztivált először ki kell választani. Ezt a lenti menü seítségével, a fesztivál aktiválása menüpont alatt teheted meg.`,
+		psid
+	);
+
+	yield sendReply(
+		t`A menüre kattintva a fesztiválok listáját láthatod majd, ahol a fesztivált a zöld + jelre kattintva aktiválhatod.`,
+		psid
+	);
+
+	yield sendReply(
+		t`A fesztivál programját ugyanitt, az adott fesztiválra kattintva, a bögészés gomb megnyomása utan láthatod.`,
+		psid
+	);
+
+	yield sendReply(
+		t`Itt koncerteket adhatsz hozzá a kedvenceid listájához, és én gondoskodom majd róla, hogy a kezdés előtt időben értesítselek.`,
+		psid
+	);
+
+	yield sendReply(
+		t`Most rabolom tovább az idődet, biztos Te is izgatott vagy már, hogy felfedezd a lehetőségeket.`,
+		psid
+	);
+
+	yield sendReply(
+		t`Már alig várom, hogy jobban megismerjelek!` + ' 😍',
+		psid
+	);
+
+	yield sendReply(
+		t`A zenei ízléseddel kapcsolatban lenne most pár kérésem.` + ' 🧐',
 		psid
 	);
 

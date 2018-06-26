@@ -12,13 +12,15 @@ const noActiveFestival = function*({ locale, psid }) {
 	const t = i18n(locale);
 
 	yield sendReply(
-		t`Nem is írtad, hogy melyik fesztiválon vagy...` + ' 🤷‍',
+		t`Úgy tűnik, hogy nem állítottál be aktív fesztivált egyelőre.` +
+			' 🤷‍',
 		psid
 	);
 
 	yield sendWebViewButton(
-		t`Válaszd ki erről a listáról, aztán próbáld újra!` + ' 😎',
-		t`Fesztiválok böngészése`,
+		t`Kérlek aktiváld a fesztivált a zöld + jelre kattintva, aztán próbáld újra!` +
+			' 😎',
+		t`Fesztiválok listája`,
 		'https://webview.festbot.com',
 		psid
 	);
@@ -33,7 +35,7 @@ const getPoi = function*({ locale, psid, activeFestival }) {
 	}
 
 	yield sendQuickReply(
-		t`Na, mit keresel?` + ' 📍',
+		t`Mit keresel?` + ' 📍',
 		[
 			{
 				title: t`Színpadot` + ' 😎',
@@ -48,7 +50,7 @@ const getPoi = function*({ locale, psid, activeFestival }) {
 				to: '/get-poi/get-bar',
 			},
 			{
-				title: t`Vécét` + ' 🚻',
+				title: t`Mosdót` + ' 🚻',
 				to: '/get-poi/request-location/wc',
 			},
 			{
@@ -88,7 +90,7 @@ const getBar = function*({ locale, psid }) {
 	const t = i18n(locale);
 
 	yield sendQuickReply(
-		t`Jó, de mit szeretnél inni? ` + ' ',
+		t`Mit szeretnél inni? ` + ' ',
 		[
 			{
 				title: t`Sört` + ' 🍺',
@@ -107,7 +109,7 @@ const getBar = function*({ locale, psid }) {
 				to: '/get-poi/request-location/whisky',
 			},
 			{
-				title: t`Coffee` + ' ☕',
+				title: t`Kávét` + ' ☕',
 				to: '/get-poi/request-location/coffee',
 			},
 		],
@@ -119,7 +121,7 @@ const getService = function*({ locale, psid }) {
 	const t = i18n(locale);
 
 	yield sendQuickReply(
-		t`Jó, de az bármi lehet...`,
+		t`A pontosítés végett muszáj megkérdeznem, hogy pontosan mit keresel`,
 		[
 			{
 				title: t`Értékmegőrző` + ' 💍',
@@ -173,8 +175,12 @@ const getFood = function*({ locale, psid }) {
 				to: '/get-poi/request-location/breakfast',
 			},
 			{
-				title: t`Fish` + ' 🐟',
+				title: t`Hal` + ' 🐟',
 				to: '/get-poi/request-location/fish',
+			},
+			{
+				title: t`Vegán` + ' 🥦',
+				to: '/get-poi/request-location/vegan',
 			},
 		],
 		psid

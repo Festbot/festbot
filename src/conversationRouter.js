@@ -118,6 +118,10 @@ const routes = [
 		handler: SobrietyTest.dontTextYourEx,
 	},
 	{
+		route: '/sobriety-test/do-the-math/:drunkness',
+		handler: SobrietyTest.doTheMath,
+	},
+	{
 		route: '/sobriety-test/do-you-know-where-you-are',
 		handler: SobrietyTest.doYouknowWhereYouAre,
 	},

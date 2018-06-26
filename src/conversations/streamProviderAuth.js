@@ -12,14 +12,14 @@ const confirmSelect = function*({ locale, psid }) {
 	const t = i18n(locale);
 
 	return sendQuickReply(
-		t`Do you use Spotify, Apple Music or Deezer to stream music?`,
+		t`Használsz Spotify-t, Apple Music-ot vagy Deezert?`,
 		[
 			{
 				title: t`Yes` + ' 😎',
 				to: '/stream-provider-auth/select',
 			},
 			{
-				title: t`Only vinyl` + ' 🤓',
+				title: t`Kizárólag bakelitet` + ' 🤓',
 				to: '/stream-provider-auth/dont-want',
 			},
 		],
@@ -31,7 +31,7 @@ const select = function*({ locale, psid }) {
 	const t = i18n(locale);
 
 	return sendButtons(
-		t`Please select your music streaming provider from the list below:`,
+		t`Kérlek válaszd ki az alábbi szolgáltatók közül:`,
 		[
 			{
 				title: 'Spotify',
@@ -50,12 +50,12 @@ const dontWant = function*({ locale, psid }) {
 	const t = i18n(locale);
 
 	yield sendReply(
-		t`Cool. I heard that cassette is the new thing now.` + ' 😉',
+		t`Cool, Hallottam, hogy a magnókazetta lesz az új sztenderd.` + ' 😉',
 		psid
 	);
 
 	yield sendReply(
-		t`If you ever change your mind, you can reach this function from the menu.` +
+		t`Ha estleg meggondolod magad később, a lenti menüben bármikor hozzáadhatod a zenei fiókodat.` +
 			' 😉',
 		psid
 	);
@@ -67,7 +67,7 @@ const auth = function*({ locale, psid }, param) {
 	switch (param) {
 		case 'spotify':
 			return sendLoginButton(
-				t`At this point I have to ask you to login using your Spotify account, at which I will retrieve the list of your most listened artists from Spotify.`,
+				t`A hozzáférés engedélyezésével egyszerűen és gyorsan megkapom a legtöbbet hallgatott előadóid listáját. A kérés jóváhagyásához kérlek jelentkezz be a Spotify fiókodba.`,
 				`https://${process.env.HOST}/spotify-login?psid=` + psid,
 				psid
 			);
@@ -101,7 +101,7 @@ const notice = function*({ locale, psid }) {
 	const t = i18n(locale);
 
 	return sendReply(
-		t`Btw. if you ever wan\'t me to forget these things about you, just type "forget me" into the chat.` +
+		t`Egyébként, a rólad megismert adatok végleges törlését bármikor kérheted tőlem, csak gépeld be a csevegésbe, hogy "forget me"` +
 			' 😉',
 		psid
 	);
@@ -111,7 +111,9 @@ const dataReceived = function*({ locale, topArtists = [], psid }) {
 	const t = i18n(locale);
 
 	return sendReply(
-		t`Wow! I see you like ${topArtists[0]} and ${topArtists[1]}` + ' 😏',
+		t`WWow!, Látom, hogy a ${topArtists[0]} és a ${
+			topArtists[1]
+		} neked is a kedvenced` + ' 😏',
 		psid
 	);
 };

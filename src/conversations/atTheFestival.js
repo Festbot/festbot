@@ -5,13 +5,14 @@ const noActiveFestival = function*({ locale, psid }) {
 	const t = i18n(locale);
 
 	yield sendReply(
-		t`Looks like you didn't tell me which festival you're at right now.` +
+		t`Úgy tűnik, hogy nem állítottál be aktív fesztivált egyelőre.` +
 			' 🤷‍',
 		psid
 	);
 	yield sendWebViewButton(
-		t`Please choose one from this list, and then ask me again!` + ' 😎',
-		t`Browse festivals`,
+		t`Kérlek aktiváld a fesztivált a zöld + jelre kattintva, aztán próbáld újra!` +
+			' 😎',
+		t`Fesztiválok listája`,
 		'https://webview.festbot.com',
 		psid
 	);
@@ -21,18 +22,18 @@ const noFestivalData = function*({ locale, psid }) {
 	const t = i18n(locale);
 
 	yield sendReply(
-		t`Oops, looks like the organizers of this festival dind't send me the map yet.` +
+		t`A macska rúgja meg! Úgy tűnik, hogy a felsztivál szervezői még nem küldtek még térkép adatokat.` +
 			' 😩',
 		psid
 	);
-	yield sendReply(t`Sorry about that.` + ' 😞', psid);
-	yield sendReply(t`I will let them know...`, psid);
+	yield sendReply(t`Elnézést kérek ezért.` + ' 😞', psid);
+	yield sendReply(t`Jelzem nekik az igényt...`, psid);
 };
 
 const toilet = function*({ locale, activeFestival, psid }) {
 	const t = i18n(locale);
 
-	yield sendReply(t`Lemme see...` + ' 🧐', psid);
+	yield sendReply(t`Lássuk csak...` + ' 🧐', psid);
 
 	if (activeFestival) {
 		yield* noFestivalData.apply(null, arguments);
@@ -44,7 +45,7 @@ const toilet = function*({ locale, activeFestival, psid }) {
 const food = function*({ locale, activeFestival, psid }) {
 	const t = i18n(locale);
 
-	yield sendReply(t`Lemme see...` + ' 🧐', psid);
+	yield sendReply(t`Lássuk csak...` + ' 🧐', psid);
 
 	if (activeFestival) {
 		yield* noFestivalData.apply(null, arguments);
@@ -56,7 +57,7 @@ const food = function*({ locale, activeFestival, psid }) {
 const agenda = function*({ locale, activeFestival, psid }) {
 	const t = i18n(locale);
 
-	yield sendReply(t`Lemme see...` + ' 🧐', psid);
+	yield sendReply(t`Lássuk csak...` + ' 🧐', psid);
 
 	if (activeFestival) {
 		yield* noFestivalData.apply(null, arguments);

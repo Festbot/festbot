@@ -1,5 +1,5 @@
 const locales = {
-	hu_HU: require('./locales/hu_HU'),
+	en_US: require('./locales/en_US'),
 };
 
 const i18n = function i18n(locale) {
