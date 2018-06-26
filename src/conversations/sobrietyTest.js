@@ -139,7 +139,7 @@ const doTheMath = function*({ locale, psid }, param) {
 					(drunkness + 3),
 			},
 			{
-				title: t`Nem beszélni matek!` + ' 😗',
+				title: t`Nem beszélni matek!` + ' 🤪',
 				to:
 					'/sobriety-test/do-you-know-where-you-are' +
 					(drunkness + 5),
@@ -161,7 +161,7 @@ const doYouknowWhereYouAre = function*({ locale, psid }, param) {
 				to: '/sobriety-test/stop-drinking' + (drunkness + 1),
 			},
 			{
-				title: t`Nem, de a haverom tudja.` + ' 😗',
+				title: t`Nem, de a haverom tudja.` + ' 🤪',
 				to: '/sobriety-test/stop-drinking' + (drunkness + 2),
 			},
 			{

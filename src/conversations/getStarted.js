@@ -36,12 +36,12 @@ getStarted = function*({ locale, psid }) {
 	);
 
 	yield sendReply(
-		t`Fontos, hogy bizonyos fesztiválos kérdésekhez az adott fesztivált először ki kell választani. Ezt a lenti menü seítségével, a fesztivál aktiválása menüpont alatt teheted meg.`,
+		t`Fontos, hogy bizonyos fesztiválos kérdésekhez az adott fesztivált először aktiválni kell. Ezt a lenti menü seítségével, a fesztivál aktiválása menüpont alatt teheted meg.`,
 		psid
 	);
 
 	yield sendReply(
-		t`A menüre kattintva a fesztiválok listáját láthatod majd, ahol a fesztivált a zöld + jelre kattintva aktiválhatod.`,
+		t`A menüpontra kattintva a fesztiválok listáját láthatod majd, ahol az adott fesztivált a zöld + jelre kattintva aktiválhatod.`,
 		psid
 	);
 
@@ -56,7 +56,7 @@ getStarted = function*({ locale, psid }) {
 	);
 
 	yield sendReply(
-		t`Most rabolom tovább az idődet, biztos Te is izgatott vagy már, hogy felfedezd a lehetőségeket.`,
+		t`Most nem is rabolom tovább az idődet, biztos Te is izgatott vagy már, hogy felfedezd a lehetőségeket.`,
 		psid
 	);
 
@@ -71,14 +71,14 @@ getStarted = function*({ locale, psid }) {
 	);
 
 	yield sendQuickReply(
-		t`I hope you wouldn’t mind if I ask a little bit about you.` + ' ☺️',
+		t`Remélem nem bánod ha kicsit belemegyünk ebbe a témába.` + ' ☺️',
 		[
 			{
-				title: t`No problem` + ' ☺️',
+				title: t`Nem gond, mehet` + ' ☺️',
 				to: '/stream-provider-auth/confirm-select',
 			},
 			{
-				title: t`Maybe later` + ' 🤔',
+				title: t`Talán majd később` + ' 🤔',
 				to: '/stream-provider-auth/select-later',
 			},
 		],

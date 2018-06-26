@@ -101,15 +101,15 @@ module.exports = {
 		'You can use the menu at the bottom of this window for asking things from me.',
 	'Kérlek majd szánj rá néhány percet, hogy átnézd ezt a menünt.':
 		'Please take a moment to check the options.',
-	'Fontos, hogy bizonyos fesztiválos kérdésekhez az adott fesztivált először ki kell választani. Ezt a lenti menü seítségével, a fesztivál aktiválása menüpont alatt teheted meg.':
+	'Fontos, hogy bizonyos fesztiválos kérdésekhez az adott fesztivált először aktiválni kell. Ezt a lenti menü seítségével, a fesztivál aktiválása menüpont alatt teheted meg.':
 		'Some of the functions are realted to a specific festival, and i might be notify you to activate the festival. You can do this anytime for yourself at the menu below.',
-	'A menüre kattintva a fesztiválok listáját láthatod majd, ahol a fesztivált a zöld + jelre kattintva aktiválhatod.':
+	'A menüpontra kattintva a fesztiválok listáját láthatod majd, ahol az adott fesztivált a zöld + jelre kattintva aktiválhatod.':
 		'Using the activation menu, you will see the list of the ferstivals. Clicking on the green + symbol you can activate that.',
 	'A fesztivál programját ugyanitt, az adott fesztiválra kattintva, a bögészés gomb megnyomása utan láthatod.':
 		'Clicking on a specific festival, you are able to see the detailed program.',
 	'Itt koncerteket adhatsz hozzá a kedvenceid listájához, és én gondoskodom majd róla, hogy a kezdés előtt időben értesítselek.':
 		'Where you can save events to your favourites, and i will notify you when the time will come.',
-	'Most rabolom tovább az idődet, biztos Te is izgatott vagy már, hogy felfedezd a lehetőségeket.':
+	'Most nem is rabolom tovább az idődet, biztos Te is izgatott vagy már, hogy felfedezd a lehetőségeket.':
 		"Now it's time to move forward, i'm sure you are getting excited all about this.",
 	'Már alig várom, hogy jobban megismerjelek!':
 		"I can't wait to get to know you better!",
@@ -117,8 +117,8 @@ module.exports = {
 		'Some of my services are based on your musical taste.',
 	'Remélem nem bánod ha kicsit belemegyünk ebbe a témába.':
 		'I hope you wouldn’t mind if I ask a little bit about you.',
-	'Nem gond': 'No problem',
-	'Később talán': 'Maybe later',
+	'Nem gond, mehet': 'No problem',
+	'Talán majd később': 'Maybe later',
 
 	// At the festival
 	"Looks like you didn't tell me which festival you're at right now.":
