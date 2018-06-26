@@ -147,6 +147,7 @@ module.exports = {
 	'Mit számít?': 'What does it matter?',
 	'Mennyi 12 x 12?': 'What is 12 x 12?',
 	'Nem beszélni matek!': 'I no speak math!',
+	'Te most bemutattál???': 'Did you just gave a finger???',
 
 	// General
 	Igen: 'Yes',
