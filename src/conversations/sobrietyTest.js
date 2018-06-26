@@ -168,5 +168,6 @@ module.exports = {
 	howManyDrinks,
 	howManyFingers,
 	dontTextYourEx,
+	doTheMath,
 	doYouknowWhereYouAre,
 };
