@@ -8,62 +8,77 @@ module.exports = function getPersistentMenu() {
 			composer_input_disabled: false,
 			call_to_actions: [
 				{
-					title: '👨‍🎤  ' + t`At the festival`,
+					title: '👨‍🎤  ' + t`Keresés...`,
 					type: 'nested',
 					call_to_actions: [
 						{
-							title: '💦 ' + t`Szomjas vagyok`,
+							title: '💦 ' + t`Innék valamit`,
 							type: 'postback',
 							payload: '/get-poi/get-bar',
 						},
 						{
-							title: '🍔 ' + t`Kajás vagyok`,
+							title: '🍔 ' + t`Éhes vagyok`,
 							type: 'postback',
 							payload: '/get-poi/get-food',
 						},
 						{
-							title: 'ℹ️ ' + t`Keresek dolgokat`,
+							title: 'ℹ️ ' + t`Mutasd a többi lehetőséget`,
 							type: 'postback',
 							payload: '/get-poi/get-poi',
 						},
 						{
-							title: '😜 ' + t`Sobriety test`,
+							title: '😜 ' + t`Alkohol teszt`,
 							type: 'postback',
 							payload: '/sobriety-test/how-many-drinks',
 						},
 					],
 				},
 				{
-					title: '🎒 ' + t`Before the festival`,
+					title: '🎒 ' + t`Fesztiválok és programok`,
 					type: 'nested',
 					call_to_actions: [
 						{
-							title: '🎧 ' + t`Connect streaming services`,
-							type: 'postback',
-							payload: '/stream-provider-auth/confirm-select',
+							title: '🎤  ' + t`Fesztivál aktiválás`,
+							type: 'web_url',
+							url: 'https://webview.festbot.com',
+							webview_height_ratio: 'tall',
+							messenger_extensions: true,
 						},
 						{
-							title: '🌍  ' + t`Discover artists`,
+							title: '🎤  ' + t`Fesztivál programok`,
+							type: 'web_url',
+							url: 'https://webview.festbot.com',
+							webview_height_ratio: 'tall',
+							messenger_extensions: true,
+						},
+						{
+							title: '🌍  ' + t`Előadók szerint`,
 							type: 'web_url',
 							url: 'https://webview.festbot.com/discover',
 							webview_height_ratio: 'tall',
 							messenger_extensions: true,
 						},
 						{
-							title: '🎤  ' + t`Change festival`,
+							title: '🌍  ' + t`Mai programom`,
 							type: 'web_url',
-							url: 'https://webview.festbot.com',
+							url: 'https://webview.festbot.com/',
 							webview_height_ratio: 'tall',
 							messenger_extensions: true,
 						},
 					],
 				},
 				{
-					title: '⚙️ ' + t`Settings & Help`,
+					title: '⚙️ ' + t`Beállítások és segítség`,
 					type: 'nested',
 					call_to_actions: [
 						{
-							title: '🔒 ' + t`Privacy`,
+							title:
+								'🎧 ' + t`Zene szolgáltatás fiók hozzáadása'`,
+							type: 'postback',
+							payload: '/stream-provider-auth/confirm-select',
+						},
+						{
+							title: '🔒 ' + t`Adatvédelem`,
 							type: 'nested',
 							call_to_actions: [
 								{
@@ -72,7 +87,7 @@ module.exports = function getPersistentMenu() {
 									payload: '/legal/gdpr',
 								},
 								{
-									title: '👩‍⚖️ ' + t`Privacy policy`,
+									title: '👩‍⚖️ ' + t`Adatkezelés`,
 									type: 'web_url',
 									url: 'https://festbot.com/privacy',
 									webview_height_ratio: 'tall',
@@ -81,7 +96,7 @@ module.exports = function getPersistentMenu() {
 							],
 						},
 						{
-							title: '🌐 ' + t`Language`,
+							title: '🌐 ' + t`Nyelv`,
 							type: 'postback',
 							payload: '/settings/ask-language',
 						},

@@ -5,26 +5,26 @@ const howManyDrinks = function*({ locale, psid }) {
 	const t = i18n(locale);
 
 	return sendQuickReply(
-		t`Okay, let's do this! How many drinks have you had?` + ' 🍺🍷🍸',
+		t`Oké, inni jó! Hány pohárral ittál?` + ' 🍺🍷🍸',
 		[
 			{
-				title: t`Just one` + '😊',
+				title: t`Csak eggyel` + '😊',
 				to: '/sobriety-test/not-drunk/',
 			},
 			{
-				title: t`Two` + ' 😎️',
+				title: t`Kettő` + ' 😎️',
 				to: '/sobriety-test/how-many-fingers/' + 2,
 			},
 			{
-				title: t`Three` + ' 🙄',
+				title: t`Három` + ' 🙄',
 				to: '/sobriety-test/how-many-fingers/' + 3,
 			},
 			{
-				title: t`Four or more` + ' 😜',
+				title: t`Négy vagy több` + ' 😜',
 				to: '/sobriety-test/how-many-fingers/' + 4,
 			},
 			{
-				title: t`I didn't count` + ' 😗',
+				title: t`Már nem számolom` + ' 😗',
 				to: '/sobriety-test/how-many-fingers/' + 5,
 			},
 		],
@@ -52,7 +52,7 @@ const howManyFingers = function*({ locale, psid }, param) {
 	];
 
 	return sendQuickReply(
-		t`How many fingers am I holding up?` + ' ' + fingers[random],
+		t`Hány ujjamat mutatom?` + ' ' + fingers[random],
 		[
 			{
 				title: random + (coin ? 1 : -1),
@@ -70,47 +70,107 @@ const howManyFingers = function*({ locale, psid }, param) {
 				title: random + (coin ? -1 : 1),
 				to: '/sobriety-test/dont-text-your-ex/' + (drunkness + 1),
 			},
-		],
-		psid
-	);
-};
-
-const dontTextYourEx = function*({ locale, psid }) {
-	const t = i18n(locale);
-
-	return sendQuickReply(
-		t`I hope you're not planning to text your ex!` + ' 🙄',
-		[
 			{
-				title: t`I just did` + ' 😗',
-				to: '/sobriety-test/do-you-know-where-you-are',
-			},
-			{
-				title: t`Good idea!` + ' 😁',
-				to: '/sobriety-test/do-you-know-where-you-are',
-			},
-			{
-				title: t`Not gonna happen` + ' 😅',
-				to: '',
+				title: t`Te most bemutattál???` + ' 😂',
+				to: '/sobriety-test/dont-text-your-ex/' + (drunkness + 5),
 			},
 		],
 		psid
 	);
 };
 
-const doYouknowWhereYouAre = function*({ locale, psid }) {
+const dontTextYourEx = function*({ locale, psid }, param) {
 	const t = i18n(locale);
+	const drunkness = parseInt(param, 10);
 
 	return sendQuickReply(
-		t`Do you know where you are?` + ' 🙄',
+		t`Mit tartanál most a legjobb ötletnek?` + ' 🙄',
 		[
 			{
-				title: t`With my friends` + ' 😗',
-				to: '/sobriety-test/stop-drinking',
+				title: t`Haza menni, unatkozom!` + ' 😗',
+				to: '/sobriety-test/do-the-math' + drunkness,
 			},
 			{
-				title: t`What does it matter?` + ' 😗',
-				to: '/sobriety-test/stop-drinking',
+				title: t`Bulizni tovább ezerrel!` + ' 😁',
+				to: '/sobriety-test/do-the-math' + (drunkness + 1),
+			},
+			{
+				title: t`Sírni egy jót.` + ' 😅',
+				to: '/sobriety-test/do-the-math' + (drunkness + 2),
+			},
+			{
+				title: t`Ráírni az exemre.` + ' 😅',
+				to: '/sobriety-test/do-the-math' + (drunkness + 3),
+			},
+			{
+				title: t`Szexting az ex-emmel.` + ' 😅',
+				to: '/sobriety-test/do-the-math' + (drunkness + 5),
+			},
+			{
+				title: t`Átmenni az ex-emhez.` + ' 😅',
+				to: '/sobriety-test/do-the-math' + (drunkness + 7),
+			},
+		],
+		psid
+	);
+};
+
+const doTheMath = function*({ locale, psid }, param) {
+	const t = i18n(locale);
+	const drunkness = parseInt(param, 10);
+
+	return sendQuickReply(
+		t`Mennyi 12 x 12?` + ' 🙄',
+		[
+			{
+				title: t`144`,
+				to: '/sobriety-test/do-you-know-where-you-are' + drunkness,
+			},
+			{
+				title: t`122`,
+				to:
+					'/sobriety-test/do-you-know-where-you-are' +
+					(drunkness + 1),
+			},
+			{
+				title: t`1212`,
+				to:
+					'/sobriety-test/do-you-know-where-you-are' +
+					(drunkness + 3),
+			},
+			{
+				title: t`Nem beszélni matek!` + ' 🤪',
+				to:
+					'/sobriety-test/do-you-know-where-you-are' +
+					(drunkness + 5),
+			},
+		],
+		psid
+	);
+};
+
+const doYouknowWhereYouAre = function*({ locale, psid }, param) {
+	const t = i18n(locale);
+	const drunkness = parseInt(param, 10);
+
+	return sendQuickReply(
+		t`Tudod, hogy hol vagy most?` + ' 🙄',
+		[
+			{
+				title: t`Még szép` + ' 😗',
+				to: '/sobriety-test/stop-drinking' + (drunkness + 1),
+			},
+			{
+				title: t`Nem, de a haverom tudja.` + ' 🤪',
+				to: '/sobriety-test/stop-drinking' + (drunkness + 2),
+			},
+			{
+				title: t`Mit számít?` + ' 😗',
+				to: '/sobriety-test/stop-drinking' + (drunkness + 3),
+			},
+			{
+				title: t`uhhh` + ' 😗',
+				to: '/sobriety-test/stop-drinking' + (drunkness + 5),
 			},
 		],
 		psid
@@ -121,5 +181,6 @@ module.exports = {
 	howManyDrinks,
 	howManyFingers,
 	dontTextYourEx,
+	doTheMath,
 	doYouknowWhereYouAre,
 };
