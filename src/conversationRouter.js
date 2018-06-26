@@ -114,11 +114,11 @@ const routes = [
 		handler: SobrietyTest.howManyFingers,
 	},
 	{
-		route: '/sobriety-test/dont-text-your-ex/:drunkness',
+		route: '/sobriety-test/dont-text-your-ex',
 		handler: SobrietyTest.dontTextYourEx,
 	},
 	{
-		route: '/sobriety-test/do-the-math/:drunkness',
+		route: '/sobriety-test/do-the-math',
 		handler: SobrietyTest.doTheMath,
 	},
 	{
