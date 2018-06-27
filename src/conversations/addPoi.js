@@ -33,6 +33,8 @@ const {
 	CHARGING_STATION,
 	FIRST_AID,
 	INFORMATION,
+	ATM,
+	MASSAGE,
 } = require('../apiHelpers/festbot/poiTypes');
 
 const i18n = require('../i18n');
@@ -123,6 +125,8 @@ const addService = function*({ locale, psid }) {
 		[CHARGING_STATION]: t`Telefontöltés` + ' 🔋',
 		[FIRST_AID]: t`Elsősegély` + ' 🏥',
 		[INFORMATION]: t`Információ` + ' ℹ️',
+		[ATM]: t`ATM` + ' 🏧',
+		[MASSAGE]: t`Masszázs` + ' 💆‍♀️',
 	};
 
 	yield sendQuickReply(

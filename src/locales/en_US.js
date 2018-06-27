@@ -11,7 +11,7 @@ module.exports = {
 	'Fesztiválok és programok': 'Festivals and programs',
 	'Fesztivál aktiválás': 'Change festival',
 	'Előadók szerint': 'Discover artists',
-	'Fesztivál programok': 'Programl list',
+	'Fesztiválok, programok': 'Festivals/Program list',
 	'Mai programom': 'My agenda',
 
 	'Beállítások és segítség': 'Settings & Help',
@@ -93,6 +93,7 @@ module.exports = {
 		"I can't find this kind of food here, or the organizers didn't specify this.",
 	'Találtam egyet, mindjárt küldöm...': 'I have found something for you...',
 	'Mondd meg, hogy hol vagy.': 'Please tell me where you are.',
+	Masszázs: 'Massage',
 
 	// Chats
 	'Szia {1}, Itt vagyok, hogy segítek a fesztiválos kérdéseidben.':
