@@ -19,7 +19,7 @@ module.exports = {
 	Nyelv: 'Language',
 	Adatkezelés: 'Privacy policy',
 	Adatvédelem: 'Privacy',
-	'Zene szolgáltatás fiók hozzáadása': 'Connect streaming services',
+	'Fiók hozzáadása': 'Connect streaming services',
 
 	'My agenda': 'Programom',
 	'Discover artists': 'Fellépők keresése',

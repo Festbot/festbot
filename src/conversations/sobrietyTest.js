@@ -157,7 +157,7 @@ const doYouknowWhereYouAre = function*({ locale, psid }, param) {
 		t`Tudod, hogy hol vagy most?` + ' 🙄',
 		[
 			{
-				title: t`Még szép` + ' 😗',
+				title: t`Még szép` + ' 😎',
 				to: '/sobriety-test/stop-drinking/' + (drunkness + 1),
 			},
 			{
@@ -169,7 +169,7 @@ const doYouknowWhereYouAre = function*({ locale, psid }, param) {
 				to: '/sobriety-test/stop-drinking/' + (drunkness + 3),
 			},
 			{
-				title: t`uhhh` + ' 😗',
+				title: t`uhhh` + ' 🤪',
 				to: '/sobriety-test/stop-drinking/' + (drunkness + 5),
 			},
 		],
