@@ -88,27 +88,27 @@ const dontTextYourEx = function*({ locale, psid }, param) {
 		[
 			{
 				title: t`Haza menni, unatkozom!` + ' 😗',
-				to: '/sobriety-test/do-the-math' + drunkness,
+				to: '/sobriety-test/do-the-math/' + drunkness,
 			},
 			{
 				title: t`Bulizni tovább ezerrel!` + ' 😁',
-				to: '/sobriety-test/do-the-math' + (drunkness + 1),
+				to: '/sobriety-test/do-the-math/' + (drunkness + 1),
 			},
 			{
 				title: t`Sírni egy jót.` + ' 😅',
-				to: '/sobriety-test/do-the-math' + (drunkness + 2),
+				to: '/sobriety-test/do-the-math/' + (drunkness + 2),
 			},
 			{
 				title: t`Ráírni az exemre.` + ' 😅',
-				to: '/sobriety-test/do-the-math' + (drunkness + 3),
+				to: '/sobriety-test/do-the-math/' + (drunkness + 3),
 			},
 			{
 				title: t`Szexting az ex-emmel.` + ' 😅',
-				to: '/sobriety-test/do-the-math' + (drunkness + 5),
+				to: '/sobriety-test/do-the-math/' + (drunkness + 5),
 			},
 			{
 				title: t`Átmenni az ex-emhez.` + ' 😅',
-				to: '/sobriety-test/do-the-math' + (drunkness + 7),
+				to: '/sobriety-test/do-the-math/' + (drunkness + 7),
 			},
 		],
 		psid
@@ -124,24 +124,24 @@ const doTheMath = function*({ locale, psid }, param) {
 		[
 			{
 				title: t`144`,
-				to: '/sobriety-test/do-you-know-where-you-are' + drunkness,
+				to: '/sobriety-test/do-you-know-where-you-are/' + drunkness,
 			},
 			{
 				title: t`122`,
 				to:
-					'/sobriety-test/do-you-know-where-you-are' +
+					'/sobriety-test/do-you-know-where-you-are/' +
 					(drunkness + 1),
 			},
 			{
 				title: t`1212`,
 				to:
-					'/sobriety-test/do-you-know-where-you-are' +
+					'/sobriety-test/do-you-know-where-you-are/' +
 					(drunkness + 3),
 			},
 			{
 				title: t`Nem beszélni matek!` + ' 🤪',
 				to:
-					'/sobriety-test/do-you-know-where-you-are' +
+					'/sobriety-test/do-you-know-where-you-are/' +
 					(drunkness + 5),
 			},
 		],
@@ -158,19 +158,19 @@ const doYouknowWhereYouAre = function*({ locale, psid }, param) {
 		[
 			{
 				title: t`Még szép` + ' 😗',
-				to: '/sobriety-test/stop-drinking' + (drunkness + 1),
+				to: '/sobriety-test/stop-drinking/' + (drunkness + 1),
 			},
 			{
 				title: t`Nem, de a haverom tudja.` + ' 🤪',
-				to: '/sobriety-test/stop-drinking' + (drunkness + 2),
+				to: '/sobriety-test/stop-drinking/' + (drunkness + 2),
 			},
 			{
 				title: t`Mit számít?` + ' 😗',
-				to: '/sobriety-test/stop-drinking' + (drunkness + 3),
+				to: '/sobriety-test/stop-drinking/' + (drunkness + 3),
 			},
 			{
 				title: t`uhhh` + ' 😗',
-				to: '/sobriety-test/stop-drinking' + (drunkness + 5),
+				to: '/sobriety-test/stop-drinking/' + (drunkness + 5),
 			},
 		],
 		psid
