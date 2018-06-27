@@ -8,11 +8,11 @@ module.exports = function getPersistentMenu() {
 			composer_input_disabled: false,
 			call_to_actions: [
 				{
-					title: '👨‍🎤  ' + t`Keresés...`,
+					title: '🔍  ' + t`Keresés...`,
 					type: 'nested',
 					call_to_actions: [
 						{
-							title: '💦 ' + t`Innék valamit`,
+							title: '🥃 ' + t`Innék valamit`,
 							type: 'postback',
 							payload: '/get-poi/get-bar',
 						},
@@ -38,28 +38,28 @@ module.exports = function getPersistentMenu() {
 					type: 'nested',
 					call_to_actions: [
 						{
-							title: '🎤  ' + t`Fesztivál aktiválás`,
+							title: '➕ ' + t`Fesztivál aktiválás`,
 							type: 'web_url',
 							url: 'https://webview.festbot.com',
 							webview_height_ratio: 'tall',
 							messenger_extensions: true,
 						},
 						{
-							title: '🎤  ' + t`Fesztivál programok`,
+							title: '⭐  ' + t`Fesztiválok, programok`,
 							type: 'web_url',
-							url: 'https://webview.festbot.com',
+							url: 'https://webview.festbot.com/festivals',
 							webview_height_ratio: 'tall',
 							messenger_extensions: true,
 						},
 						{
-							title: '🌍  ' + t`Előadók szerint`,
+							title: '🎤  ' + t`Előadók szerint`,
 							type: 'web_url',
 							url: 'https://webview.festbot.com/discover',
 							webview_height_ratio: 'tall',
 							messenger_extensions: true,
 						},
 						{
-							title: '🌍  ' + t`Mai programom`,
+							title: '📅  ' + t`Mai programom`,
 							type: 'web_url',
 							url: 'https://webview.festbot.com/',
 							webview_height_ratio: 'tall',
@@ -72,8 +72,7 @@ module.exports = function getPersistentMenu() {
 					type: 'nested',
 					call_to_actions: [
 						{
-							title:
-								'🎧 ' + t`Fiók hozzáadása'`,
+							title: '🎧 ' + t`Fiók hozzáadása'`,
 							type: 'postback',
 							payload: '/stream-provider-auth/confirm-select',
 						},
