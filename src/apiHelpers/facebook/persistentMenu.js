@@ -73,7 +73,7 @@ module.exports = function getPersistentMenu() {
 					call_to_actions: [
 						{
 							title:
-								'🎧 ' + t`Zene szolgáltatás fiók hozzáadása'`,
+								'🎧 ' + t`Fiók hozzáadása'`,
 							type: 'postback',
 							payload: '/stream-provider-auth/confirm-select',
 						},
