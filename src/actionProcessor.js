@@ -68,15 +68,15 @@ async function executeAction({ type, payload }) {
 					title: element.title,
 					subtitle: element.subtitle,
 					default_action: {
-						type: 'postback',
-						payload: 'https://webview.festbot.com',
-						title: 'lofasz',
-						//webview_height_ratio: 'tall',
+						type: 'web_url',
+						url: 'https://webview.festbot.com',
+						webview_height_ratio: 'tall',
 					},
 					buttons: element.buttons.map(button => ({
-						type: button.url ? 'postback' : 'postback',
+						type: button.url ? 'web_url' : 'postback',
 						title: button.title,
-						payload: button.url,
+						url: button.url,
+						payload: button.to,
 					})),
 				}))
 			);
