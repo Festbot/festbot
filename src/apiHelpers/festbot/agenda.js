@@ -9,9 +9,9 @@ const getTodaysAgenda = async function(savedShows) {
 		const startDate = new Date(show.startDate);
 		const now = new Date();
 
-		if (startDate.toDateString() === now.toDateString()) {
+		//if (startDate.toDateString() === now.toDateString()) {
 			data.push(show);
-		}
+		//}
 	}
 
 	return data;

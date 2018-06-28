@@ -12,6 +12,7 @@ const getAgenda = function*({ locale, psid, savedShows }) {
 
 	if (agenda.length === 0) {
 		yield sendReply(t`Nem adtál hozzá mára programot.`, psid);
+		return;
 	}
 
 	yield sendCarousel(
