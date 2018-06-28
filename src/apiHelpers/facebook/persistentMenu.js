@@ -70,7 +70,7 @@ module.exports = function getPersistentMenu() {
 					type: 'nested',
 					call_to_actions: [
 						{
-							title: '🎧 ' + t`Fiók hozzáadása'`,
+							title: '🎧 ' + t`Fiók hozzáadása`,
 							type: 'postback',
 							payload: '/stream-provider-auth/confirm-select',
 						},
