@@ -27,7 +27,7 @@ const sendQuickReply = (message, quickReplies, psid) => ({
 
 const sendCarousel = (elements, psid) => ({
 	type: SEND_CAROUSEL,
-	payload: { element, psid },
+	payload: { elements, psid },
 });
 
 const sendButtons = (message, buttons, psid) => ({
