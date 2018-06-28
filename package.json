@@ -8,6 +8,7 @@
     "prettier": "prettier './**/*.js' --write",
     "prettier-check": "prettier-check './**/*.js' --loglevel log",
     "test": "mocha --recursive",
+    "test-api": "mocha --grep api --recursive",
     "postinstall": "npm run test"
   },
   "repository": {

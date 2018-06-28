@@ -3,6 +3,7 @@ const FacebookGraph = require('./apiHelpers/facebook/graphApi');
 const ConversationContextProvider = require('./conversationContextProvider');
 const SpotifyApi = require('./apiHelpers/spotify');
 const PoiApi = require('./apiHelpers/festbot/pois');
+const AgendaApi = require('./apiHelpers/festbot/agenda');
 
 const {
 	SEND_REPLY,
@@ -19,6 +20,7 @@ const {
 	GET_POIS,
 	GET_VENUES,
 	UPDATE_VENUE_LOCATION,
+	GET_AGENDA,
 } = require('./actionTypes');
 
 async function executeAction({ type, payload }) {
@@ -131,6 +133,9 @@ async function executeAction({ type, payload }) {
 				payload.lat,
 				payload.lng
 			);
+			break;
+		case GET_AGENDA:
+			return await AgendaApi.getTodaysAgenda(payload.psid);
 			break;
 	}
 }

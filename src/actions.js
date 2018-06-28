@@ -13,6 +13,7 @@ const {
 	GET_POIS,
 	GET_VENUES,
 	UPDATE_VENUE_LOCATION,
+	GET_AGENDA,
 } = require('./actionTypes');
 
 const sendReply = (message, psid) => ({
@@ -82,6 +83,11 @@ const updateVenueLocation = (venueId, lat, lng) => ({
 	payload: { venueId, lat, lng },
 });
 
+const getAgenda = psid => ({
+	type: GET_AGENDA,
+	payload: { psid },
+});
+
 module.exports = {
 	sendReply,
 	setContext,
@@ -97,4 +103,5 @@ module.exports = {
 	getPois,
 	getVenues,
 	updateVenueLocation,
+	getAgenda,
 };
