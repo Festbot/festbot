@@ -73,9 +73,9 @@ async function executeAction({ type, payload }) {
 						webview_height_ratio: 'tall',
 					},
 					buttons: element.buttons.map(button => ({
-						type: button.url ? 'web_url' : 'postback',
+						type: button.url ? 'postback' : 'postback',
 						title: button.title,
-						url: button.url,
+						payload: button.url,
 					})),
 				}))
 			);

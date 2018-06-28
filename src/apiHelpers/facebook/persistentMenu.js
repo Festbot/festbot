@@ -78,11 +78,11 @@ module.exports = function getPersistentMenu() {
 							title: '🔒 ' + t`Adatvédelem`,
 							type: 'nested',
 							call_to_actions: [
-								{
-									title: '🇪🇺 ' + t`GDPR`,
-									type: 'postback',
-									payload: '/legal/gdpr',
-								},
+								//{
+								//	title: '🇪🇺 ' + t`GDPR`,
+								//	type: 'postback',
+								//	payload: '/legal/gdpr',
+								//},
 								{
 									title: '👩‍⚖️ ' + t`Adatkezelés`,
 									type: 'web_url',
