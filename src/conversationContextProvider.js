@@ -4,9 +4,9 @@ const cache = new NodeCache();
 
 const ConversationContextProvider = {
 	get: async function(psid, force) {
-		if (cache.get(psid) && !force) {
-			return cache.get(psid);
-		}
+		//if (cache.get(psid) && !force) {
+		//	return cache.get(psid);
+		//}
 
 		const festbotId = FestbotUsersApi.hashFacebookPSID(psid);
 		let userData = null;
@@ -34,6 +34,7 @@ const ConversationContextProvider = {
 		const userData = {
 			...oldData,
 			...newData,
+			lastUpdated: Date.now(),
 		};
 		await FestbotUsersApi.updateUserData(
 			oldData._id,
