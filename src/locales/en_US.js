@@ -103,13 +103,13 @@ module.exports = {
 	'Kérlek majd szánj rá néhány percet, hogy átnézd ezt a menünt.':
 		'Please take a moment to check the options.',
 	'Fontos, hogy bizonyos fesztiválos kérdésekhez az adott fesztivált először aktiválni kell. Ezt a lenti menü seítségével, a fesztivál aktiválása menüpont alatt teheted meg.':
-		'Some of the functions are realted to a specific festival, and i might be notify you to activate the festival. You can do this anytime for yourself at the menu below.',
+		'Some of the functions are realted to a specific festival, so I might ask you to check in to a festival. You can do this anytime for yourself with the "change festival" button.',
 	'A menüpontra kattintva a fesztiválok listáját láthatod majd, ahol az adott fesztivált a zöld + jelre kattintva aktiválhatod.':
-		'Using the activation menu, you will see the list of the ferstivals. Clicking on the green + symbol you can activate that.',
+		'Using the activation menu, you will see the list of the festivals. Clicking on the green + symbol you can activate that.',
 	'A fesztivál programját ugyanitt, az adott fesztiválra kattintva, a bögészés gomb megnyomása utan láthatod.':
 		'Clicking on a specific festival, you are able to see the detailed program.',
 	'Itt koncerteket adhatsz hozzá a kedvenceid listájához, és én gondoskodom majd róla, hogy a kezdés előtt időben értesítselek.':
-		'Where you can save events to your favourites, and i will notify you when the time will come.',
+		'Where you can save events to your favourites, and I will notify you when the time will come.',
 	'Most nem is rabolom tovább az idődet, biztos Te is izgatott vagy már, hogy felfedezd a lehetőségeket.':
 		"Now it's time to move forward, i'm sure you are getting excited all about this.",
 	'Már alig várom, hogy jobban megismerjelek!':
