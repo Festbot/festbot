@@ -60,10 +60,8 @@ module.exports = function getPersistentMenu() {
 						},
 						{
 							title: '📅  ' + t`Mai programom`,
-							type: 'web_url',
-							url: 'https://webview.festbot.com/',
-							webview_height_ratio: 'tall',
-							messenger_extensions: true,
+							type: 'postback',
+							payload: '/agenda/get-agenda',
 						},
 					],
 				},

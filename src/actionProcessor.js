@@ -14,6 +14,7 @@ const {
 	SET_CONTEXT,
 	SEND_WEBVIEW_BUTTON,
 	SEND_LOCATION,
+	SEND_CAROUSEL,
 	ADD_POI,
 	GET_POIS,
 	GET_VENUES,
@@ -56,6 +57,25 @@ async function executeAction({ type, payload }) {
 					content_type: 'text',
 					payload: quickReply.to,
 					title: quickReply.title,
+				}))
+			);
+			break;
+		case SEND_CAROUSEL:
+			return await FacebookSendApi.sendCarousel(
+				payload.psid,
+				payload.elements.map(element => ({
+					image_url: element.imageUrl,
+					title: element.title,
+					subtitle: element.subtitle,
+					default_action: {
+						type: 'postback',
+						payload: element.to,
+					},
+					buttons: element.buttons.map(button => ({
+						type: button.url ? 'web_url' : 'postback',
+						title: button.title,
+						url: button.url,
+					})),
 				}))
 			);
 			break;

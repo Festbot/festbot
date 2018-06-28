@@ -37,11 +37,7 @@ const sendTyping = function(recipientId, timeout) {
 	});
 };
 
-module.exports.sendMessage = async function(
-	recipientId,
-	message,
-	quickReplies = []
-) {
+const sendMessage = async function(recipientId, message, quickReplies = []) {
 	await sendTyping(recipientId, message.length * 50);
 
 	const obj = {
@@ -59,7 +55,7 @@ module.exports.sendMessage = async function(
 	callSendAPI(obj);
 };
 
-module.exports.sendDebug = async function(recipientId, message) {
+const sendDebug = async function(recipientId, message) {
 	const obj = {
 		messaging_type: 'RESPONSE',
 		recipient: { id: recipientId },
@@ -71,7 +67,7 @@ module.exports.sendDebug = async function(recipientId, message) {
 	callSendAPI(obj);
 };
 
-module.exports.sendLoginButton = function(recipientId, text, buttonUrl) {
+const sendLoginButton = function(recipientId, text, buttonUrl) {
 	callSendAPI({
 		recipient: { id: recipientId },
 		message: {
@@ -92,7 +88,7 @@ module.exports.sendLoginButton = function(recipientId, text, buttonUrl) {
 	});
 };
 
-module.exports.sendButtons = function(recipientId, text, buttons) {
+const sendButtons = function(recipientId, text, buttons) {
 	callSendAPI({
 		recipient: { id: recipientId },
 		message: {
@@ -108,7 +104,7 @@ module.exports.sendButtons = function(recipientId, text, buttons) {
 	});
 };
 
-module.exports.sendImage = function(recipientId, imageUrl) {
+const sendImage = function(recipientId, imageUrl) {
 	callSendAPI({
 		messaging_type: 'RESPONSE',
 		recipient: { id: recipientId },
@@ -124,12 +120,7 @@ module.exports.sendImage = function(recipientId, imageUrl) {
 	});
 };
 
-module.exports.sendWebviewButton = function(
-	recipientId,
-	message,
-	buttonTitle,
-	url
-) {
+const sendWebviewButton = function(recipientId, message, buttonTitle, url) {
 	callSendAPI({
 		recipient: {
 			id: recipientId,
@@ -153,4 +144,31 @@ module.exports.sendWebviewButton = function(
 			},
 		},
 	});
+};
+
+const sendCarousel = function(recipientId, elements) {
+	callSendAPI({
+		recipient: {
+			id: recipientId,
+		},
+		message: {
+			attachment: {
+				type: 'template',
+				payload: {
+					template_type: 'generic',
+					elements: elements,
+				},
+			},
+		},
+	});
+};
+
+module.exports = {
+	sendCarousel,
+	sendWebviewButton,
+	sendImage,
+	sendButtons,
+	sendLoginButton,
+	sendDebug,
+	sendMessage,
 };

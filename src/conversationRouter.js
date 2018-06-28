@@ -7,9 +7,12 @@ const pathToRegexp = require('path-to-regexp');
 const SobrietyTest = require('./conversations/sobrietyTest');
 const AddPoi = require('./conversations/addPoi');
 const GetPoi = require('./conversations/getPoi');
+const Agenda = require('./conversations/agenda');
 
 const routes = [
 	{ route: '/get-started', handler: GetStarted.getStarted },
+
+	{ route: '/agenda/get-agenda', handler: Agenda.getAgenda },
 
 	{
 		route: '/stream-provider-auth/confirm-select',

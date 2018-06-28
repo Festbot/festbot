@@ -2,6 +2,7 @@ const {
 	SEND_REPLY,
 	SET_CONTEXT,
 	SEND_QUICK_REPLY,
+	SEND_CAROUSEL,
 	SEND_BUTTONS,
 	SEND_LOGIN_BUTTON,
 	GET_FACEBOOK_DATA,
@@ -22,6 +23,11 @@ const sendReply = (message, psid) => ({
 const sendQuickReply = (message, quickReplies, psid) => ({
 	type: SEND_QUICK_REPLY,
 	payload: { message, quickReplies, psid },
+});
+
+const sendCarousel = (elements, psid) => ({
+	type: SEND_CAROUSEL,
+	payload: { element, psid },
 });
 
 const sendButtons = (message, buttons, psid) => ({
@@ -81,6 +87,7 @@ module.exports = {
 	setContext,
 	sendQuickReply,
 	sendButtons,
+	sendCarousel,
 	sendLoginButton,
 	sendLocation,
 	sendWebViewButton,
