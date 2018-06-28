@@ -18,6 +18,15 @@ const getDoc = async function(db, id) {
 	return await request.get(options);
 };
 
+const deleteDoc = async function(db, id) {
+	const options = {
+		url: 'https://api.festbot.com/' + db,
+		json: true,
+	};
+
+	return await request.delete(options);
+};
+
 const createDoc = async function(db, data) {
 	const options = {
 		url: 'https://api.festbot.com/' + db,
@@ -67,4 +76,5 @@ module.exports = {
 	find,
 	updateDoc,
 	getDoc,
+	deleteDoc,
 };

@@ -6,7 +6,7 @@ const ERROR_CONFLICT = 'conflict';
 
 function generateDefaultUserData() {
 	return {
-		topArtist: [],
+		topArtists: [],
 		topGenres: [],
 		savedArtists: [],
 		savedShows: [],
