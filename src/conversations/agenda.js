@@ -4,7 +4,6 @@ const i18n = require('../i18n');
 const getAgenda = function*({ locale, psid }) {
 	const t = i18n(locale);
 
-	yield sendReply('Idaig eljutott', psid);
 
 	yield sendCarousel(
 		[
