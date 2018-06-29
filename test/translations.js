@@ -3,12 +3,6 @@ const locales = {
 	en_US: require('../src/locales/en_US')
 };
 
-const files = [
-	'./src/conversations/getStarted.js',
-	'./src/conversations/streamProviderAuth.js',
-	'./src/conversations/sobrietyTest.js'
-];
-
 function replaceKeys(text) {
 	const regex = /\$\{[a-zA-z._\s\+]+\}/;
 	let counter = 1;
@@ -27,13 +21,13 @@ function getTexts(file) {
 		.map(text => text.slice(0, -1));
 }
 
-files.forEach(file => {
-	const content = fs.readFileSync(file).toString();
+fs.readdirSync('./src/conversations').forEach(file => {
+	const content = fs.readFileSync('./src/conversations/' + file).toString();
 
 	Object.keys(locales).forEach(locale => {
 		getTexts(content).forEach(text => {
 			if (!locales[locale][replaceKeys(text)]) {
-				console.log(file, replaceKeys(text));
+				console.log('Missing translation:', file, '"' + replaceKeys(text) + '"');
 			}
 		});
 	});
