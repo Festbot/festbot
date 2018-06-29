@@ -1,18 +1,41 @@
 const fs = require('fs');
-const file = fs.readFileSync('./src/conversations/getStarted.js').toString();
+const locales = {
+	en_US: require('../src/locales/en_US')
+};
 
-function getTexts(file) {
-	const regex = /t`([a-zA-z .,'’?!$\{\}]+)`(?:;|\s?\+)/g;
-	const texts = [];
+const files = [
+	'./src/conversations/getStarted.js',
+	'./src/conversations/streamProviderAuth.js',
+	'./src/conversations/sobrietyTest.js'
+];
 
-	while ((m = regex.exec(file)) !== null) {
-		if (m.index === regex.lastIndex) {
-			regex.lastIndex++;
-		}
-		texts.push(m[1]);
+function replaceKeys(text) {
+	const regex = /\$\{[a-zA-z._\s\+]+\}/;
+	let counter = 1;
+	while(regex.test(text)) {
+		text = text.replace(regex, '{' + counter + '}');
+		counter++;
 	}
 
-	return texts;
+	return text;
 }
 
-console.log(getTexts(file));
+function getTexts(file) {
+	const regex = /t`([a-zA-Z.,'’_?!$áÁéÉíÍóÓöÖőŐüÜ\s\+\{\}]+)`/g;
+	return texts = file.match(regex)
+		.map(text => text.substring(2))
+		.map(text => text.slice(0, -1));
+}
+
+files.forEach(file => {
+	const content = fs.readFileSync(file).toString();
+
+	Object.keys(locales).forEach(locale => {
+		getTexts(content).forEach(text => {
+			if (!locales[locale][replaceKeys(text)]) {
+				console.log(file, replaceKeys(text));
+			}
+		});
+	});
+});
+
