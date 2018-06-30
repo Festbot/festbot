@@ -61,8 +61,10 @@ throng(
 		app.get('/webhook', FacebookAuth.validateWebhook);
 		app.get('/authorize', FacebookAuth.authorize);
 
-		app.get('/test-notification', async function() {
-			const users = getUsersWithActiveFestival();
+		app.get('/test-notification', async function(req, res) {
+			res.send(200);
+
+			const users = await getUsersWithActiveFestival();
 
 			for (let i = 0; i < users.length; i++) {
 				if (users[i].psid) {
