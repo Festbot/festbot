@@ -1,5 +1,6 @@
 const request = require('request-promise');
 const md5 = require('md5');
+const { find } = require('./utils');
 
 const ERROR_NOT_FOUND = 'not_found';
 const ERROR_CONFLICT = 'conflict';
@@ -15,14 +16,14 @@ function generateDefaultUserData() {
 	};
 }
 
-module.exports.getUserData = async function(userId) {
+const getUserData = async function(userId) {
 	return request.get({
 		url: 'https://api.festbot.com/users/' + userId,
 		json: true,
 	});
 };
 
-module.exports.addUser = async function(userId) {
+const addUser = async function(userId) {
 	const userData = generateDefaultUserData();
 
 	const options = {
@@ -41,7 +42,7 @@ module.exports.addUser = async function(userId) {
 	};
 };
 
-module.exports.updateUserData = async function(userId, rev, data) {
+const updateUserData = async function(userId, rev, data) {
 	const options = {
 		url: 'https://api.festbot.com/users/' + userId,
 		headers: { 'If-Match': rev },
@@ -51,6 +52,21 @@ module.exports.updateUserData = async function(userId, rev, data) {
 	return request.put(options);
 };
 
-module.exports.hashFacebookPSID = function(psid) {
+const hashFacebookPSID = function(psid) {
 	return md5(psid);
+};
+
+const getUsersWithActiveFestival = async function(festivalId) {
+	const { docs } = await find('users', {
+		activeFestival: festivalId,
+	});
+	return docs;
+};
+
+module.exports = {
+	getUsersWithActiveFestival,
+	getUserData,
+	addUser,
+	updateUserData,
+	hashFacebookPSID,
 };

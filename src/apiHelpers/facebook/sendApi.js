@@ -163,6 +163,19 @@ const sendCarousel = function(recipientId, elements) {
 	});
 };
 
+const sendNotificaiton = function(recipientId, message) {
+	callSendAPI({
+		recipient: {
+			id: recipientId,
+		},
+		message: {
+			text: message,
+		},
+		messaging_type: 'MESSAGE_TAG',
+		tag: 'SHIPPING_UPDATE',
+	});
+};
+
 module.exports = {
 	sendCarousel,
 	sendWebviewButton,
@@ -171,4 +184,5 @@ module.exports = {
 	sendLoginButton,
 	sendDebug,
 	sendMessage,
+	sendNotificaiton,
 };

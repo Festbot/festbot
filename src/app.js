@@ -12,6 +12,8 @@ const StatusPage = require('./statusPage');
 const app = express();
 const throng = require('throng');
 const WORKERS = process.env.WEB_CONCURRENCY || 1;
+const { getUsersWithActiveFestival } = require('./apiHelpers/festbot/users');
+const FacebookSendApi = require('./apiHelpers/facebook/sendApi');
 
 throng(
 	{
@@ -58,6 +60,19 @@ throng(
 		});
 		app.get('/webhook', FacebookAuth.validateWebhook);
 		app.get('/authorize', FacebookAuth.authorize);
+
+		app.get('/test-notification', async function() {
+			const users = getUsersWithActiveFestival();
+
+			for (let i = 0; i < users.length; i++) {
+				if (users[i].psid) {
+					await FacebookSendApi.sendNotification(
+						users[i].psid,
+						'Test notification'
+					);
+				}
+			}
+		});
 
 		app.post('/webhook', function(req, res) {
 			const data = req.body;
