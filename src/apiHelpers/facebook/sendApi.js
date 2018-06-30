@@ -163,7 +163,7 @@ const sendCarousel = function(recipientId, elements) {
 	});
 };
 
-const sendNotificaiton = function(recipientId, message) {
+const sendNotification = function(recipientId, message) {
 	callSendAPI({
 		recipient: {
 			id: recipientId,
@@ -184,5 +184,5 @@ module.exports = {
 	sendLoginButton,
 	sendDebug,
 	sendMessage,
-	sendNotificaiton,
+	sendNotification,
 };
