@@ -10,7 +10,7 @@ const getTodaysAgenda = async function(savedShows) {
 		const now = new Date();
 
 		//if (startDate.toDateString() === now.toDateString()) {
-			data.push(show);
+		data.push(show);
 		//}
 	}
 

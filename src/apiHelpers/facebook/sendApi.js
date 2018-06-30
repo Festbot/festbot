@@ -172,7 +172,7 @@ const sendNotification = function(recipientId, message) {
 			text: message,
 		},
 		messaging_type: 'MESSAGE_TAG',
-		tag: 'SHIPPING_UPDATE',
+		tag: 'CONFIRMED_EVENT_REMINDER',
 	});
 };
 

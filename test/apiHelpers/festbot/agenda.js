@@ -8,7 +8,6 @@ describe('festbot api agenda: getTodaysAgenda', function() {
 			'f442bee64bb034de9a00e5b3bdb602cc',
 			'f442bee64bb034de9a00e5b3bdb50a8f',
 		]);
-		console.log(agenda);
 		assert.isArray(agenda);
 	});
 });
