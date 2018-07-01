@@ -1,4 +1,6 @@
 const fs = require('fs');
+const chalk = require('chalk');
+
 const locales = {
 	en_US: require('../src/locales/en_US'),
 };
@@ -28,8 +30,8 @@ fs.readdirSync('./src/conversations').forEach(file => {
 	Object.keys(locales).forEach(locale => {
 		getTexts(content).forEach(text => {
 			if (!locales[locale][replaceKeys(text)]) {
-				console.log(
-					'Missing translation:',
+				console.log(chalk.black.bgYellow('WARN') +
+					' Missing translation:',
 					file,
 					'"' + replaceKeys(text) + '"'
 				);
