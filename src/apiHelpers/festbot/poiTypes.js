@@ -25,4 +25,7 @@ module.exports = {
 	CHARGING_STATION: 'charging_station',
 	FIRST_AID: 'first-aid',
 	INFORMATION: 'information',
+	SHOTS: 'shots',
+	PHARMACY: 'pharmacy',
+	BIKE_STORAGE: 'bike_storage',
 };

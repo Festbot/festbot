@@ -35,6 +35,9 @@ const {
 	INFORMATION,
 	ATM,
 	MASSAGE,
+	SHOTS,
+	PHARMACY,
+	BIKE_STORAGE,
 } = require('../apiHelpers/festbot/poiTypes');
 
 const i18n = require('../i18n');
@@ -105,6 +108,7 @@ const addBar = function*({ locale, psid }) {
 		[COCKTAILS]: t`Koktélt` + ' 🍹',
 		[WHISKY]: t`Viszkit` + ' 🥃',
 		[COFFEE]: t`Coffee` + ' ☕',
+		[SHOTS]: t`Pálinka` + ' 🍶',
 	};
 
 	yield sendQuickReply(
@@ -124,9 +128,11 @@ const addService = function*({ locale, psid }) {
 		[LOCKERS]: t`Értékmegőrző` + ' 💍',
 		[CHARGING_STATION]: t`Telefontöltés` + ' 🔋',
 		[FIRST_AID]: t`Elsősegély` + ' 🏥',
+		[PHARMACY]: t`Gyógyszertár` + ' 💊',
 		[INFORMATION]: t`Információ` + ' ℹ️',
 		[ATM]: t`ATM` + ' 🏧',
 		[MASSAGE]: t`Masszázs` + ' 💆‍♀️',
+		[BIKE_STORAGE]: t`Biciklitároló` + ' 🚲',
 	};
 
 	yield sendQuickReply(
