@@ -79,13 +79,10 @@ throng(
 		app.post('/webhook', function(req, res) {
 			const data = req.body;
 
-			// Make sure this is a page subscription
 			if (data.object !== 'page') {
 				return res.sendStatus(404);
 			}
 
-			// Iterate over each entry
-			// There may be multiple if batched
 			data.entry.forEach(function(pageEntry) {
 				if (!pageEntry.messaging) {
 					return;

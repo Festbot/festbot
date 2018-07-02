@@ -1,4 +1,4 @@
-const { getLocalizedMenu } = require('../config/presistentMenu');
+const { getLocalizedMenu } = require('../config/persistentMenu');
 const { sendButtons } = require('../actions');
 
 const autoReply = function*({ locale, psid }) {

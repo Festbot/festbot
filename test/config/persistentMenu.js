@@ -1,4 +1,4 @@
-const getPersistentMenu = require('../../../src/config/persistentMenu');
+const { getPersistentMenu } = require('../../src/config/persistentMenu');
 const assert = require('chai').assert;
 
 describe('testing persistent menu', function() {
