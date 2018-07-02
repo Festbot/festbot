@@ -221,7 +221,7 @@ const sendPoi = function*(
 		yield sendMapMarker(
 			t`A hely helye`,
 			poi.coordinates.lat,
-			poi.cooridnates.lng,
+			poi.coordinates.lng,
 			psid
 		);
 	} else {
@@ -271,7 +271,7 @@ const sendStage = function*(
 		yield sendMapMarker(
 			t`Színpad`,
 			poi.coordinates.lat,
-			poi.cooridnates.lng,
+			poi.coordinates.lng,
 			psid
 		);
 	} else {
