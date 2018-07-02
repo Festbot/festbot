@@ -1,5 +1,5 @@
 const request = require('request-promise');
-const getPersistentMenu = require('./persistentMenu');
+const { getPersistentMenu } = require('../../config/presistentMenu');
 const getGreetings = require('./greetings');
 
 const PAGE_ACCESS_TOKEN = process.env.FACEBOOK_ACCESS_TOKEN;
