@@ -1,6 +1,6 @@
 const { autoReply } = require('../../src/conversations/autoReply');
 const { isAction, actionTypeMatches } = require('../helpers/actions');
-const { SEND_BUTTONS } = require('../../src/actionTypes');
+const { SEND_REPLY } = require('../../src/actionTypes');
 
 const contextMock = {
 	locale: 'hu_HU',
@@ -16,6 +16,6 @@ describe('autoReply', function() {
 		const { value } = generator.next();
 
 		isAction(value);
-		actionTypeMatches(value, SEND_BUTTONS);
+		actionTypeMatches(value, SEND_REPLY);
 	});
 });

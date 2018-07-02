@@ -13,6 +13,8 @@ const AutoReply = require('./conversations/autoReply');
 const routes = [
 	{ route: '/auto-reply', handler: AutoReply.autoReply },
 
+	{ route: '/auto-reply/sub-menu/index', handler: AutoReply.subMenu },
+
 	{ route: '/get-started', handler: GetStarted.getStarted },
 
 	{ route: '/agenda/get-agenda', handler: Agenda.getAgenda },
