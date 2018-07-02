@@ -1,6 +1,8 @@
 const fs = require('fs');
 const chalk = require('chalk');
 
+console.log(process.env);
+
 const locales = {
 	en_US: require('../src/locales/en_US'),
 };
@@ -29,11 +31,10 @@ function getTexts(file) {
 	return (texts = file
 		.match(regex)
 		.map(text => text.substring(2))
-		.map(text => text.slice(0, -1)))
-		.map(text => ({
-			line: getLineNumber(file, text),
-			text: text
-		}));
+		.map(text => text.slice(0, -1))).map(text => ({
+		line: getLineNumber(file, text),
+		text: text,
+	}));
 }
 
 fs.readdirSync('./src/conversations').forEach(file => {
@@ -42,9 +43,9 @@ fs.readdirSync('./src/conversations').forEach(file => {
 	Object.keys(locales).forEach(locale => {
 		getTexts(content).forEach(text => {
 			if (!locales[locale][replaceKeys(text.text)]) {
-				console.log(chalk.black.bgYellow('WARN') +
-					' ' + file + ':' + text.line,
-					'Missing translation:',
+				console.log(
+					chalk.black.bgYellow('WARN') + ' ' + file + ':' + text.line,
+					'Missing translation for:',
 					'"' + replaceKeys(text.text) + '"'
 				);
 			}

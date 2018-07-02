@@ -117,6 +117,6 @@ const getLocalizedMenu = function(locale) {
 	}
 
 	return menu[0];
-}
+};
 
 module.exports = { getPersistentMenu, getLocalizedMenu };
