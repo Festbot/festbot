@@ -136,6 +136,12 @@ throng(
 							messagingEvent.sender.id,
 							messagingEvent.postback.payload
 						);
+					} else {
+						console.log('nem tudom mit kaptam', messagingEvent);
+						receivedPostback(
+							messagingEvent.sender.id,
+							'/auto-reply'
+						);
 					}
 				});
 			});

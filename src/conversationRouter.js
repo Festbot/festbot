@@ -8,8 +8,11 @@ const SobrietyTest = require('./conversations/sobrietyTest');
 const AddPoi = require('./conversations/addPoi');
 const GetPoi = require('./conversations/getPoi');
 const Agenda = require('./conversations/agenda');
+const AutoReply = require('./conversations/autoReply');
 
 const routes = [
+	{ route: '/auto-reply', handler: AutoReply.autoReply },
+
 	{ route: '/get-started', handler: GetStarted.getStarted },
 
 	{ route: '/agenda/get-agenda', handler: Agenda.getAgenda },
