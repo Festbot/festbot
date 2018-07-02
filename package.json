@@ -9,9 +9,10 @@
     "prettier-check": "prettier-check './**/*.js' --loglevel log",
     "postinstall": "npm run test",
     "lint-translation": "node ./utils/translationLinter",
-    "test": "mocha --recursive",
+    "test": "mocha && npm run test-conversations && npm run test-config",
     "test-conversations": "mocha ./test/conversations",
-    "test-api": "mocha ./test/apiHelpers --recursive"
+    "test-api": "mocha ./test/apiHelpers --recursive",
+    "test-config": "mocha ./test/config --recursive"
   },
   "repository": {
     "type": "git",
