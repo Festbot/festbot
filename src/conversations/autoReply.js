@@ -7,7 +7,7 @@ const autoReply = function*({ locale, psid }) {
 	yield sendButtons(
 		'These are my functions: ',
 		menu.call_to_actions.map((button, index) => ({
-			title: menu.call_to_actions[index],
+			title: menu.call_to_actions[index].title,
 			to: '/auto-reply/sub-menu/' + index,
 		})),
 		psid
@@ -18,7 +18,7 @@ const subMenu = function*({ locale, psid }) {
 	const menu = getLocalizedMenu(locale);
 
 	yield sendQuickReply(
-		'These are my functions: ',
+		'These are my functions.',
 		menu.call_to_actions.map((button, index) => ({
 			title: menu.call_to_actions[index],
 			to: '/auto-reply/sub-menu/' + index,

@@ -7,10 +7,11 @@
     "start": "node src/app.js",
     "prettier": "prettier './**/*.js' --write",
     "prettier-check": "prettier-check './**/*.js' --loglevel log",
-    "test": "mocha --recursive",
-    "test-api": "mocha --grep api --recursive",
     "postinstall": "npm run test",
-    "lint-translation": "node ./utils/translationLinter"
+    "lint-translation": "node ./utils/translationLinter",
+    "test": "mocha --recursive",
+    "test-conversations": "mocha ./test/conversations",
+    "test-api": "mocha ./test/apiHelpers --recursive"
   },
   "repository": {
     "type": "git",
