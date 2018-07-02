@@ -4,6 +4,7 @@ const ConversationContextProvider = require('./conversationContextProvider');
 const SpotifyApi = require('./apiHelpers/spotify');
 const PoiApi = require('./apiHelpers/festbot/pois');
 const AgendaApi = require('./apiHelpers/festbot/agenda');
+const GoogleMapsApi = require('./apiHelpers/google/maps');
 
 const {
 	SEND_REPLY,
@@ -21,6 +22,7 @@ const {
 	GET_VENUES,
 	UPDATE_VENUE_LOCATION,
 	GET_AGENDA,
+	SEND_MAP_MARKER,
 } = require('./actionTypes');
 
 async function executeAction({ type, payload }) {
@@ -136,6 +138,19 @@ async function executeAction({ type, payload }) {
 			break;
 		case GET_AGENDA:
 			return await AgendaApi.getTodaysAgenda(payload.psid);
+			break;
+		case SEND_MAP_MARKER:
+			const mapImageUrl = GoogleMapsApi.getStaticMapUrl(
+				payload.lat,
+				payload.lng
+			);
+			return await FacebookSendApi.sendMapMarker(
+				payload.psid,
+				payload.title,
+				mapImageUrl,
+				payload.lat,
+				payload.lng
+			);
 			break;
 	}
 }

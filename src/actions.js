@@ -14,6 +14,7 @@ const {
 	GET_VENUES,
 	UPDATE_VENUE_LOCATION,
 	GET_AGENDA,
+	SEND_MAP_MARKER,
 } = require('./actionTypes');
 
 const sendReply = (message, psid) => ({
@@ -88,6 +89,16 @@ const getAgenda = psid => ({
 	payload: { psid },
 });
 
+const sendMapMarker = (title, lat, lng, psid) => ({
+	type: SEND_MAP_MARKER,
+	payload: {
+		title,
+		lat,
+		lng,
+		psid,
+	},
+});
+
 module.exports = {
 	sendReply,
 	setContext,
@@ -104,4 +115,5 @@ module.exports = {
 	getVenues,
 	updateVenueLocation,
 	getAgenda,
+	sendMapMarker,
 };

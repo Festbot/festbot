@@ -5,6 +5,7 @@ const {
 	getPois,
 	setContext,
 	sendWebViewButton,
+	sendMapMarker,
 } = require('../actions');
 const i18n = require('../i18n');
 
@@ -39,7 +40,7 @@ const getPoi = function*({ locale, psid, activeFestival }) {
 		[
 			{
 				title: t`Színpadot` + ' 😎',
-				to: '/get-poi/request-location/stage',
+				to: '/get-poi/get-stage',
 			},
 			{
 				title: t`Kaját` + ' 🍽️',
@@ -82,6 +83,21 @@ const getPoi = function*({ locale, psid, activeFestival }) {
 				to: '/get-poi/request-location/tobacco',
 			},
 		],
+		psid
+	);
+};
+
+const getStage = function*({ locale, psid, activeFestival }) {
+	const t = i18n(locale);
+
+	const stages = yield getVenues(activeFestival, 'stage');
+
+	yield sendQuickReply(
+		t`Melyik színpadot?`,
+		stages.map(stage => ({
+			title: stage.name,
+			to: '/get-poi/request-location/stage:' + stage._id,
+		})),
 		psid
 	);
 };
@@ -196,18 +212,16 @@ const sendPoi = function*(
 	}
 
 	const t = i18n(locale);
-
 	const [lat, lng] = location.split(':');
-
 	const pois = yield getPois(activeFestival, lastAskedLocation, lat, lng);
 
 	if (pois.length > 0) {
 		const poi = pois[0];
 		yield sendReply(t`Találtam egyet, mindjárt küldöm...` + ' 🤟', psid);
-		yield sendReply(
-			`http://maps.apple.com/maps?q=${poi.coordinates.lat},${
-				poi.coordinates.lng
-			}&z=16`,
+		yield sendMapMarker(
+			t`A hely helye`,
+			poi.coordinates.lat,
+			poi.cooridnates.lng,
 			psid
 		);
 	} else {
@@ -222,12 +236,51 @@ const sendPoi = function*(
 const requestLocation = function*({ locale, psid }, type) {
 	const t = i18n(locale);
 
-	yield setContext(psid, {
-		lastAskedLocation: type,
-		locationRequestedFor: 'send-poi',
-	});
+	const [poi, poiId] = type.split(':');
+
+	if (poi === 'stage') {
+		yield setContext(psid, {
+			lastAskedLocation: poiId,
+			locationRequestedFor: 'send-stage',
+		});
+	} else {
+		yield setContext(psid, {
+			lastAskedLocation: poi,
+			locationRequestedFor: 'send-poi',
+		});
+	}
 
 	yield sendLocation(t`Mondd meg, hogy hol vagy!` + ' 📍', psid);
+};
+
+const sendStage = function*(
+	{ locale, psid, lastAskedLocation, locationRequestedFor },
+	location
+) {
+	if (locationRequestedFor !== 'send-stage') {
+		return;
+	}
+
+	const t = i18n(locale);
+	const venue = yield getVenueLocation(lastAskedLocation);
+
+	if (venue) {
+		const poi = pois[0];
+		yield sendReply(t`Találtam egyet, mindjárt küldöm...` + ' 🤟', psid);
+
+		yield sendMapMarker(
+			t`Színpad`,
+			poi.coordinates.lat,
+			poi.cooridnates.lng,
+			psid
+		);
+	} else {
+		yield sendReply(
+			t`Nem találtam ilyen helyet a fesztiválon, vagy a szervezők nem adták meg.` +
+				' ',
+			psid
+		);
+	}
 };
 
 module.exports = {
@@ -237,4 +290,6 @@ module.exports = {
 	sendPoi,
 	getBar,
 	getService,
+	getStage,
+	sendStage,
 };

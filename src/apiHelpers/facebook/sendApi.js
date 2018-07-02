@@ -1,11 +1,9 @@
 const request = require('request-promise');
 
-const PAGE_ACCESS_TOKEN = process.env.FACEBOOK_ACCESS_TOKEN;
-
 const callSendAPI = function(messageData) {
 	request({
 		uri: 'https://graph.facebook.com/v2.6/me/messages',
-		qs: { access_token: PAGE_ACCESS_TOKEN },
+		qs: { access_token: process.env.FACEBOOK_ACCESS_TOKEN },
 		method: 'POST',
 		json: messageData,
 	})
@@ -163,6 +161,62 @@ const sendCarousel = function(recipientId, elements) {
 	});
 };
 
+const sendMapMarker = function(recipientId, title, mapImageUrl, lat, lng) {
+	callSendAPI({
+		recipient: {
+			id: recipientId,
+		},
+		message: {
+			attachment: {
+				type: 'template',
+				payload: {
+					template_type: 'generic',
+					sharable: true,
+					image_aspect_ratio: 'square',
+					elements: [
+						{
+							title: '📍 ' + title,
+							image_url: mapImageUrl,
+							buttons: [
+								{
+									type: 'web_url',
+									title: 'Open in Google Maps',
+									url: `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`,
+									webview_height_ratio: 'full',
+								},
+								{
+									type: 'web_url',
+									title: 'Open in Apple Maps',
+									url: `https://maps.apple.com/?q=${lat},${lng}`,
+									webview_height_ratio: 'full',
+								},
+							],
+						},
+					],
+				},
+			},
+		},
+	});
+};
+
+const sendList = function(recipientId, elements) {
+	callSendAPI({
+		recipient: {
+			id: recipientId,
+		},
+		message: {
+			attachment: {
+				type: 'template',
+				payload: {
+					template_type: 'list',
+					top_element_style: 'compact',
+					elements: elements
+				},
+			},
+		},
+	});
+};
+
 const sendNotification = function(recipientId, message) {
 	callSendAPI({
 		recipient: {
@@ -185,4 +239,6 @@ module.exports = {
 	sendDebug,
 	sendMessage,
 	sendNotification,
+	sendMapMarker,
+	sendList,
 };
