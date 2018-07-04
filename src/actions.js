@@ -1,4 +1,5 @@
 const {
+	SLEEP,
 	SEND_REPLY,
 	SET_CONTEXT,
 	SEND_QUICK_REPLY,
@@ -16,6 +17,11 @@ const {
 	GET_AGENDA,
 	SEND_MAP_MARKER,
 } = require('./actionTypes');
+
+const sleep = (timeout) => ({
+	type: SLEEP,
+	payload: { timeout }
+});
 
 const sendReply = (message, psid) => ({
 	type: SEND_REPLY,
@@ -100,6 +106,7 @@ const sendMapMarker = (title, lat, lng, psid) => ({
 });
 
 module.exports = {
+	sleep,
 	sendReply,
 	setContext,
 	sendQuickReply,

@@ -5,8 +5,13 @@ const SpotifyApi = require('./apiHelpers/spotify');
 const PoiApi = require('./apiHelpers/festbot/pois');
 const AgendaApi = require('./apiHelpers/festbot/agenda');
 const GoogleMapsApi = require('./apiHelpers/google/maps');
+const sleep = timeout =>
+	new Promise(resolve => {
+		setTimeout(resolve, timeout);
+	});
 
 const {
+	SLEEP,
 	SEND_REPLY,
 	SEND_QUICK_REPLY,
 	SEND_BUTTONS,
@@ -27,6 +32,9 @@ const {
 
 async function executeAction({ type, payload }) {
 	switch (type) {
+		case SLEEP:
+			return await sleep(payload.timeout);
+			break;
 		case SEND_WEBVIEW_BUTTON:
 			return await FacebookSendApi.sendWebviewButton(
 				payload.psid,
