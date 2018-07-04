@@ -18,9 +18,9 @@ const {
 	SEND_MAP_MARKER,
 } = require('./actionTypes');
 
-const sleep = (timeout) => ({
+const sleep = timeout => ({
 	type: SLEEP,
-	payload: { timeout }
+	payload: { timeout },
 });
 
 const sendReply = (message, psid) => ({

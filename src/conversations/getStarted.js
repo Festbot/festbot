@@ -4,6 +4,7 @@ const {
 	sendQuickReply,
 	setContext,
 	sendWebViewButton,
+	sleep,
 } = require('../actions');
 const i18n = require('../i18n');
 
@@ -19,7 +20,7 @@ getStarted = function*({ locale, psid }) {
 		timezone: facebookData.timezone,
 	});
 
-	const festival = 'Balaton Sound'
+	const festival = 'Balaton Sound';
 
 	yield sendReply(
 		t`Szia ${
@@ -31,7 +32,7 @@ getStarted = function*({ locale, psid }) {
 	yield sendReply(t`Kérdéseid a menü segítségével irányíthatod.`, psid);
 
 	yield sendReply(
-		t`Kérlek majd szánj rá néhány percet, hogy átnézd ezt a menünt.`,
+		t`Kérlek majd szánj rá néhány percet, hogy átnézd ezt a menüt.`,
 		psid
 	);
 
@@ -62,11 +63,13 @@ getStarted = function*({ locale, psid }) {
 		psid
 	);
 
+	yield sleep(2 * 60 * 1000);
+
 	yield sendReply(
 		t`Ha van aktiv fesztiválod és koncerteket adsz hozzá a kedvenceid listájához, én gondoskodom majd róla, hogy a kezdés előtt időben értesítselek.`,
 		psid
 	);
-
+	yield sleep(5 * 60 * 1000);
 	yield sendReply(
 		t`Már alig várom, hogy jobban megismerjelek!` + ' 😍',
 		psid

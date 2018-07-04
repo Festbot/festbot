@@ -100,15 +100,16 @@ module.exports = {
 		'Hey {1}, I’m here to assist you with festival related things.',
 	'Kérdéseid a menü segítségével irányíthatod.':
 		'You can use the menu for asking things from me.',
-	'Kérlek majd szánj rá néhány percet, hogy átnézd ezt a menünt.':
+	'Kérlek majd szánj rá néhány percet, hogy átnézd ezt a menüt.':
 		'Please take a moment to check the options.',
-	
+
 	'Ha van aktiv fesztiválod és koncerteket adsz hozzá a kedvenceid listájához, én gondoskodom majd róla, hogy a kezdés előtt időben értesítselek.':
 		'Once you have an active festival, you can save events to your favourites, and I will notify you when the time will come.',
 	'Nem akarom tovább rabolni az idődet, mert biztos Te is izgatott vagy már, de még előtte közösen csekkoljunk be téged a {1} fesztiválra.':
 		"Now it's time to move forward, i'm sure you are getting excited all about this. Let's activate the  {1} festival for you.",
-		'Kattints a gombra a {1} fesztivál aktiválásához.':'Tap on the button to activate the {1} featival.',
-		'Tovább':'Next',
+	'Kattints a gombra a {1} fesztivál aktiválásához.':
+		'Tap on the button to activate the {1} featival.',
+	Tovább: 'Next',
 	'Már alig várom, hogy jobban megismerjelek!':
 		"I can't wait to get to know you better!",
 	'A zenei ízléseddel kapcsolatban lenne most pár kérésem.':
