@@ -6,7 +6,7 @@ module.exports = {
 	'Keresés...': 'I am looking for...',
 	'Innék valamit': 'I would drink something',
 	'Éhes vagyok': "I'm hungry",
-	'Mutasd a többi lehetőséget': 'Show all the options',
+	'Mutasd a többit': 'Show all the options',
 	'Alkohol teszt': 'Sobriety test',
 	'Fesztiválok és programok': 'Festivals and programs',
 	'Fesztivál aktiválás': 'Change festival',
@@ -96,22 +96,19 @@ module.exports = {
 	Masszázs: 'Massage',
 
 	// Chats
-	'Szia {1}, Itt vagyok, hogy segítek a fesztiválos kérdéseidben.':
+	'Szia {1}, Itt vagyok, hogy segítsek a fesztiválos kérdéseidben.':
 		'Hey {1}, I’m here to assist you with festival related things.',
-	'Kérdéseid a képernyő alján található menü segítségével irányíthatod.':
-		'You can use the menu at the bottom of this window for asking things from me.',
+	'Kérdéseid a menü segítségével irányíthatod.':
+		'You can use the menu for asking things from me.',
 	'Kérlek majd szánj rá néhány percet, hogy átnézd ezt a menünt.':
 		'Please take a moment to check the options.',
-	'Fontos, hogy bizonyos fesztiválos kérdésekhez az adott fesztivált először aktiválni kell. Ezt a lenti menü seítségével, a fesztivál aktiválása menüpont alatt teheted meg.':
-		'Some of the functions are realted to a specific festival, so I might ask you to check in to a festival. You can do this anytime for yourself with the "change festival" button.',
-	'A menüpontra kattintva a fesztiválok listáját láthatod majd, ahol az adott fesztivált a zöld + jelre kattintva aktiválhatod.':
-		'Using the activation menu, you will see the list of the festivals. Clicking on the green + symbol you can activate that.',
-	'A fesztivál programját ugyanitt, az adott fesztiválra kattintva, a bögészés gomb megnyomása utan láthatod.':
-		'Clicking on a specific festival, you are able to see the detailed program.',
-	'Itt koncerteket adhatsz hozzá a kedvenceid listájához, és én gondoskodom majd róla, hogy a kezdés előtt időben értesítselek.':
-		'Where you can save events to your favourites, and I will notify you when the time will come.',
-	'Most nem is rabolom tovább az idődet, biztos Te is izgatott vagy már, hogy felfedezd a lehetőségeket.':
-		"Now it's time to move forward, i'm sure you are getting excited all about this.",
+	
+	'Ha van aktiv fesztiválod és koncerteket adsz hozzá a kedvenceid listájához, én gondoskodom majd róla, hogy a kezdés előtt időben értesítselek.':
+		'Once you have an active festival, you can save events to your favourites, and I will notify you when the time will come.',
+	'Nem akarom tovább rabolni az idődet, mert biztos Te is izgatott vagy már, de még előtte közösen csekkoljunk be téged a {1} fesztiválra.':
+		"Now it's time to move forward, i'm sure you are getting excited all about this. Let's activate the  {1} festival for you.",
+		'Kattints a gombra a {1} fesztivál aktiválásához.':'Tap on the button to activate the {1} featival.',
+		'Tovább':'Next',
 	'Már alig várom, hogy jobban megismerjelek!':
 		"I can't wait to get to know you better!",
 	'A zenei ízléseddel kapcsolatban lenne most pár kérésem.':

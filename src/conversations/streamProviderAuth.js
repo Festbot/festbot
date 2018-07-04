@@ -15,7 +15,7 @@ const confirmSelect = function*({ locale, psid }) {
 		t`Használsz Spotify-t, Apple Music-ot vagy Deezert?`,
 		[
 			{
-				title: t`Yes` + ' 😎',
+				title: t`Igen` + ' 😎',
 				to: '/stream-provider-auth/select',
 			},
 			{
@@ -73,7 +73,7 @@ const auth = function*({ locale, psid }, param) {
 			);
 		case 'deezer':
 			return sendLoginButton(
-				t`At this point I have to ask you to login using your Deezer account, at which I will retrieve the list of your most listened artists from Deezer.`,
+				t`A hozzáférés engedélyezésével egyszerűen és gyorsan megkapom a legtöbbet hallgatott előadóid listáját. A kérés jóváhagyásához kérlek jelentkezz be a Deezer fiókodba.`,
 				`https://${process.env.HOST}/deezer-login?psid=` + psid,
 				psid
 			);
@@ -111,7 +111,7 @@ const dataReceived = function*({ locale, topArtists = [], psid }) {
 	const t = i18n(locale);
 
 	return sendReply(
-		t`WWow!, Látom, hogy a ${topArtists[0]} és a ${
+		t`Wow!, Látom, hogy a ${topArtists[0]} és a ${
 			topArtists[1]
 		} neked is a kedvenced` + ' 😏',
 		psid

@@ -3,6 +3,7 @@ const {
 	getFacebookData,
 	sendQuickReply,
 	setContext,
+	sendWebViewButton,
 } = require('../actions');
 const i18n = require('../i18n');
 
@@ -18,45 +19,51 @@ getStarted = function*({ locale, psid }) {
 		timezone: facebookData.timezone,
 	});
 
+	const festival = 'Balaton Sound'
+
 	yield sendReply(
 		t`Szia ${
 			facebookData.first_name
-		}, Itt vagyok, hogy segítek a fesztiválos kérdéseidben.` + ' 😎',
+		}, Itt vagyok, hogy segítsek a fesztiválos kérdéseidben.` + ' 😎',
 		psid
 	);
 
-	yield sendReply(
-		t`Kérdéseid a képernyő alján található menü segítségével irányíthatod.`,
-		psid
-	);
+	yield sendReply(t`Kérdéseid a menü segítségével irányíthatod.`, psid);
 
 	yield sendReply(
 		t`Kérlek majd szánj rá néhány percet, hogy átnézd ezt a menünt.`,
 		psid
 	);
 
+	// yield sendReply(
+	// 	t`Fontos, hogy bizonyos fesztiválos kérdésekhez az adott fesztivált először aktiválni kell. Ezt a lenti menü seítségével, a fesztivál aktiválása menüpont alatt teheted meg.`,
+	// 	psid
+	// );
+
+	// yield sendReply(
+	// 	t`A menüpontra kattintva a fesztiválok listáját láthatod majd, ahol az adott fesztivált a zöld + jelre kattintva aktiválhatod.`,
+	// 	psid
+	// );
+
+	// yield sendReply(
+	// 	t`A fesztivál programját ugyanitt, az adott fesztiválra kattintva, a bögészés gomb megnyomása utan láthatod.`,
+	// 	psid
+	// );
+
 	yield sendReply(
-		t`Fontos, hogy bizonyos fesztiválos kérdésekhez az adott fesztivált először aktiválni kell. Ezt a lenti menü seítségével, a fesztivál aktiválása menüpont alatt teheted meg.`,
+		t`Nem akarom tovább rabolni az idődet, mert biztos Te is izgatott vagy már, de még előtte közösen csekkoljunk be téged a ${festival} fesztiválra.`,
+		psid
+	);
+
+	yield sendWebViewButton(
+		t`Kattints a gombra a ${festival} fesztivál aktiválásához.`,
+		t`Tovább`,
+		'https://webview.festbot.com/',
 		psid
 	);
 
 	yield sendReply(
-		t`A menüpontra kattintva a fesztiválok listáját láthatod majd, ahol az adott fesztivált a zöld + jelre kattintva aktiválhatod.`,
-		psid
-	);
-
-	yield sendReply(
-		t`A fesztivál programját ugyanitt, az adott fesztiválra kattintva, a bögészés gomb megnyomása utan láthatod.`,
-		psid
-	);
-
-	yield sendReply(
-		t`Itt koncerteket adhatsz hozzá a kedvenceid listájához, és én gondoskodom majd róla, hogy a kezdés előtt időben értesítselek.`,
-		psid
-	);
-
-	yield sendReply(
-		t`Most nem is rabolom tovább az idődet, biztos Te is izgatott vagy már, hogy felfedezd a lehetőségeket.`,
+		t`Ha van aktiv fesztiválod és koncerteket adsz hozzá a kedvenceid listájához, én gondoskodom majd róla, hogy a kezdés előtt időben értesítselek.`,
 		psid
 	);
 

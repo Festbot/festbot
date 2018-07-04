@@ -23,7 +23,7 @@ const getPersistentMenu = function() {
 							payload: '/get-poi/get-food',
 						},
 						{
-							title: 'ℹ️ ' + t`Mutasd a többi lehetőséget`,
+							title: 'ℹ️ ' + t`Mutasd a többit`,
 							type: 'postback',
 							payload: '/get-poi/get-poi',
 						},
