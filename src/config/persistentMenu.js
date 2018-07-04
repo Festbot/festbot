@@ -98,13 +98,11 @@ const getPersistentMenu = function() {
 							type: 'postback',
 							payload: '/settings/ask-language',
 						},
-						isStaging
-							? {
-									title: '📍 ' + t`Zerkelés`,
-									type: 'postback',
-									payload: '/add-poi/add-poi',
-							  }
-							: undefined,
+						{
+							title: '📍 ' + t`Zerkelés`,
+							type: 'postback',
+							payload: '/add-poi/add-poi',
+						},
 					],
 				},
 			],
