@@ -13,7 +13,7 @@ const moment = require('moment');
 getStarted = function*({ locale, psid }) {
 	const [momentLocale] = locale.split('_');
 	moment.locale(momentLocale);
-	const festbotAge = moment().from('2018-07-05T10:20:08+00:00');
+	const festbotAge = moment().to(process.env.FESTBOT_BIRTH_DAY);
 
 	const t = i18n(locale);
 	const facebookData = yield getFacebookData(psid);
@@ -28,20 +28,6 @@ getStarted = function*({ locale, psid }) {
 
 	const festival = 'Balaton Sound';
 
-	yield sendReply(
-		t`A Festbotot szabadidőnkben csináljuk, és még csak ${festbotAge} született.` +
-			' 🤓' +
-			t`Ahhoz, hogy ingyenes maradhasson, közreműködőkre van szükségünk.` +
-			' 🧐',
-		psid
-	);
-
-	yield sendReply(
-		t`Ha szeretnél segíteni nekünk jelentkezz ✨VIP✨ tagnak a közreműködői csoportunkba.`,
-		psid
-	);
-
-	yield sendReply(t`https://www.facebook.com/groups/festbotvip/`, psid);
 
 	yield sendReply(
 		t`Szia ${
@@ -117,19 +103,19 @@ getStarted = function*({ locale, psid }) {
 	);
 
 	yield sendReply(
-		t`A Festbotot szabadidőnkben csináljuk.` +
+		t`A Festbotot szabadidőnkben csináljuk, és még csak ${festbotAge} született.` +
 			' 🤓' +
 			t`Ahhoz, hogy ingyenes maradhasson, közreműködőkre van szükségünk.` +
 			' 🧐',
 		psid
 	);
-
+	yield sleep(6 * 60 * 60 * 1000);
 	yield sendReply(
 		t`Ha szeretnél segíteni nekünk jelentkezz ✨VIP✨ tagnak a közreműködői csoportunkba.`,
 		psid
 	);
 
 	yield sendReply(t`https://www.facebook.com/groups/festbotvip/`, psid);
-};
+
 
 module.exports = { getStarted };
