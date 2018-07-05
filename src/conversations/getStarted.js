@@ -100,17 +100,21 @@ getStarted = function*({ locale, psid }) {
 		],
 		psid
 	);
+	yield sleep(6 * 60 * 60 * 1000);
 
 	yield sendReply(
 		t`A Festbotot szabadidőnkben csináljuk, és még csak ${festbotAge} született.` +
 			' 🤓' +
-			t`Ahhoz, hogy ingyenes maradhasson, közreműködőkre van szükségünk.` +
+			t`Rengeteg izgalmas és hasznos funkción dolgozunk, melyeket folyamatosan adunk majd hozzá a Festbothoz.` +
 			' 🧐',
 		psid
 	);
-	yield sleep(6 * 60 * 60 * 1000);
 	yield sendReply(
-		t`Ha szeretnél segíteni nekünk jelentkezz ✨VIP✨ tagnak a közreműködői csoportunkba.`,
+		t`Ez persze időbe telik és ahhoz, hogy a Festbot ingyenes maradhasson, önkéntes közreműködőkre is szükség van.`,
+		psid
+	);
+	yield sendReply(
+		t`Ha szívesen csatlakoznál a közösségünkhöz és tudsz segíteni nekünk jelentkezz ✨VIP✨ tagnak a közreműködői csoportunkba.`,
 		psid
 	);
 
