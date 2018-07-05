@@ -23,6 +23,21 @@ getStarted = function*({ locale, psid }) {
 	const festival = 'Balaton Sound';
 
 	yield sendReply(
+		t`A Festbotot szabadidőnkben csináljuk.` +
+			' 🤓' +
+			t`Ahhoz, hogy ingyenes maradhasson, közreműködőkre van szükségünk.` +
+			' 🧐',
+		psid
+	);
+
+	yield sendReply(
+		t`Ha szeretnél segíteni nekünk jelentkezz ✨VIP✨ tagnak a közreműködői csoportunkba.`,
+		psid
+	);
+
+	yield sendReply(t`https://www.facebook.com/groups/festbotvip/`, psid);
+
+	yield sendReply(
 		t`Szia ${
 			facebookData.first_name
 		}, Itt vagyok, hogy segítsek a fesztiválos kérdéseidben.` + ' 😎',
@@ -94,6 +109,21 @@ getStarted = function*({ locale, psid }) {
 		],
 		psid
 	);
+
+	yield sendReply(
+		t`A Festbotot szabadidőnkben csináljuk.` +
+			' 🤓' +
+			t`Ahhoz, hogy ingyenes maradhasson, közreműködőkre van szükségünk.` +
+			' 🧐',
+		psid
+	);
+
+	yield sendReply(
+		t`Ha szeretnél segíteni nekünk jelentkezz ✨VIP✨ tagnak a közreműködői csoportunkba.`,
+		psid
+	);
+
+	yield sendReply(t`https://www.facebook.com/groups/festbotvip/`, psid);
 };
 
 module.exports = { getStarted };
