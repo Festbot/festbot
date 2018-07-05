@@ -28,7 +28,6 @@ getStarted = function*({ locale, psid }) {
 
 	const festival = 'Balaton Sound';
 
-
 	yield sendReply(
 		t`Szia ${
 			facebookData.first_name
@@ -116,6 +115,5 @@ getStarted = function*({ locale, psid }) {
 	);
 
 	yield sendReply(t`https://www.facebook.com/groups/festbotvip/`, psid);
-
-
+};
 module.exports = { getStarted };
