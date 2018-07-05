@@ -41,8 +41,8 @@ module.exports = {
 		'At this point I have to ask you to login using your Deezer account, at which I will retrieve the list of your most listened artists from Deezer.',
 	'Egyébként, a rólad megismert adatok végleges törlését bármikor kérheted tőlem, csak gépeld be a csevegésbe, hogy "forget me".':
 		'Btw. if you ever wan\'t me to forget these things about you, just type "forget me" into the chat.',
-	'Wow!, Látom, hogy a {1} és a ${2} neked is a kedvenced':
-		'Wow! I see you like {1} and ${2}',
+	'Wow!, Látom, hogy a {1} és a {2} neked is a kedvenced':
+		'Wow! I see you like {1} and {2}',
 
 	// at the Festival
 	'Úgy tűnik, hogy nem állítottál be aktív fesztivált egyelőre.':

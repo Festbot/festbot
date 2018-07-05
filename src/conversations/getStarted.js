@@ -110,7 +110,7 @@ getStarted = function*({ locale, psid }) {
 		psid
 	);
 	yield sendReply(
-		t`Ez persze időbe telik és ahhoz, hogy a Festbot ingyenes maradhasson, önkéntes közreműködőkre is szükség van.`,
+		t`Ez persze időbe telik és sok sok munka, ezért a fejlesztéshez önkéntes közreműködőkre is szükség van.`,
 		psid
 	);
 	yield sendReply(
