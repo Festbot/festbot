@@ -105,7 +105,7 @@ getStarted = function*({ locale, psid }) {
 	yield sendReply(
 		t`A Festbotot szabadidőnkben csináljuk, és még csak ${festbotAge} született.` +
 			' 🤓' +
-			t`Rengeteg izgalmas és hasznos funkción dolgozunk, melyeket folyamatosan adunk majd hozzá a Festbothoz.` +
+			t`We are working on a lot of exciting and useful features that we will keep on adding to the Festbot.` +
 			' 🧐',
 		psid
 	);
@@ -114,7 +114,7 @@ getStarted = function*({ locale, psid }) {
 		psid
 	);
 	yield sendReply(
-		t`Ha szívesen csatlakoznál a közösségünkhöz és tudsz segíteni nekünk jelentkezz ✨VIP✨ tagnak a közreműködői csoportunkba.`,
+		t`Ha szívesen csatlakoznál a közösségünkhöz és tudsz segíteni nekünk, jelentkezz ✨VIP✨ tagnak a közreműködői csoportunkba.`,
 		psid
 	);
 

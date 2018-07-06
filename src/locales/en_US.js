@@ -96,6 +96,8 @@ module.exports = {
 	Masszázs: 'Massage',
 
 	// Chats
+
+	//Get Started
 	'Szia {1}, Itt vagyok, hogy segítsek a fesztiválos kérdéseidben.':
 		'Hey {1}, I’m here to assist you with festival related things.',
 	'Kérdéseid a menü segítségével irányíthatod.':
@@ -118,6 +120,13 @@ module.exports = {
 		'I hope you wouldn’t mind if I ask a little bit about you.',
 	'Nem gond, mehet': 'No problem',
 	'Talán majd később': 'Maybe later',
+
+	'A Festbotot szabadidőnkben csináljuk, és még csak {1} született.':
+		'We are doing Festbot in our free time, and it is born {1}.',
+	'Ez persze időbe telik és sok sok munka, ezért a fejlesztéshez önkéntes közreműködőkre is szükség van.':
+		'It takes time, and there is a lot of work, so volunteering is needed for the development.',
+	'Ha szívesen csatlakoznál a közösségünkhöz és tudsz segíteni nekünk, jelentkezz ✨VIP✨ tagnak a közreműködői csoportunkba.':
+		'If you would like to join our community and you can help us, sign up for the ✨VIP✨ member in our contributors group.',
 
 	// At the festival
 	"Looks like you didn't tell me which festival you're at right now.":
