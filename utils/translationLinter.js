@@ -1,8 +1,6 @@
 const fs = require('fs');
 const chalk = require('chalk');
 
-console.log(process.env);
-
 const locales = {
 	en_US: require('../src/locales/en_US'),
 };
