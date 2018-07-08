@@ -14,7 +14,7 @@ const sendConfig = async function() {
 				'bc097de5-f4b8-4744-953e-56fa4a17a171',
 		},
 		json: {
-			WEBHOOK: 'https://' + process.env.HOST + '/kik/webhook',
+			webhook: 'https://' + process.env.HOST + '/kik/webhook',
 			features: {
 				receiveReadReceipts: false,
 				receiveIsTyping: false,
