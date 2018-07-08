@@ -14,6 +14,7 @@ const throng = require('throng');
 const WORKERS = process.env.WEB_CONCURRENCY || 1;
 const { getUsersWithActiveFestival } = require('./apiHelpers/festbot/users');
 const FacebookSendApi = require('./apiHelpers/facebook/sendApi');
+const KikApi = require('./chatApis/kik/kik');
 
 throng(
 	{
@@ -146,6 +147,11 @@ throng(
 			res.sendStatus(200);
 		});
 
+		app.get('/kik/webhook', function(res, req) {
+			console.log('kik', req.body);
+			res.sendStatus(200);
+		});
+
 		async function receivedPostback(psid, payload) {
 			const { handler, param } = matchRoute(routes, payload);
 			await processAction(handler, param, psid);
@@ -157,5 +163,8 @@ throng(
 
 		console.log('Setting up messenger profile...');
 		FacebookGraph.setUpMessengerProfile();
+
+		console.log('Setting up kik...');
+		KikApi.sendConfig();
 	}
 );
