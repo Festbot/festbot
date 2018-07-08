@@ -1,44 +1,18 @@
 const {
 	sendReply,
-	sendLocation,
 	sendQuickReply,
 	addPoi: addPoiToDb,
-	setContext,
 	sendWebViewButton,
 	getVenues,
 	updateVenueLocation,
 } = require('../actions');
 
 const {
-	HOTDOG_HAMBURGER,
-	PIZZA,
-	MEXICAN,
-	GYROS,
-	HEALTHY_FOOD,
-	BREAKFAST,
-	FISH,
-	WC,
-	CAMPING,
-	ENTRANCE,
-	TAXI,
-	SUPERMARKET,
-	PARKING,
-	TOBACCO,
-	BEER,
-	WINE,
-	COCKTAILS,
-	WHISKY,
-	COFFEE,
-	LOCKERS,
-	CHARGING_STATION,
-	FIRST_AID,
-	INFORMATION,
-	ATM,
-	MASSAGE,
-	SHOTS,
-	PHARMACY,
-	BIKE_STORAGE,
-} = require('../apiHelpers/festbot/poiTypes');
+	getFoodCategories,
+	getServiceCategories,
+	getDrinkCategories,
+	getAssortedCategories,
+} = require('../config/pois');
 
 const i18n = require('../i18n');
 
@@ -73,15 +47,7 @@ const addPoi = function*({ locale, psid, activeFestival }) {
 		'add-service': t`Szolgáltatást`,
 	};
 
-	const locations = {
-		[WC]: t`Vécét` + ' 🚻',
-		[CAMPING]: t`Kempinget` + ' ⛺⛺⛺',
-		[ENTRANCE]: t`Bejárat` + ' ⛩️',
-		[TAXI]: t`Hiénákat` + ' 🚕🚕🚕',
-		[SUPERMARKET]: t`Bolt` + ' 🛒',
-		[PARKING]: t`Parkolót` + ' 🅿️',
-		[TOBACCO]: t`Dohánybolt` + ' 🚬',
-	};
+	const locations = getAssortedCategories(locale);
 
 	yield sendQuickReply(
 		t`Na, mit találtál?` + ' 📍',
@@ -92,7 +58,7 @@ const addPoi = function*({ locale, psid, activeFestival }) {
 			})),
 			...Object.keys(locations).map(location => ({
 				title: locations[location],
-				to: '/add-poi/request-location/' + location,
+				to: '/add-poi/request-poi-location/' + location,
 			})),
 		],
 		psid
@@ -101,21 +67,13 @@ const addPoi = function*({ locale, psid, activeFestival }) {
 
 const addBar = function*({ locale, psid }) {
 	const t = i18n(locale);
-
-	const bars = {
-		[BEER]: t`Sört` + ' 🍺',
-		[WINE]: t`Bort` + ' 🍷',
-		[COCKTAILS]: t`Koktélt` + ' 🍹',
-		[WHISKY]: t`Viszkit` + ' 🥃',
-		[COFFEE]: t`Coffee` + ' ☕',
-		[SHOTS]: t`Pálinka` + ' 🍶',
-	};
+	const bars = getDrinkCategories(locale);
 
 	yield sendQuickReply(
 		t`Jó, de mit lehet ott inni? ` + ' ',
 		Object.keys(bars).map(bar => ({
 			title: bars[bar],
-			to: '/add-poi/request-location/' + bar,
+			to: '/add-poi/request-poi-location/' + bar,
 		})),
 		psid
 	);
@@ -123,23 +81,13 @@ const addBar = function*({ locale, psid }) {
 
 const addService = function*({ locale, psid }) {
 	const t = i18n(locale);
-
-	const services = {
-		[LOCKERS]: t`Értékmegőrző` + ' 💍',
-		[CHARGING_STATION]: t`Telefontöltés` + ' 🔋',
-		[FIRST_AID]: t`Elsősegély` + ' 🏥',
-		[PHARMACY]: t`Gyógyszertár` + ' 💊',
-		[INFORMATION]: t`Információ` + ' ℹ️',
-		[ATM]: t`ATM` + ' 🏧',
-		[MASSAGE]: t`Masszázs` + ' 💆‍♀️',
-		[BIKE_STORAGE]: t`Biciklitároló` + ' 🚲',
-	};
+	const services = getServiceCategories(locale);
 
 	yield sendQuickReply(
 		t`Jó, de az bármi lehet...`,
 		Object.keys(services).map(service => ({
 			title: services[service],
-			to: '/add-poi/request-location/' + service,
+			to: '/add-poi/request-poi-location/' + service,
 		})),
 		psid
 	);
@@ -147,22 +95,13 @@ const addService = function*({ locale, psid }) {
 
 const addFood = function*({ locale, psid }) {
 	const t = i18n(locale);
-
-	const foods = {
-		[HOTDOG_HAMBURGER]: t`Amerikai` + ' 🍔 🌭',
-		[PIZZA]: t`Pizza` + ' 🍕',
-		[MEXICAN]: t`Mexikói` + ' 🌮',
-		[GYROS]: t`Gyros`,
-		[HEALTHY_FOOD]: t`Egészséges` + ' 🥗',
-		[BREAKFAST]: t`Reggeli` + ' 🍳',
-		[FISH]: t`Hal` + ' 🐟',
-	};
+	const foods = getFoodCategories(locale);
 
 	yield sendQuickReply(
 		t`Konyha jellege` + ' 🍽️',
 		Object.keys(foods).map(food => ({
 			title: foods[food],
-			to: '/add-poi/request-location/' + food,
+			to: '/add-poi/request-poi-location/' + food,
 		})),
 		psid
 	);
@@ -177,69 +116,68 @@ const addStage = function*({ locale, psid, activeFestival }) {
 		t`Melyik színpadot?`,
 		stages.map(stage => ({
 			title: stage.name,
-			to: '/add-poi/request-location/stage:' + stage._id,
+			to: '/add-poi/request-stage-location/' + stage._id,
 		})),
 		psid
 	);
 };
 
-const requestLocation = function*({ locale, psid }, type) {
+const requestStageLocation = function*({ locale, psid }, stageId) {
 	const t = i18n(locale);
 
-	const [poi, poiId] = type.split(':');
+	yield requestLocation(
+		t`Add meg a helyzet!` + ' 📍',
+		'/add-poi/stage-location-received/' + stageId,
+		psid
+	);
+};
 
-	if (poi === 'stage') {
-		yield setContext(psid, {
-			lastAskedLocation: poiId,
-			locationRequestedFor: 'save-stage',
-		});
-	} else {
-		yield setContext(psid, {
-			lastAskedLocation: poi,
-			locationRequestedFor: 'save-poi',
-		});
-	}
+const requestPoiLocation = function*({ locale, psid }, type) {
+	const t = i18n(locale);
 
-	yield sendLocation(t`Add meg a helyzetét!` + ' 📍', psid);
+	yield requestLocation(
+		t`Add meg a helyzet!` + ' 📍',
+		'/add-poi/poi-location-received/' + type,
+		psid
+	);
 };
 
 const savePoi = function*(
-	{ locale, psid, activeFestival, lastAskedLocation, locationRequestedFor },
-	location
+	{ locale, psid, activeFestival, lastKnownLocation },
+	type
 ) {
-	if (locationRequestedFor !== 'save-poi') {
-		return;
-	}
-
 	const t = i18n(locale);
-	const [lat, lng] = location.split(':');
 
-	yield addPoiToDb(activeFestival, lastAskedLocation, lat, lng);
+	yield addPoiToDb(
+		activeFestival,
+		type,
+		lastKnownLocation.lat,
+		lastKnownLocation.lng
+	);
+
 	yield sendReply(t`Köszi, így most már megvan!` + ' 🤟', psid);
 };
 
-const saveStage = function*(
-	{ locale, psid, locationRequestedFor, lastAskedLocation },
-	location
-) {
-	if (locationRequestedFor !== 'save-stage') {
-		return;
-	}
-
+const saveStage = function*({ locale, psid, lastKnownLocation }, stageId) {
 	const t = i18n(locale);
-	const [lat, lng] = location.split(':');
 
-	yield updateVenueLocation(lastAskedLocation, lat, lng);
+	yield updateVenueLocation(
+		stageId,
+		lastKnownLocation.lat,
+		lastKnownLocation.lng
+	);
+
 	yield sendReply(t`Köszi, most már megvan a színpad!` + ' 🤟', psid);
 };
 
 module.exports = {
 	addPoi,
-	requestLocation,
 	addFood,
 	savePoi,
 	addBar,
 	addService,
 	addStage,
 	saveStage,
+	requestStageLocation,
+	requestPoiLocation,
 };

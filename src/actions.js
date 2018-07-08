@@ -16,6 +16,8 @@ const {
 	UPDATE_VENUE_LOCATION,
 	GET_AGENDA,
 	SEND_MAP_MARKER,
+	REQUEST_LOCATION,
+	REDIRECT,
 } = require('./actionTypes');
 
 const sleep = timeout => ({
@@ -105,6 +107,23 @@ const sendMapMarker = (title, lat, lng, psid) => ({
 	},
 });
 
+const requestLocation = (message, redirect, psid) => ({
+	type: REQUEST_LOCATION,
+	payload: {
+		message,
+		redirect,
+		psid,
+	},
+});
+
+const redirect = (to, psid) => ({
+	type: REDIRECT,
+	payload: {
+		to,
+		psid,
+	},
+});
+
 module.exports = {
 	sleep,
 	sendReply,
@@ -123,4 +142,6 @@ module.exports = {
 	updateVenueLocation,
 	getAgenda,
 	sendMapMarker,
+	requestLocation,
+	redirect,
 };

@@ -5,6 +5,8 @@ const SpotifyApi = require('./apiHelpers/spotify');
 const PoiApi = require('./apiHelpers/festbot/pois');
 const AgendaApi = require('./apiHelpers/festbot/agenda');
 const GoogleMapsApi = require('./apiHelpers/google/maps');
+const ConversationRouter = require('./conversationRouter');
+
 const sleep = timeout =>
 	new Promise(resolve => {
 		setTimeout(resolve, timeout);
@@ -28,6 +30,8 @@ const {
 	UPDATE_VENUE_LOCATION,
 	GET_AGENDA,
 	SEND_MAP_MARKER,
+	REQUEST_LOCATION,
+	REDIRECT,
 } = require('./actionTypes');
 
 async function executeAction({ type, payload }) {
@@ -160,10 +164,25 @@ async function executeAction({ type, payload }) {
 				payload.lng
 			);
 			break;
+		case REQUEST_LOCATION:
+			await FacebookSendApi.sendMessage(payload.psid, payload.message, [
+				{ content_type: 'location' },
+			]);
+			await ConversationContextProvider.set(payload.psid, {
+				redirectAfterLocation: payload.redirect,
+			});
+			break;
+		case REDIRECT:
+			const { handler, param } = ConversationRouter.matchRoute(
+				ConversationRouter.routes,
+				payload.to
+			);
+			return await processAction(handler, param, psid);
+			break;
 	}
 }
 
-const processAction = async function(conversation, param, psid) {
+async function processAction(conversation, param, psid) {
 	const context = await ConversationContextProvider.get(psid);
 	const generator = conversation(context, param);
 	let done;
@@ -176,6 +195,6 @@ const processAction = async function(conversation, param, psid) {
 			result = await executeAction(yielded.value);
 		}
 	}
-};
+}
 
 module.exports = { processAction };

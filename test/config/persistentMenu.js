@@ -21,7 +21,7 @@ describe('testing persistent menu', function() {
 	it('title cant be longer than 30 chars', function() {
 		persistentMenu.forEach(menu => {
 			menu.call_to_actions.forEach(submenu => {
-				assert.isAtMost(submenu.title.length, 30);
+				assert.isAtMost(submenu.title.length, 30, submenu.title);
 			});
 		});
 	});
@@ -29,8 +29,9 @@ describe('testing persistent menu', function() {
 	it('title cant be longer than 30 chars', function() {
 		persistentMenu.forEach(menu => {
 			menu.call_to_actions.forEach(submenu => {
+				console.log(submenu);
 				submenu.call_to_actions.forEach(submenu2 => {
-					assert.isAtMost(submenu2.title.length, 30);
+					assert.isAtMost(submenu2.title.length, 30, submenu2.title);
 				});
 			});
 		});
