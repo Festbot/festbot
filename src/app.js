@@ -147,7 +147,7 @@ throng(
 			res.sendStatus(200);
 		});
 
-		app.get('/kik/webhook', function(res, req) {
+		app.post('/kik/webhook', function(res, req) {
 			console.log('kik', req.body);
 			res.sendStatus(200);
 		});
