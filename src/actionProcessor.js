@@ -1,4 +1,4 @@
-const ConversationContextProvider = require('../conversationContextProvider');
+const ConversationContextProvider = require('./conversationContextProvider');
 const executeAction = require('./sideEffects');
 
 const processAction = async function(conversation, param, psid) {
