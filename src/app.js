@@ -14,7 +14,6 @@ const throng = require('throng');
 const WORKERS = process.env.WEB_CONCURRENCY || 1;
 const { getUsersWithActiveFestival } = require('./apiHelpers/festbot/users');
 const FacebookSendApi = require('./apiHelpers/facebook/sendApi');
-const KikApi = require('./chatApis/kik/kik');
 
 throng(
 	{
@@ -163,8 +162,5 @@ throng(
 
 		console.log('Setting up messenger profile...');
 		FacebookGraph.setUpMessengerProfile();
-
-		console.log('Setting up kik...');
-		KikApi.sendConfig();
 	}
 );
