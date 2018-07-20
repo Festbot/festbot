@@ -123,6 +123,8 @@ module.exports = {
 
 	'A Festbotot szabadidőnkben csináljuk, és még csak {1} született.':
 		'We are doing Festbot in our free time, and it is born {1}.',
+		'A már meglévő funkciók mellett, időről időre további új és izgalmas lehetőségekkel bővítjük a Festbotot.':
+		'We are working on a lot of exciting and useful features that we will keep on adding to the Festbot.',
 	'Ez persze időbe telik és sok sok munka, ezért a fejlesztéshez önkéntes közreműködőkre is szükség van.':
 		'It takes time, and there is a lot of work, so volunteering is needed for the development.',
 	'Ha szívesen csatlakoznál a közösségünkhöz és tudsz segíteni nekünk, jelentkezz ✨VIP✨ tagnak a közreműködői csoportunkba.':

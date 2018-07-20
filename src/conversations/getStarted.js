@@ -105,7 +105,7 @@ getStarted = function*({ locale, psid }) {
 	yield sendReply(
 		t`A Festbotot szabadidőnkben csináljuk, és még csak ${festbotAge} született.` +
 			' 🤓' +
-			t`We are working on a lot of exciting and useful features that we will keep on adding to the Festbot.` +
+			t`A már meglévő funkciók mellett, időről időre további új és izgalmas lehetőségekkel bővítjük a Festbotot.` +
 			' 🧐',
 		psid
 	);
