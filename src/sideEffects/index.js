@@ -2,6 +2,12 @@ const festbot = require('./festbot');
 const facebook = require('./facebook');
 const spotify = require('./spotify');
 
+const ConversationContextProvider = require('../conversationContextProvider');
+const sleep = timeout =>
+	new Promise(resolve => {
+		setTimeout(resolve, timeout);
+	});
+
 const { SLEEP, SET_CONTEXT } = require('../actionTypes');
 
 const executeAction = async function({ type, payload }) {
