@@ -21,7 +21,11 @@ const executeAction = async function({ type, payload }) {
 			);
 	}
 
-	return (await festbot()) || (await facebook()) || (await spotify());
+	return (
+		(await festbot({ type, payload })) ||
+		(await facebook({ type, payload })) ||
+		(await spotify({ type, payload }))
+	);
 };
 
 module.exports = executeAction;
