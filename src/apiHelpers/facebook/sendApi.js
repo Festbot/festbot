@@ -2,7 +2,7 @@ const request = require('request-promise');
 
 const callSendAPI = function(messageData) {
 	request({
-		uri: 'https://graph.facebook.com/v3.0/me/messages',
+		uri: 'https://graph.facebook.com/v2.6/me/messages',
 		qs: { access_token: process.env.FACEBOOK_ACCESS_TOKEN },
 		method: 'POST',
 		json: messageData,

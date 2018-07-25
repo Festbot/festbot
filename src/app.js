@@ -146,6 +146,11 @@ throng(
 			res.sendStatus(200);
 		});
 
+		app.post('/kik/webhook', function(res, req) {
+			console.log('kik', req.body);
+			res.sendStatus(200);
+		});
+
 		async function receivedPostback(psid, payload) {
 			const { handler, param } = matchRoute(routes, payload);
 			await processAction(handler, param, psid);

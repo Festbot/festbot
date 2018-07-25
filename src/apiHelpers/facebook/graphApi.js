@@ -6,7 +6,7 @@ const PAGE_ACCESS_TOKEN = process.env.FACEBOOK_ACCESS_TOKEN;
 
 module.exports.getUserInformation = async function(psid) {
 	return await request({
-		uri: 'https://graph.facebook.com/v3.0/' + psid,
+		uri: 'https://graph.facebook.com/v2.6/' + psid,
 		qs: {
 			fields: 'first_name,last_name,locale,timezone',
 			access_token: PAGE_ACCESS_TOKEN,
@@ -19,7 +19,7 @@ module.exports.getUserInformation = async function(psid) {
 module.exports.setUpMessengerProfile = async function() {
 	try {
 		const response = await request({
-			uri: 'https://graph.facebook.com/v3.0/me/messenger_profile',
+			uri: 'https://graph.facebook.com/v2.6/me/messenger_profile',
 			qs: { access_token: PAGE_ACCESS_TOKEN },
 			method: 'POST',
 			json: {
