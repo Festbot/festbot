@@ -35,8 +35,6 @@ module.exports.verifyRequestSignature = function(req, res, buf) {
 	const signature = req.headers['x-hub-signature'];
 
 	if (!signature) {
-		// For testing, let's log an error. In production, you should throw an
-		// error.
 		console.error("Couldn't validate the signature.");
 	} else {
 		const elements = signature.split('=');
