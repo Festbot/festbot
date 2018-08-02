@@ -28,13 +28,15 @@ const introduction = function*({ psid, locale }) {
 	const festival = 'Sziget';
 
 	yield sendReply(
-		t`Szia ${
-			facebookData.first_name
-		}, Itt vagyok, hogy segítsek a fesztiválos kérdéseidben.` + ' 😎',
+		t`Azért vagyok, hogy fesztiválos dolgokban segítsek neked.` + ' 😎',
 		psid
 	);
 
-	yield sendReply(t`Kérdéseid a menüből választhatod ki.`, psid);
+	yield sendReply(
+		t`Kérdéseidet a bal alsó sarokban lévő menüből választhatod ki.` +
+			' 🗂️',
+		psid
+	);
 
 	yield sendReply(
 		t`Kérlek majd szánj rá néhány percet, hogy átnézd ezt a menüt.`,
@@ -57,7 +59,8 @@ const introduction = function*({ psid, locale }) {
 	// );
 
 	yield sendReply(
-		t`Nem akarom tovább rabolni az idődet, mert biztos Te is izgatott vagy már, de még előtte közösen csekkoljunk be téged a ${festival} fesztiválra.`,
+		t`Nem akarom tovább rabolni az idődet, mert biztos te is izgatott vagy már, de még előtte közösen csekkoljunk be téged a ${festival} fesztiválra.` +
+			' 🛂',
 		psid
 	);
 
@@ -71,10 +74,12 @@ const introduction = function*({ psid, locale }) {
 	//yield sleep(2 * 60 * 1000);
 
 	yield sendReply(
-		t`Ha van aktiv fesztiválod és koncerteket adsz hozzá a kedvenceid listájához, én gondoskodom majd róla, hogy a kezdés előtt időben értesítselek.`,
+		t`Ha van aktiv fesztiválod és koncerteket adsz hozzá a kedvenceid listájához, akkor szólni fogok majd kezdés előtt, hogy ne maradjál le róluk. 📅`,
 		psid
 	);
-	yield sleep(5 * 60 * 1000);
+
+	//yield sleep(5 * 60 * 1000);
+
 	yield sendReply(
 		t`Már alig várom, hogy jobban megismerjelek!` + ' 😍',
 		psid
