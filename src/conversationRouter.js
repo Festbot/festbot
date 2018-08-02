@@ -18,7 +18,7 @@ const routes = [
 	{ route: '/get-started', handler: GetStarted.getStarted },
 	{ route: '/get-started/introduction', handler: GetStarted.introduction },
 	{
-		route: '/get-started/set-language/:language',
+		route: '/get-started/set-language/:locale',
 		handler: GetStarted.setLanguage,
 	},
 

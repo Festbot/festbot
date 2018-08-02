@@ -121,7 +121,9 @@ const introduction = function*({ psid, locale }) {
 	yield sendReply(t`https://www.facebook.com/groups/festbotvip/`, psid);
 };
 
-const setLanguage = function*({ psid }, language) {
+const setLanguage = function*({ psid }, locale) {
+	const t = i18n(locale);
+
 	switch (language) {
 		case 'hu_HU':
 			yield sendReply(t`Oh, szia! Én is magyar vagyok. :)`, psid);
