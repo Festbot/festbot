@@ -34,7 +34,7 @@ const introduction = function*({ psid, locale }) {
 		psid
 	);
 
-	yield sendReply(t`Kérdéseid a menü segítségével irányíthatod.`, psid);
+	yield sendReply(t`Kérdéseid a menüből választhatod ki.`, psid);
 
 	yield sendReply(
 		t`Kérlek majd szánj rá néhány percet, hogy átnézd ezt a menüt.`,

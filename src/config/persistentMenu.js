@@ -6,7 +6,7 @@ const getPersistentMenu = function() {
 		const t = i18n(locale);
 		return {
 			locale: locale,
-			composer_input_disabled: false,
+			composer_input_disabled: true,
 			call_to_actions: [
 				{
 					title: '🔍  ' + t`Keresés...`,
