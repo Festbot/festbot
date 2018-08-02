@@ -122,21 +122,25 @@ const introduction = function*({ psid, locale }) {
 };
 
 const setLanguage = function*({ psid }, locale) {
-	const t = i18n(locale);
+	const newContext = yield setContext(psid, {
+		locale: locale,
+	});
 
 	switch (locale) {
 		case 'hu_HU':
-			yield sendReply(t`Oh, szia! Én is magyar vagyok. :)`, psid);
+			yield sendReply('Oh, szia! Amúgy én is magyar vagyok. 😎', psid);
 			break;
 		case 'en_US':
-			yield sendReply(t`Oh, hai! :)`, psid);
+			yield sendReply('Oh, hi there! 👋`', psid);
 			break;
 	}
+
+	yield* introduction(newContext);
 };
 
 const getStarted = function*({ psid }) {
 	yield sendQuickReply(
-		'Quelle langue parlez-vous? 🌍',
+		'Bonjour! Quelle langue parlez-vous? 🌍',
 		[
 			{
 				title: 'English' + ' 🇬🇧',
