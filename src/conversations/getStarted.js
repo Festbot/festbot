@@ -124,7 +124,7 @@ const introduction = function*({ psid, locale }) {
 const setLanguage = function*({ psid }, locale) {
 	const t = i18n(locale);
 
-	switch (language) {
+	switch (locale) {
 		case 'hu_HU':
 			yield sendReply(t`Oh, szia! Én is magyar vagyok. :)`, psid);
 			break;
