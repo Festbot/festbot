@@ -10,23 +10,22 @@ const i18n = require('../i18n');
 
 const moment = require('moment');
 
-getStarted = function*({ locale, psid }) {
-	const [momentLocale] = locale.split('_');
-	moment.locale(momentLocale);
-	const festbotAge = moment().to(process.env.FESTBOT_BIRTH_DAY);
-
-	const t = i18n(locale);
+const introduction = function*({ psid, locale }) {
 	const facebookData = yield getFacebookData(psid);
 
 	const newContext = yield setContext(psid, {
 		firstName: facebookData.first_name,
 		lastName: facebookData.last_name,
-		gender: facebookData.gender,
-		locale: facebookData.locale,
 		timezone: facebookData.timezone,
 	});
 
-	const festival = 'Balaton Sound';
+	const [momentLocale] = locale.split('_');
+	moment.locale(momentLocale);
+	const festbotAge = moment().to(process.env.FESTBOT_BIRTH_DAY);
+
+	const t = i18n(locale);
+
+	const festival = 'Sziget';
 
 	yield sendReply(
 		t`Szia ${
@@ -100,6 +99,7 @@ getStarted = function*({ locale, psid }) {
 		],
 		psid
 	);
+
 	yield sleep(6 * 60 * 60 * 1000);
 
 	yield sendReply(
@@ -120,4 +120,33 @@ getStarted = function*({ locale, psid }) {
 
 	yield sendReply(t`https://www.facebook.com/groups/festbotvip/`, psid);
 };
-module.exports = { getStarted };
+
+const setLanguage = function*({ psid }, language) {
+	switch (language) {
+		case 'hu_HU':
+			yield sendReply(t`Oh, szia! Én is magyar vagyok. :)`, psid);
+			break;
+		case 'en_US':
+			yield sendReply(t`Oh, hai! :)`, psid);
+			break;
+	}
+};
+
+const getStarted = function*({ psid }) {
+	yield sendQuickReply(
+		'Quelle langue parlez-vous? 🌍',
+		[
+			{
+				title: 'English' + ' 🇬🇧',
+				to: '/get-started/set-language/en_US',
+			},
+			{
+				title: 'Magyar' + ' 🇭🇺',
+				to: '/get-started/set-language/hu_HU',
+			},
+		],
+		psid
+	);
+};
+
+module.exports = { getStarted, introduction, setLanguage };

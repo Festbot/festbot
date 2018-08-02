@@ -1,6 +1,6 @@
 const { getStarted } = require('../../src/conversations/getStarted');
 const { isAction, actionTypeMatches } = require('../helpers/actions');
-const { GET_FACEBOOK_DATA } = require('../../src/actionTypes');
+const { SEND_QUICK_REPLY } = require('../../src/actionTypes');
 
 const contextMock = {
 	locale: 'hu_HU',
@@ -15,6 +15,6 @@ describe('getStarted', function() {
 		const { value } = generator.next();
 
 		isAction(value);
-		actionTypeMatches(value, GET_FACEBOOK_DATA);
+		actionTypeMatches(value, SEND_QUICK_REPLY);
 	});
 });

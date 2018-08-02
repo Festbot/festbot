@@ -253,10 +253,12 @@ const requestLocation = function*({ locale, psid }, type) {
 	yield sendLocation(t`Mondd meg, hogy hol vagy!` + ' 📍', psid);
 };
 
-const sendStage = function*(
-	{ locale, psid, lastAskedLocation, locationRequestedFor },
-	location
-) {
+const sendStage = function*({
+	locale,
+	psid,
+	lastAskedLocation,
+	locationRequestedFor,
+}) {
 	if (locationRequestedFor !== 'send-stage') {
 		return;
 	}
