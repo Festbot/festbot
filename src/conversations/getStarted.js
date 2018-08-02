@@ -68,7 +68,7 @@ const introduction = function*({ psid, locale }) {
 		psid
 	);
 
-	yield sleep(2 * 60 * 1000);
+	//yield sleep(2 * 60 * 1000);
 
 	yield sendReply(
 		t`Ha van aktiv fesztiválod és koncerteket adsz hozzá a kedvenceid listájához, én gondoskodom majd róla, hogy a kezdés előtt időben értesítselek.`,
@@ -80,45 +80,45 @@ const introduction = function*({ psid, locale }) {
 		psid
 	);
 
-	yield sendReply(
-		t`A zenei ízléseddel kapcsolatban lenne most pár kérésem.` + ' 🧐',
-		psid
-	);
+	// yield sendReply(
+	// 	t`A zenei ízléseddel kapcsolatban lenne most pár kérésem.` + ' 🧐',
+	// 	psid
+	// );
 
-	yield sendQuickReply(
-		t`Remélem nem bánod ha kicsit belemegyünk ebbe a témába.` + ' ☺️',
-		[
-			{
-				title: t`Nem gond, mehet` + ' ☺️',
-				to: '/stream-provider-auth/confirm-select',
-			},
-			{
-				title: t`Talán majd később` + ' 🤔',
-				to: '/stream-provider-auth/select-later',
-			},
-		],
-		psid
-	);
+	// yield sendQuickReply(
+	// 	t`Remélem nem bánod ha kicsit belemegyünk ebbe a témába.` + ' ☺️',
+	// 	[
+	// 		{
+	// 			title: t`Nem gond, mehet` + ' ☺️',
+	// 			to: '/stream-provider-auth/confirm-select',
+	// 		},
+	// 		{
+	// 			title: t`Talán majd később` + ' 🤔',
+	// 			to: '/stream-provider-auth/select-later',
+	// 		},
+	// 	],
+	// 	psid
+	// );
 
-	yield sleep(6 * 60 * 60 * 1000);
+	// yield sleep(6 * 60 * 60 * 1000);
 
-	yield sendReply(
-		t`A Festbotot szabadidőnkben csináljuk, és még csak ${festbotAge} született.` +
-			' 🤓' +
-			t`A már meglévő funkciók mellett, időről időre további új és izgalmas lehetőségekkel bővítjük a Festbotot.` +
-			' 🧐',
-		psid
-	);
-	yield sendReply(
-		t`Ez persze időbe telik és sok sok munka, ezért a fejlesztéshez önkéntes közreműködőkre is szükség van.`,
-		psid
-	);
-	yield sendReply(
-		t`Ha szívesen csatlakoznál a közösségünkhöz és tudsz segíteni nekünk, jelentkezz ✨VIP✨ tagnak a közreműködői csoportunkba.`,
-		psid
-	);
+	// yield sendReply(
+	// 	t`A Festbotot szabadidőnkben csináljuk, és még csak ${festbotAge} született.` +
+	// 		' 🤓' +
+	// 		t`A már meglévő funkciók mellett időről időre további új és izgalmas lehetőségekkel bővítjük a Festbotot.` +
+	// 		' 🧐',
+	// 	psid
+	// );
+	// yield sendReply(
+	// 	t`Ez persze időbe telik és sok sok munka, ezért a fejlesztéshez önkéntes közreműködőkre is szükség van.`,
+	// 	psid
+	// );
+	// yield sendReply(
+	// 	t`Ha szívesen csatlakoznál a közösségünkhöz, és tudsz segíteni nekünk, jelentkezz ✨VIP✨ tagnak a közreműködői csoportunkba.`,
+	// 	psid
+	// );
 
-	yield sendReply(t`https://www.facebook.com/groups/festbotvip/`, psid);
+	// yield sendReply(t`https://www.facebook.com/groups/festbotvip/`, psid);
 };
 
 const setLanguage = function*({ psid }, locale) {
