@@ -98,16 +98,16 @@ module.exports = {
 	// Chats
 
 	//Get Started
-	'Szia {1}, Itt vagyok, hogy segítsek a fesztiválos kérdéseidben.':
-		'Hey {1}, I’m here to assist you with festival related things.',
-	'Kérdéseid a menü segítségével irányíthatod.':
+	'Azért vagyok, hogy fesztiválos dolgokban segítsek neked.':
+		'I’m here to assist you with festival related things.',
+	'Kérdéseidet a bal alsó sarokban lévő menüből választhatod ki.':
 		'You can use the menu for asking things from me.',
 	'Kérlek majd szánj rá néhány percet, hogy átnézd ezt a menüt.':
 		'Please take a moment to check the options.',
 
 	'Ha van aktiv fesztiválod és koncerteket adsz hozzá a kedvenceid listájához, én gondoskodom majd róla, hogy a kezdés előtt időben értesítselek.':
 		'Once you have an active festival, you can save events to your favourites, and I will notify you when the time will come.',
-	'Nem akarom tovább rabolni az idődet, mert biztos Te is izgatott vagy már, de még előtte közösen csekkoljunk be téged a {1} fesztiválra.':
+	'Nem akarom tovább rabolni az idődet, mert biztos te is izgatott vagy már, de még előtte közösen csekkoljunk be téged a {1} fesztiválra.':
 		"Now it's time to move forward, i'm sure you are getting excited all about this. Let's activate the  {1} festival for you.",
 	'Kattints a gombra a {1} fesztivál aktiválásához.':
 		'Tap on the button to activate the {1} featival.',
