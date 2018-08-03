@@ -3,7 +3,7 @@ const {
 	setLanguage,
 } = require('../../src/conversations/settings');
 const { isAction, actionTypeMatches } = require('../helpers/actions');
-const { SEND_QUICK_REPLY, SEND_REPLY } = require('../../src/actionTypes');
+const { SEND_QUICK_REPLY, SET_CONTEXT } = require('../../src/actionTypes');
 
 const contextMock = {
 	locale: 'hu_HU',
@@ -28,6 +28,6 @@ describe('setLanguage', function() {
 		const { value } = generator.next();
 
 		isAction(value);
-		actionTypeMatches(value, SEND_REPLY);
+		actionTypeMatches(value, SET_CONTEXT);
 	});
 });

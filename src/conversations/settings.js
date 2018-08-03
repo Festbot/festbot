@@ -9,7 +9,7 @@ const languages = [
 const askLanguage = function*({ locale, psid }) {
 	const t = i18n(locale);
 	return sendQuickReply(
-		t`Quelle langue parlez-vous?` + '😎',
+		`Quelle langue parlez-vous?` + '😎',
 		languages.map(language => ({
 			title: language.title + ' ' + language.emoji,
 			to: '/settings/set-language/' + language.code,
