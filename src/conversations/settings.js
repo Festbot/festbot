@@ -1,4 +1,4 @@
-const { sendReply, sendQuickReply } = require('../actions');
+const { sendReply, sendQuickReply, setContext } = require('../actions');
 const i18n = require('../i18n');
 
 const languages = [
@@ -9,7 +9,7 @@ const languages = [
 const askLanguage = function*({ locale, psid }) {
 	const t = i18n(locale);
 	return sendQuickReply(
-		t`I know a few languages, which one do you prefer?` + '😎',
+		t`Quelle langue parlez-vous?` + '😎',
 		languages.map(language => ({
 			title: language.title + ' ' + language.emoji,
 			to: '/settings/set-language/' + language.code,
