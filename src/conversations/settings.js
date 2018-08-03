@@ -18,15 +18,19 @@ const askLanguage = function*({ locale, psid }) {
 	);
 };
 
-const setLanguage = function*({ locale, psid }, router, param) {
-	const t = i18n(locale);
-	return sendReply(
-		{
-			message: t`Ezt választottad: ` + param + ' 😎',
-			newContext: { ...arguments[0], locale: 'hu_HU' },
-		},
-		psid
-	);
+const setLanguage = function*({ psid }, locale) {
+	yield setContext(psid, {
+		locale: locale,
+	});
+
+	switch (locale) {
+		case 'hu_HU':
+			yield sendReply('Oh, szia! Amúgy én is magyar vagyok. 😎', psid);
+			break;
+		case 'en_US':
+			yield sendReply('Oh, hi there! 👋`', psid);
+			break;
+	}
 };
 
 module.exports = { askLanguage, setLanguage };
