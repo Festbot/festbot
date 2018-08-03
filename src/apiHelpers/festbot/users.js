@@ -13,6 +13,7 @@ function generateDefaultUserData() {
 		savedShows: [],
 		activeFestival: null,
 		visitedFestivals: [],
+		locale: 'en_US',
 	};
 }
 
