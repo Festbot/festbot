@@ -184,7 +184,7 @@ const getFood = function*({ locale, psid }) {
 			},
 			{
 				title: t`Egészséges` + ' 🥗',
-				to: '/get-poi/request-location/healty_food',
+				to: '/get-poi/request-location/healthy_food',
 			},
 			{
 				title: t`Reggeli` + ' 🍳',
