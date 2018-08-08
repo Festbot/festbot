@@ -1,4 +1,4 @@
-const { createDoc, find, updateDoc } = require('./utils');
+const { createDoc, find, updateDoc, getDoc } = require('./utils');
 
 const addPoi = async function(
 	festivalId = null,
@@ -45,4 +45,15 @@ const updateVenueLocation = async function(venueId, lat, lng) {
 	return;
 };
 
-module.exports = { addPoi, getPois, getVenues, updateVenueLocation };
+const getVenueLocation = async function(venueId) {
+	const { coordinates } = await getDoc('venues', venueId);
+	return coordinates;
+};
+
+module.exports = {
+	addPoi,
+	getPois,
+	getVenues,
+	updateVenueLocation,
+	getVenueLocation,
+};

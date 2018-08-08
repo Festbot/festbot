@@ -173,18 +173,11 @@ const requestLocation = function*({ locale, psid }, type) {
 
 const sendStage = function*({ locale, psid }, venueId) {
 	const t = i18n(locale);
-	const venue = yield getVenueLocation(venueId);
+	const { coordinates } = yield getVenueLocation(venueId);
 
-	if (venue) {
-		const poi = pois[0];
+	if (coordinates.lat !== null && coordinates.lng !== null) {
 		yield sendReply(t`Megtaláltam, mindjárt küldöm...` + ' 🤟', psid);
-
-		yield sendMapMarker(
-			t`Színpad`,
-			poi.coordinates.lat,
-			poi.coordinates.lng,
-			psid
-		);
+		yield sendMapMarker(t`Színpad`, coordinates.lat, coordinates.lng, psid);
 	} else {
 		yield sendReply(
 			t`Nem találtam ilyen helyet a fesztiválon, vagy a szervezők nem adták meg.` +

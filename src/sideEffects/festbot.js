@@ -7,6 +7,7 @@ const {
 	GET_VENUES,
 	UPDATE_VENUE_LOCATION,
 	GET_AGENDA,
+	GET_VENUE_LOCATION,
 } = require('../actionTypes');
 
 const executeAction = async function({ type, payload }) {
@@ -36,6 +37,9 @@ const executeAction = async function({ type, payload }) {
 				payload.lat,
 				payload.lng
 			);
+
+		case GET_VENUE_LOCATION:
+			return await PoiApi.getVenueLocation(payload.venueId);
 
 		case GET_AGENDA:
 			return await AgendaApi.getTodaysAgenda(payload.psid);

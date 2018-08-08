@@ -19,6 +19,7 @@ const {
 	SEND_MAP_MARKER,
 	GET_DEEZER_ARTISTS,
 	GET_DEEZER_GENRES,
+	GET_VENUE_LOCATION,
 } = require('./actionTypes');
 
 const sleep = timeout => ({
@@ -123,6 +124,11 @@ const sendMapMarker = (title, lat, lng, psid) => ({
 	},
 });
 
+const getVenueLocation = venueId => ({
+	type: GET_VENUE_LOCATION,
+	payload: { venueId },
+});
+
 module.exports = {
 	sleep,
 	sendReply,
@@ -141,6 +147,7 @@ module.exports = {
 	addPoi,
 	getPois,
 	getVenues,
+	getVenueLocation,
 	updateVenueLocation,
 	getAgenda,
 	sendMapMarker,
