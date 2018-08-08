@@ -136,6 +136,8 @@ module.exports = {
 	getFacebookData,
 	getSpotifyArtists,
 	getSpotifyTopGenres,
+	getDeezerArtists,
+	getDeezerGenres,
 	addPoi,
 	getPois,
 	getVenues,
