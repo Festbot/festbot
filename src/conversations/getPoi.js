@@ -6,6 +6,7 @@ const {
 	setContext,
 	sendWebViewButton,
 	sendMapMarker,
+	getVenues,
 } = require('../actions');
 const i18n = require('../i18n');
 const { getOthers, getBars, getFoods, getServices } = require('../config/pois');
@@ -64,14 +65,14 @@ const getPoi = function*({ locale, psid, activeFestival }) {
 const getStage = function*({ locale, psid, activeFestival }) {
 	const t = i18n(locale);
 
-	const stages = yield getVenues(activeFestival, 'stage').slice(0, 8);
+	const stages = yield getVenues(activeFestival, 'stage');
 
 	yield sendQuickReply(
 		t`Melyik színpadot?`,
 		stages.map(stage => ({
 			title: stage.name,
 			to: '/get-poi/request-location/stage:' + stage._id,
-		})),
+		})).slice(0, 8),
 		psid
 	);
 };
