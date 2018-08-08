@@ -60,10 +60,12 @@ throng(
 
 		app.post('/send-notification', async function(req, res) {
 			if (req.body.accessToken === process.env.FESTBOT_ACCES_TOKEN) {
-				await FacebookSendApi.sendNotification(req.body.psid, req.body.message);
+				await FacebookSendApi.sendNotification(
+					req.body.psid,
+					req.body.message
+				);
 				res.send(200);
-			}
-			else {
+			} else {
 				res.send(401);
 			}
 		});

@@ -37,10 +37,10 @@ const getPoi = function*({ locale, psid, activeFestival }) {
 	}
 
 	const categories = {
-		'add-stage': t`Színpadot` + ' 😎',
-		'add-food': t`Kaját` + ' 🍽️',
-		'add-bar': t`Piát` + ' 🍻',
-		'add-service': t`Szolgáltatást`,
+		'get-stage': t`Színpadot` + ' 😎',
+		'get-food': t`Kaját` + ' 🍽️',
+		'get-bar': t`Piát` + ' 🍻',
+		'get-service': t`Szolgáltatást`,
 	};
 
 	const locations = getOthers();
@@ -64,7 +64,7 @@ const getPoi = function*({ locale, psid, activeFestival }) {
 const getStage = function*({ locale, psid, activeFestival }) {
 	const t = i18n(locale);
 
-	const stages = yield getVenues(activeFestival, 'stage');
+	const stages = yield getVenues(activeFestival, 'stage').slice(0, 8);
 
 	yield sendQuickReply(
 		t`Melyik színpadot?`,

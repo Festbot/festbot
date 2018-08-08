@@ -80,6 +80,10 @@ const routes = [
 		handler: GetPoi.getBar,
 	},
 	{
+		route: '/get-poi/get-stage',
+		handler: GetPoi.getStage,
+	},
+	{
 		route: '/get-poi/get-service',
 		handler: GetPoi.getService,
 	},
