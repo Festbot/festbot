@@ -1,4 +1,4 @@
-const SpotifyApi = require('../apiHelpers/deezer');
+const DeezerApi = require('../apiHelpers/deezer');
 
 const { GET_DEEZER_ARTISTS, GET_DEEZER_GENRES } = require('../actionTypes');
 
