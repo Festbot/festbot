@@ -83,8 +83,23 @@ const auth = function*({ locale, psid }, param) {
 	}
 };
 
-const spotifyTokenReceived = function*({ locale, psid }, accessToken) {
+const dataReceived = function*({ locale, topArtists = [], psid }) {
 	const t = i18n(locale);
+
+	yield sendReply(
+		t`Wow!, Látom, hogy a ${topArtists[0]} és a ${
+			topArtists[1]
+		} neked is a kedvenced` + ' 😏',
+		psid
+	);
+
+	yield sendReply(
+		t`Szólni fogok, ha fellépnek valahol a környéken...` + ' 😏',
+		psid
+	);
+};
+
+const spotifyTokenReceived = function*({ psid }, accessToken) {
 	const spotifyArtists = yield getSpotifyArtists(accessToken);
 	const spotifyGenres = yield getSpotifyTopGenres(accessToken);
 
@@ -94,29 +109,19 @@ const spotifyTokenReceived = function*({ locale, psid }, accessToken) {
 		topGenres: spotifyGenres,
 	});
 
-	return sendReply(
-		t`Wow! I see you like ${spotifyArtists[0]} and ${spotifyArtists[1]}` +
-			' 😏',
-		psid
-	);
+	yield* dataReceived(newContext);
 };
 
-const deezerTokenReceived = function*({ locale, psid }, accessToken) {
-	const t = i18n(locale);
+const deezerTokenReceived = function*({ psid }, accessToken) {
 	const deezerArtists = yield getDeezerArtists(accessToken);
-	const deezerGenres = yield getDeezerGenres(accessToken);
 
 	const newContext = yield setContext(psid, {
 		spotifyAccessToken: accessToken,
 		topArtists: deezerArtists,
-		topGenres: deezerGenres,
+		topGenres: [],
 	});
 
-	return sendReply(
-		t`Wow! I see you like ${deezerArtists[0]} and ${deezerArtists[1]}` +
-			' 😏',
-		psid
-	);
+	yield* dataReceived(newContext);
 };
 
 const notice = function*({ locale, psid }) {
@@ -129,29 +134,12 @@ const notice = function*({ locale, psid }) {
 	);
 };
 
-const dataReceived = function*({ locale, topArtists = [], psid }) {
-	const t = i18n(locale);
-
-	yield sendReply(
-		t`Wow!, Látom, hogy a ${topArtists[0]} és a ${
-			topArtists[1]
-		} neked is a kedvenced` + ' 😏',
-		psid
-	);
-
-	return sendReply(
-		t`Szólni fogok, ha fellépnek valahol a környéken.` + ' 😏',
-		psid
-	);
-};
-
 module.exports = {
 	confirmSelect,
 	select,
 	dontWant,
 	auth,
 	notice,
-	dataReceived,
 	spotifyTokenReceived,
 	deezerTokenReceived,
 };

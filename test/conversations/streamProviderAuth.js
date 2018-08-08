@@ -4,7 +4,6 @@ const {
 	dontWant,
 	auth,
 	notice,
-	dataReceived,
 	spotifyTokenReceived,
 } = require('../../src/conversations/streamProviderAuth');
 const { isAction, actionTypeMatches } = require('../helpers/actions');
@@ -67,17 +66,6 @@ describe('auth', function() {
 
 describe('notice', function() {
 	const generator = notice(contextMock);
-
-	it('returns an action', function() {
-		const { value } = generator.next();
-
-		isAction(value);
-		actionTypeMatches(value, SEND_REPLY);
-	});
-});
-
-describe('dataReceived', function() {
-	const generator = dataReceived(contextMock);
 
 	it('returns an action', function() {
 		const { value } = generator.next();
