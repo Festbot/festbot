@@ -8,6 +8,7 @@ const {
 	sendMapMarker,
 } = require('../actions');
 const i18n = require('../i18n');
+const { getOthers, getBars, getFoods } = require('../config/pois');
 
 const noActiveFestival = function*({ locale, psid }) {
 	const t = i18n(locale);
@@ -35,53 +36,26 @@ const getPoi = function*({ locale, psid, activeFestival }) {
 		return;
 	}
 
+	const categories = {
+		'add-stage': t`Színpadot` + ' 😎',
+		'add-food': t`Kaját` + ' 🍽️',
+		'add-bar': t`Piát` + ' 🍻',
+		'add-service': t`Szolgáltatást`,
+	};
+
+	const locations = getOthers();
+
 	yield sendQuickReply(
 		t`Mit keresel?` + ' 📍',
 		[
-			{
-				title: t`Színpadot` + ' 😎',
-				to: '/get-poi/get-stage',
-			},
-			{
-				title: t`Kaját` + ' 🍽️',
-				to: '/get-poi/get-food',
-			},
-			{
-				title: t`Piát` + ' 🍻',
-				to: '/get-poi/get-bar',
-			},
-			{
-				title: t`Mosdót` + ' 🚻',
-				to: '/get-poi/request-location/wc',
-			},
-			{
-				title: t`Szolgáltatást`,
-				to: '/get-poi/get-service',
-			},
-			{
-				title: t`Kempinget` + ' ⛺⛺⛺',
-				to: '/get-poi/request-location/camping',
-			},
-			{
-				title: t`Bejárat` + ' ⛩️',
-				to: '/get-poi/request-location/entrance',
-			},
-			{
-				title: t`Hiénákat` + ' 🚕🚕🚕',
-				to: '/get-poi/request-location/taxi',
-			},
-			{
-				title: t`Bolt` + ' 🛒',
-				to: '/get-poi/request-location/supermarket',
-			},
-			{
-				title: t`Parkolót` + ' 🅿️',
-				to: '/get-poi/request-location/parking',
-			},
-			{
-				title: t`Dohánybolt` + ' 🚬',
-				to: '/get-poi/request-location/tobacco',
-			},
+			...Object.keys(categories).map(category => ({
+				title: categories[category],
+				to: '/get-poi/' + category,
+			})),
+			...Object.keys(locations).map(location => ({
+				title: locations[location],
+				to: '/get-poi/request-location/' + location,
+			})),
 		],
 		psid
 	);
@@ -104,101 +78,42 @@ const getStage = function*({ locale, psid, activeFestival }) {
 
 const getBar = function*({ locale, psid }) {
 	const t = i18n(locale);
+	const bars = getBars();
 
 	yield sendQuickReply(
 		t`Mit szeretnél inni? ` + ' ',
-		[
-			{
-				title: t`Sört` + ' 🍺',
-				to: '/get-poi/request-location/beer',
-			},
-			{
-				title: t`Bort` + ' 🍷',
-				to: '/get-poi/request-location/wine',
-			},
-			{
-				title: t`Koktélt` + ' 🍹',
-				to: '/get-poi/request-location/cocktails',
-			},
-			{
-				title: t`Viszkit` + ' 🥃',
-				to: '/get-poi/request-location/whisky',
-			},
-			{
-				title: t`Kávét` + ' ☕',
-				to: '/get-poi/request-location/coffee',
-			},
-		],
+		Object.keys(bars).map(bar => ({
+			title: bars[bar],
+			to: '/get-poi/request-location/' + bar,
+		})),
 		psid
 	);
 };
 
 const getService = function*({ locale, psid }) {
 	const t = i18n(locale);
+	const services = getServices();
 
 	yield sendQuickReply(
-		t`A pontosítés végett muszáj megkérdeznem, hogy pontosan mit keresel`,
-		[
-			{
-				title: t`Értékmegőrző` + ' 💍',
-				to: '/get-poi/request-location/lockers',
-			},
-			{
-				title: t`Telefontöltés` + ' 🔋',
-				to: '/get-poi/request-location/charging_station',
-			},
-			{
-				title: t`Elsősegély` + ' 🏥',
-				to: '/get-poi/request-location/first_aid',
-			},
-			{
-				title: t`Információ` + ' ℹ️',
-				to: '/get-poi/request-location/information',
-			},
-		],
+		t`A pontosítás végett muszáj megkérdeznem, hogy pontosan mit keresel`,
+		Object.keys(services).map(service => ({
+			title: services[service],
+			to: '/get-poi/request-location/' + service,
+		})),
 		psid
 	);
 };
 
 const getFood = function*({ locale, psid }) {
 	const t = i18n(locale);
+	const foods = getFoods();
 
 	yield sendQuickReply(
 		t`Konyha jellege` + ' 🍽️',
-		[
-			{
-				title: t`Amerikai` + ' 🍔 🌭',
-				to: '/get-poi/request-location/hotdog_hamburger',
-			},
-			{
-				title: t`Pizza` + ' 🍕',
-				to: '/get-poi/request-location/pizza',
-			},
-			{
-				title: t`Mexikói` + ' 🌮',
-				to: '/get-poi/request-location/mexican',
-			},
-			{
-				title: t`Gyros`,
-				to: '/get-poi/request-location/gyros',
-			},
-			{
-				title: t`Egészséges` + ' 🥗',
-				to: '/get-poi/request-location/healthy_food',
-			},
-			{
-				title: t`Reggeli` + ' 🍳',
-				to: '/get-poi/request-location/breakfast',
-			},
-			{
-				title: t`Hal` + ' 🐟',
-				to: '/get-poi/request-location/fish',
-			},
-			{
-				title: t`Vegán` + ' 🥦',
-				to: '/get-poi/request-location/vegan',
-			},
-		],
+		Object.keys(foods).map(food => ({
+			title: foods[food],
+			to: '/get-poi/request-location/' + food,
+		})),
 		psid
 	);
 };

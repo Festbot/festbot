@@ -5,7 +5,6 @@ const FavoriteGenres = require('./conversations/favroiteGenres');
 const Settings = require('./conversations/settings');
 const pathToRegexp = require('path-to-regexp');
 const SobrietyTest = require('./conversations/sobrietyTest');
-const AddPoi = require('./conversations/addPoi');
 const GetPoi = require('./conversations/getPoi');
 const Agenda = require('./conversations/agenda');
 const AutoReply = require('./conversations/autoReply');
@@ -58,39 +57,6 @@ const routes = [
 	{
 		route: '/settings/set-language/:language',
 		handler: Settings.setLanguage,
-	},
-
-	{
-		route: '/add-poi/add-poi',
-		handler: AddPoi.addPoi,
-	},
-	{
-		route: '/add-poi/save-poi/:location',
-		handler: AddPoi.savePoi,
-	},
-	{
-		route: '/add-poi/add-food',
-		handler: AddPoi.addFood,
-	},
-	{
-		route: '/add-poi/add-bar',
-		handler: AddPoi.addBar,
-	},
-	{
-		route: '/add-poi/add-service',
-		handler: AddPoi.addService,
-	},
-	{
-		route: '/add-poi/request-location/:type',
-		handler: AddPoi.requestLocation,
-	},
-	{
-		route: '/add-poi/add-stage',
-		handler: AddPoi.addStage,
-	},
-	{
-		route: '/add-poi/save-stage/:location',
-		handler: AddPoi.saveStage,
 	},
 
 	{

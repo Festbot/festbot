@@ -28,4 +28,5 @@ module.exports = {
 	SHOTS: 'shots',
 	PHARMACY: 'pharmacy',
 	BIKE_STORAGE: 'bike_storage',
+	VEGAN: 'vegan',
 };
