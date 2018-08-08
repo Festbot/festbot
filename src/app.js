@@ -58,18 +58,13 @@ throng(
 		app.get('/webhook', FacebookAuth.validateWebhook);
 		app.get('/authorize', FacebookAuth.authorize);
 
-		app.get('/test-notification', async function(req, res) {
-			res.send(200);
-
-			const users = await getUsersWithActiveFestival();
-
-			for (let i = 0; i < users.length; i++) {
-				if (users[i].psid) {
-					await FacebookSendApi.sendNotification(
-						users[i].psid,
-						'Test notification'
-					);
-				}
+		app.post('/send-notification', async function(req, res) {
+			if (req.body.accessToken === process.env.FESTBOT_ACCES_TOKEN) {
+				await FacebookSendApi.sendNotification(req.body.psid, req.body.message);
+				res.send(200);
+			}
+			else {
+				res.send(401);
 			}
 		});
 
