@@ -173,7 +173,7 @@ const requestLocation = function*({ locale, psid }, type) {
 
 const sendStage = function*({ locale, psid }, venueId) {
 	const t = i18n(locale);
-	const { coordinates } = yield getVenueLocation(venueId);
+	const coordinates = yield getVenueLocation(venueId);
 
 	if (coordinates.lat !== null && coordinates.lng !== null) {
 		yield sendReply(t`Megtaláltam, mindjárt küldöm...` + ' 🤟', psid);
