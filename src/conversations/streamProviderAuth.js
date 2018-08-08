@@ -4,6 +4,7 @@ const {
 	sendLoginButton,
 	sendButtons,
 	getSpotifyArtists,
+	getSpotifyTopGenres,
 	setContext,
 } = require('../actions');
 const i18n = require('../i18n');
@@ -83,11 +84,12 @@ const auth = function*({ locale, psid }, param) {
 const spotifyTokenReceived = function*({ locale, psid }, accessToken) {
 	const t = i18n(locale);
 	const spotifyArtists = yield getSpotifyArtists(accessToken);
+	const spotifyGenres = yield getSpotifyTopGenres(accessToken);
 
 	const newContext = yield setContext(psid, {
 		spotifyAccessToken: accessToken,
 		topArtists: spotifyArtists,
-		topGenres: ['pinarock'],
+		topGenres: spotifyGenres,
 	});
 
 	return sendReply(

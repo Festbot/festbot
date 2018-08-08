@@ -8,6 +8,7 @@ const {
 	SEND_LOGIN_BUTTON,
 	GET_FACEBOOK_DATA,
 	GET_SPOTIFY_ARTISTS,
+	GET_SPOTIFY_TOP_GENRES,
 	SEND_WEBVIEW_BUTTON,
 	SEND_LOCATION,
 	ADD_POI,
@@ -70,6 +71,11 @@ const getSpotifyArtists = accessToken => ({
 	payload: accessToken,
 });
 
+const getSpotifyTopGenres = accessToken => ({
+	type: GET_SPOTIFY_TOP_GENRES,
+	payload: accessToken
+});
+
 const addPoi = (festivalId, category, lat, lng) => ({
 	type: ADD_POI,
 	payload: { festivalId, category, lat, lng },
@@ -117,6 +123,7 @@ module.exports = {
 	sendWebViewButton,
 	getFacebookData,
 	getSpotifyArtists,
+	getSpotifyTopGenres,
 	addPoi,
 	getPois,
 	getVenues,

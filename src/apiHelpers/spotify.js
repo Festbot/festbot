@@ -62,3 +62,12 @@ module.exports.getTopArtists = async function(accessToken) {
 	});
 	return data.items.map(artist => artist.name);
 };
+
+module.exports.getTopGenres = async function(accessToken) {
+	const data = await request.get({
+		url: 'https://api.spotify.com/v1/me/top/artists',
+		headers: { Authorization: 'Bearer ' + accessToken },
+		json: true,
+	});
+	return data.items.map(artist => artist.genres[0]);
+};
