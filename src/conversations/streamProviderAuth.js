@@ -6,6 +6,8 @@ const {
 	getSpotifyArtists,
 	getSpotifyTopGenres,
 	setContext,
+	getDeezerArtists,
+	getDeezerGenres,
 } = require('../actions');
 const i18n = require('../i18n');
 
@@ -99,6 +101,24 @@ const spotifyTokenReceived = function*({ locale, psid }, accessToken) {
 	);
 };
 
+const deezerTokenReceived = function*({ locale, psid }, accessToken) {
+	const t = i18n(locale);
+	const deezerArtists = yield getDeezerArtists(accessToken);
+	const deezerGenres = yield getDeezerGenres(accessToken);
+
+	const newContext = yield setContext(psid, {
+		spotifyAccessToken: accessToken,
+		topArtists: deezerArtists,
+		topGenres: deezerGenres,
+	});
+
+	return sendReply(
+		t`Wow! I see you like ${deezerArtists[0]} and ${deezerArtists[1]}` +
+			' 😏',
+		psid
+	);
+};
+
 const notice = function*({ locale, psid }) {
 	const t = i18n(locale);
 
@@ -112,10 +132,15 @@ const notice = function*({ locale, psid }) {
 const dataReceived = function*({ locale, topArtists = [], psid }) {
 	const t = i18n(locale);
 
-	return sendReply(
+	yield sendReply(
 		t`Wow!, Látom, hogy a ${topArtists[0]} és a ${
 			topArtists[1]
 		} neked is a kedvenced` + ' 😏',
+		psid
+	);
+
+	return sendReply(
+		t`Szólni fogok, ha fellépnek valahol a környéken.` + ' 😏',
 		psid
 	);
 };
@@ -128,4 +153,5 @@ module.exports = {
 	notice,
 	dataReceived,
 	spotifyTokenReceived,
+	deezerTokenReceived,
 };

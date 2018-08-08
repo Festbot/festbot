@@ -61,4 +61,23 @@ const getTopArtists = async function(accessToken) {
 	return data.map(artist => artist.name);
 };
 
-module.exports = { login, getAccessToken, getInfoAboutMyself, getTopArtists };
+const getTopGenres = async function(accessToken) {
+	const { data } = await request.get({
+		url:
+			'https://api.deezer.com/user/me/artists?' +
+			querystring.stringify({
+				access_token: accessToken,
+			}),
+		json: true,
+	});
+
+	return data.map(artist => artist.name);
+};
+
+module.exports = {
+	login,
+	getAccessToken,
+	getInfoAboutMyself,
+	getTopArtists,
+	getTopGenres,
+};

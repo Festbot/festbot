@@ -47,16 +47,13 @@ throng(
 				req,
 				res
 			);
-			//const newContext = await ContextProvider.set(psid, {
-			//	deezerAccesToken: accessToken,
-			//	topArtists: await DeezerApi.getTopArtists(accessToken),
-			//	topGenres: ['pinarock'],
-			//});
 
-			//conversationRouter(
-			//	'/stream-provider-auth/data-received',
-			//	newContext
-			//);
+			const { handler, param } = matchRoute(
+				routes,
+				'/stream-provider-auth/token-received/deezer/' + accessToken
+			);
+
+			await processAction(handler, param, psid);
 		});
 		app.get('/webhook', FacebookAuth.validateWebhook);
 		app.get('/authorize', FacebookAuth.authorize);

@@ -17,6 +17,8 @@ const {
 	UPDATE_VENUE_LOCATION,
 	GET_AGENDA,
 	SEND_MAP_MARKER,
+	GET_DEEZER_ARTISTS,
+	GET_DEEZER_GENRES,
 } = require('./actionTypes');
 
 const sleep = timeout => ({
@@ -73,7 +75,17 @@ const getSpotifyArtists = accessToken => ({
 
 const getSpotifyTopGenres = accessToken => ({
 	type: GET_SPOTIFY_TOP_GENRES,
-	payload: accessToken
+	payload: accessToken,
+});
+
+const getDeezerArtists = accessToken => ({
+	type: GET_DEEZER_ARTISTS,
+	payload: accessToken,
+});
+
+const getDeezerGenres = accessToken => ({
+	type: GET_DEEZER_GENRES,
+	payload: accessToken,
 });
 
 const addPoi = (festivalId, category, lat, lng) => ({

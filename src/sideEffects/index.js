@@ -1,6 +1,7 @@
 const festbot = require('./festbot');
 const facebook = require('./facebook');
 const spotify = require('./spotify');
+const deezer = require('./deezer');
 
 const ConversationContextProvider = require('../conversationContextProvider');
 const sleep = timeout =>
@@ -24,7 +25,8 @@ const executeAction = async function({ type, payload }) {
 	return (
 		(await festbot({ type, payload })) ||
 		(await facebook({ type, payload })) ||
-		(await spotify({ type, payload }))
+		(await spotify({ type, payload })) ||
+		(await deezer({ type, payload }))
 	);
 };
 

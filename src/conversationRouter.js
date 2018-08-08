@@ -43,6 +43,10 @@ const routes = [
 		route: '/stream-provider-auth/token-received/spotify/:accessToken',
 		handler: StreamProviderAuth.spotifyTokenReceived,
 	},
+	{
+		route: '/stream-provider-auth/token-received/deezer/:accessToken',
+		handler: StreamProviderAuth.deezerTokenReceived,
+	},
 
 	{ route: '/at-the-festival/food', handler: AtTheFestival.food },
 	{ route: '/at-the-festival/toilet', handler: AtTheFestival.toilet },
