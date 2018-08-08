@@ -1,5 +1,4 @@
 const i18n = require('../i18n');
-const isStaging = process.env.NODE_ENV === 'staging';
 
 const getPersistentMenu = function() {
 	return ['default', 'en_US', 'hu_HU'].map(locale => {
@@ -97,11 +96,6 @@ const getPersistentMenu = function() {
 							title: '🌐 ' + t`Nyelv`,
 							type: 'postback',
 							payload: '/settings/ask-language',
-						},
-						{
-							title: '📍 ' + t`Zerkelés`,
-							type: 'postback',
-							payload: '/add-poi/add-poi',
 						},
 					],
 				},
