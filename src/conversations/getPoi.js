@@ -8,7 +8,7 @@ const {
 	sendMapMarker,
 } = require('../actions');
 const i18n = require('../i18n');
-const { getOthers, getBars, getFoods } = require('../config/pois');
+const { getOthers, getBars, getFoods, getServices } = require('../config/pois');
 
 const noActiveFestival = function*({ locale, psid }) {
 	const t = i18n(locale);
