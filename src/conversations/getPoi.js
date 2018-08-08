@@ -7,6 +7,7 @@ const {
 	sendWebViewButton,
 	sendMapMarker,
 	getVenues,
+	getVenueLocation,
 } = require('../actions');
 const i18n = require('../i18n');
 const { getOthers, getBars, getFoods, getServices } = require('../config/pois');
