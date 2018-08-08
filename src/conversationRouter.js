@@ -72,6 +72,10 @@ const routes = [
 		handler: GetPoi.sendPoi,
 	},
 	{
+		route: '/get-poi/send-stage/:stageId',
+		handler: GetPoi.sendStage,
+	},
+	{
 		route: '/get-poi/get-food',
 		handler: GetPoi.getFood,
 	},

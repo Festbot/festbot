@@ -69,10 +69,12 @@ const getStage = function*({ locale, psid, activeFestival }) {
 
 	yield sendQuickReply(
 		t`Melyik színpadot?`,
-		stages.map(stage => ({
-			title: stage.name,
-			to: '/get-poi/request-location/stage:' + stage._id,
-		})).slice(0, 8),
+		stages
+			.map(stage => ({
+				title: stage.name,
+				to: '/get-poi/send-stage/' + stage._id,
+			}))
+			.slice(0, 8),
 		psid
 	);
 };
@@ -169,22 +171,13 @@ const requestLocation = function*({ locale, psid }, type) {
 	yield sendLocation(t`Mondd meg, hogy hol vagy!` + ' 📍', psid);
 };
 
-const sendStage = function*({
-	locale,
-	psid,
-	lastAskedLocation,
-	locationRequestedFor,
-}) {
-	if (locationRequestedFor !== 'send-stage') {
-		return;
-	}
-
+const sendStage = function*({ locale, psid }, venueId) {
 	const t = i18n(locale);
-	const venue = yield getVenueLocation(lastAskedLocation);
+	const venue = yield getVenueLocation(venueId);
 
 	if (venue) {
 		const poi = pois[0];
-		yield sendReply(t`Találtam egyet, mindjárt küldöm...` + ' 🤟', psid);
+		yield sendReply(t`Megtaláltam, mindjárt küldöm...` + ' 🤟', psid);
 
 		yield sendMapMarker(
 			t`Színpad`,
