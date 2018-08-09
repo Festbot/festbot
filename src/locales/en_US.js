@@ -20,6 +20,7 @@ module.exports = {
 	Adatkezelés: 'Privacy policy',
 	Adatvédelem: 'Privacy',
 	'Fiók hozzáadása': 'Connect streaming services',
+	'Fesztivál navigátor': 'Festival navigator',
 
 	'My agenda': 'Programom',
 	'Discover artists': 'Fellépők keresése',
