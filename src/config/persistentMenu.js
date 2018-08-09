@@ -61,9 +61,9 @@ const getPersistentMenu = function() {
 						{
 							title: '🗺️ ' + t`Fesztivál navigátor`,
 							type: 'web_url',
-							url: 'https://index.hu',
-							//webview_height_ratio: 'tall',
-							messenger_extensions: false,
+							url: 'https://webview.festbot.com/navigator',
+							webview_height_ratio: 'tall',
+							messenger_extensions: true,
 						},
 					],
 				},
