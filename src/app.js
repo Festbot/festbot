@@ -70,6 +70,29 @@ throng(
 			}
 		});
 
+		app.post('/broadcast-message', async function(req, res) {
+			if (req.body.accessToken !== process.env.FESTBOT_ACCES_TOKEN) {
+				res.send(401);
+			}
+
+			const users = await getUsersWithActiveFestival(req.body.festivalId);
+
+			for (let i = 0; i < users.length; i++) {
+				const user = users[i];
+				if (
+					user.psid &&
+					(user.firstName === 'Andor' || user.firstName === 'Peter')
+				) {
+					await FacebookSendApi.sendNotification(
+						users[i].psid,
+						req.body.message
+					);
+				}
+			}
+
+			res.send(200);
+		});
+
 		app.post('/webhook', function(req, res) {
 			const data = req.body;
 
