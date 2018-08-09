@@ -165,4 +165,7 @@ module.exports = {
 	Nem: 'No',
 	'Az alábbiak közül melyik nyelvet szeretnéd beállítani?':
 		'I know a few languages, which one do you prefer?',
+
+	// Festival navigator
+	'Várj, mindjárt küldöm a linket': "Hold on... I'm sending the link",
 };

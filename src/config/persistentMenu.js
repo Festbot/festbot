@@ -60,10 +60,8 @@ const getPersistentMenu = function() {
 						},
 						{
 							title: '🗺️ ' + t`Fesztivál navigátor`,
-							type: 'web_url',
-							url: 'https://webview.festbot.com/navigator',
-							webview_height_ratio: 'tall',
-							messenger_extensions: true,
+							type: 'postback',
+							payload: '/festival-navigator/send-url',
 						},
 					],
 				},
