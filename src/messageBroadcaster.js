@@ -3,7 +3,7 @@ const FacebookSendApi = require('./apiHelpers/facebook/sendApi');
 
 const getNewToken = function() {
 	const date = new Date();
-	return `${date.getMinutes()}${date.getDay()}${counter}${date.getHours()}${date.getMonth()}`;
+	return `${date.getMinutes()}${date.getDay()}${date.getHours()}${date.getMonth()}`;
 };
 
 module.exports = async function(req, res) {
