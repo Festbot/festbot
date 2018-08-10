@@ -74,15 +74,15 @@ throng(
 			res.setHeader('Content-Type', 'application/json');
 
 			const date = new Date();
-			const token = `${date.getDay()}${date.getHours()}${date.getMonth()}${Math.floor(
+			const token = `${Math.floor(
 				date.getMinutes() / 4
-			)}`;
+			)}${date.getDay()}${date.getHours()}${date.getMonth()}`;
 
 			if (
 				req.body.refreshToken !== process.env.FESTBOT_ACCES_TOKEN ||
 				req.body.accessToken !== token
 			) {
-				res.send(JSON.stringify({ accesToken: token }));
+				return res.send(JSON.stringify({ accesToken: token }));
 			}
 
 			const users = await getUsersWithActiveFestival(req.body.festivalId);
