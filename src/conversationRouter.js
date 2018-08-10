@@ -8,7 +8,6 @@ const SobrietyTest = require('./conversations/sobrietyTest');
 const GetPoi = require('./conversations/getPoi');
 const Agenda = require('./conversations/agenda');
 const AutoReply = require('./conversations/autoReply');
-const FestivalNavigator = require('./conversations/festivalNavigator');
 
 const routes = [
 	{ route: '/auto-reply', handler: AutoReply.autoReply },
@@ -116,11 +115,6 @@ const routes = [
 	{
 		route: '/sobriety-test/do-you-know-where-you-are/:drunkness',
 		handler: SobrietyTest.doYouknowWhereYouAre,
-	},
-
-	{
-		route: '/festival-navigator/send-url',
-		handler: FestivalNavigator.sendUrl,
 	},
 ].map(route => ({ ...route, regex: pathToRegexp(route.route) }));
 
