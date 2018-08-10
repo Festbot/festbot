@@ -26,11 +26,11 @@ const getPersistentMenu = function() {
 							type: 'postback',
 							payload: '/get-poi/get-poi',
 						},
-						{
-							title: '😜 ' + t`Alkohol teszt`,
-							type: 'postback',
-							payload: '/sobriety-test/how-many-drinks',
-						},
+						// {
+						// 	title: '😜 ' + t`Alkohol teszt`,
+						// 	type: 'postback',
+						// 	payload: '/sobriety-test/how-many-drinks',
+						// },
 					],
 				},
 				{
