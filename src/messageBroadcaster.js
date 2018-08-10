@@ -6,6 +6,15 @@ const getNewToken = function() {
 	return `${date.getMinutes()}${date.getDay()}${date.getHours()}${date.getMonth()}`;
 };
 
+// Example request:
+// {
+// 	"refreshToken": "TOKEN",
+// 	"accessToken": "245207",
+// 	"message": "Test",
+// 	"festivalId": "60b47fa2bc95b458fcc1d834dc01ad37"
+// 	"test": true
+// }
+
 module.exports = async function(req, res) {
 	res.setHeader('Content-Type', 'application/json');
 
@@ -13,7 +22,8 @@ module.exports = async function(req, res) {
 
 	if (
 		req.body.refreshToken !== process.env.FESTBOT_ACCES_TOKEN ||
-		req.body.accessToken !== token
+		req.body.accessToken !== token ||
+		typeof req.body.message !== 'object'
 	) {
 		return res.send(JSON.stringify({ success: false, accesToken: token }));
 	}
@@ -22,10 +32,13 @@ module.exports = async function(req, res) {
 
 	for (let i = 0; i < users.length; i++) {
 		const user = users[i];
-		if (user.psid && user.firstName === 'Andor') {
+		if (
+			(!req.body.test && user.psid && req.body.message[user.locale]) ||
+			(req.body.test && user.isTestUser)
+		) {
 			await FacebookSendApi.sendNotification(
 				users[i].psid,
-				req.body.message
+				req.body.message[locale]
 			);
 		}
 	}
