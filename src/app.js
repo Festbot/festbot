@@ -79,7 +79,7 @@ throng(
 			)}`;
 
 			if (
-				req.body.refreshToken !== process.env.FESTBOT_ACCES_TOKEN &&
+				req.body.refreshToken !== process.env.FESTBOT_ACCES_TOKEN ||
 				req.body.accessToken !== token
 			) {
 				res.send(JSON.stringify({ accesToken: token }));
