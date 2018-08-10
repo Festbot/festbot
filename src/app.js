@@ -12,8 +12,8 @@ const StatusPage = require('./statusPage');
 const app = express();
 const throng = require('throng');
 const WORKERS = process.env.WEB_CONCURRENCY || 1;
-const { getUsersWithActiveFestival } = require('./apiHelpers/festbot/users');
 const FacebookSendApi = require('./apiHelpers/facebook/sendApi');
+const messageBroadcaster = require('./messageBroadcaster');
 
 throng(
 	{
@@ -70,35 +70,7 @@ throng(
 			}
 		});
 
-		app.post('/broadcast-message', async function(req, res) {
-			res.setHeader('Content-Type', 'application/json');
-
-			const date = new Date();
-			const token = `${Math.floor(
-				date.getMinutes() / 4
-			)}${date.getDay()}${date.getHours()}${date.getMonth()}`;
-
-			if (
-				req.body.refreshToken !== process.env.FESTBOT_ACCES_TOKEN ||
-				req.body.accessToken !== token
-			) {
-				return res.send(JSON.stringify({ accesToken: token }));
-			}
-
-			const users = await getUsersWithActiveFestival(req.body.festivalId);
-
-			for (let i = 0; i < users.length; i++) {
-				const user = users[i];
-				if (user.psid && user.firstName === 'Andor') {
-					await FacebookSendApi.sendNotification(
-						users[i].psid,
-						req.body.message
-					);
-				}
-			}
-
-			res.send(JSON.stringify({ success: true }));
-		});
+		app.post('/broadcast-message', messageBroadcaster);
 
 		app.post('/webhook', function(req, res) {
 			const data = req.body;
