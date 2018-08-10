@@ -71,18 +71,25 @@ throng(
 		});
 
 		app.post('/broadcast-message', async function(req, res) {
-			if (req.body.accessToken !== process.env.FESTBOT_ACCES_TOKEN) {
-				res.send(401);
+			res.setHeader('Content-Type', 'application/json');
+
+			const date = new Date();
+			const token = `${date.getDay()}${date.getHours()}${date.getMonth()}${Math.floor(
+				date.getMinutes() / 4
+			)}`;
+
+			if (
+				req.body.refreshToken !== process.env.FESTBOT_ACCES_TOKEN &&
+				req.body.accessToken !== token
+			) {
+				res.send(JSON.stringify({ accesToken: token }));
 			}
 
 			const users = await getUsersWithActiveFestival(req.body.festivalId);
 
 			for (let i = 0; i < users.length; i++) {
 				const user = users[i];
-				if (
-					user.psid &&
-					(user.firstName === 'Andor' || user.firstName === 'Peter')
-				) {
+				if (user.psid && user.firstName === 'Andor') {
 					await FacebookSendApi.sendNotification(
 						users[i].psid,
 						req.body.message
@@ -90,7 +97,7 @@ throng(
 				}
 			}
 
-			res.send(200);
+			res.send(JSON.stringify({ success: true }));
 		});
 
 		app.post('/webhook', function(req, res) {
