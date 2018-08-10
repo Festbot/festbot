@@ -11,6 +11,7 @@ const {
 } = require('../actions');
 const i18n = require('../i18n');
 const { getOthers, getBars, getFoods, getServices } = require('../config/pois');
+const haversine = require('../utils/haversine');
 
 const noActiveFestival = function*({ locale, psid }) {
 	const t = i18n(locale);
@@ -132,7 +133,23 @@ const sendPoi = function*(
 
 	const t = i18n(locale);
 	const [lat, lng] = location.split(':');
-	const pois = yield getPois(activeFestival, lastAskedLocation, lat, lng);
+	const pois = yield getPois(activeFestival, lastAskedLocation);
+
+	pois.sort(function(a, b) {
+		const distanceA = haversine(
+			a.coordinates.lat,
+			a.coordinates.lng,
+			lat,
+			lng
+		);
+		const distanceB = haversine(
+			b.coordinates.lat,
+			b.coordinates.lng,
+			lat,
+			lng
+		);
+		return distanceA - distanceB;
+	});
 
 	if (pois.length > 0) {
 		const poi = pois[0];
