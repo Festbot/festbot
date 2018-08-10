@@ -6,12 +6,15 @@ const getNewToken = function() {
 	return `${date.getMinutes()}${date.getDay()}${date.getHours()}${date.getMonth()}`;
 };
 
-// Example request:
+// Sample request:
 // {
 // 	"refreshToken": "TOKEN",
 // 	"accessToken": "245207",
-// 	"message": "Test",
-// 	"festivalId": "60b47fa2bc95b458fcc1d834dc01ad37"
+// 	"message": {
+//		"en_US": "Hello! What's up?",
+//		"hu_HU": "Szia, mizu?"
+//	},
+// 	"festivalId": "60b47fa2bc95b458fcc1d834dc01ad37",
 // 	"test": true
 // }
 
