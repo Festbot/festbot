@@ -71,7 +71,7 @@ const howManyFingers = function*({ locale, psid }, param) {
 				to: '/sobriety-test/dont-text-your-ex/' + (drunkness + 1),
 			},
 			{
-				title: t`Te most bemutattál???` + ' 😂',
+				title: t`Most bemutattál?` + ' 😂',
 				to: '/sobriety-test/dont-text-your-ex/' + (drunkness + 5),
 			},
 		],
