@@ -151,8 +151,6 @@ const doTheMath = function*({ locale, psid }, param) {
 	const t = i18n(locale);
 	const drunkness = parseInt(param, 10);
 
-	console.log('sikerult', drunkness);
-
 	switch (true) {
 		case drunkness < 5:
 			yield sendReply(
