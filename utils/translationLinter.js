@@ -26,13 +26,19 @@ function getLineNumber(file, text) {
 
 function getTexts(file) {
 	const regex = /t`([a-zA-Z.,'’_?!$áÁéÉíÍóÓöÖőŐüÜ\s\+\{\}]+)`/g;
-	return (texts = file
-		.match(regex)
+	const match = file.match(regex);
+
+	if (!match) {
+		return [];
+	}
+
+	return match
 		.map(text => text.substring(2))
-		.map(text => text.slice(0, -1))).map(text => ({
-		line: getLineNumber(file, text),
-		text: text,
-	}));
+		.map(text => text.slice(0, -1))
+		.map(text => ({
+			line: getLineNumber(file, text),
+			text: text,
+		}));
 }
 
 fs.readdirSync('./src/conversations').forEach(file => {

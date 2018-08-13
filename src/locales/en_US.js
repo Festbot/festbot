@@ -144,22 +144,40 @@ module.exports = {
 	Három: 'Three',
 	'Négy vagy több': 'Four or more',
 	'Már nem számolom': "I didn't count",
+
+	'Részeg talán még nem vagy, de azért autóba ne ülj!':
+		"Okay, I don't think that you're drunk, but please don't drive home!",
+
 	'Hány ujjamat mutatom?': 'How many fingers am I holding up?',
+	'Most bemutattál?': 'Whaaat?',
+
 	'Mit tartanál most a legjobb ötletnek?':
-		'What sounds like a good idea right now?',
-	'Haza menni, unatkozom!': "Going home, I'm bored!",
-	'Bulizni tovább ezerrel!': 'Keep this party rollin!',
-	'Sírni egy jót.': 'Having a good cry.',
-	'Ráírni az exemre.': 'Texting my ex.',
-	'Szexting az ex-emmel.': 'Sexting my ex.',
-	'Átmenni az ex-emhez.': "Going over to my ex's house.",
+		'Which one sounds like a good idea right now?',
+	'Hazamenni, uncsizok': 'Going home',
+	'Bulizni tovább!': 'Keep this party rollin!',
+	'Sírni egy jót': 'Having a good cry',
+	'Ráírni az exemre': 'Texting my ex',
+	'Szexting az ex-emmel.': 'Sexting my ex',
+	'Átmenni az exemhez': 'Visiting my ex',
 	'Tudod, hogy hol vagy most?': 'Do you know where you are?',
 	'Még szép': 'Of course',
-	'Nem, de a haverom tudja.': 'No but like my friend knows.',
-	'Mit számít?': 'What does it matter?',
-	'Mennyi 12 x 12?': 'What is 12 x 12?',
-	'Nem beszélni matek!': 'I no speak math!',
-	'Te most bemutattál???': 'Did you just gave a finger???',
+	'A haverom tudja': 'My friend knows',
+	'Mit számít?': 'Does it matter?',
+
+	'Az ügyvédem nem szereti, ha azt mondom emberekenek, hogy igyanak még, úgyhogy nem is mondok semmit.':
+		"My lawyer doesn't really like if I tell people that they can drink more, so I won't say anything.",
+
+	'Azt még nem mondanám, hogy részeg vagy, de azért látszik, hogy ittál.':
+		"I wouldn't say that you're drunk, but it's obvious that you had a few drinks.",
+
+	'Ha ezt végig tudtad nyomkodni, akkor még nem vagy teljesen kész, de nagyon közel vagy hozzá.':
+		"You're not completely wasted yet, but you're pretty close.",
+
+	'Az exedet hagyd békén, most jó ötletnek érezheted, de holnap kellemetlen lesz.':
+		'Forget your ex, it may seems like a good idea at this point, but I can assure you, that you will regret it tomorrow.',
+
+	'Igyál vizet, mert ezek a fesztiválos piák nagyon megfájdítják a fejet.':
+		'Drink some water, because these festival boozes will make your head hurt.',
 
 	// General
 	Igen: 'Yes',

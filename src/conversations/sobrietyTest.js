@@ -8,7 +8,7 @@ const howManyDrinks = function*({ locale, psid }) {
 		t`Oké, inni jó! Hány pohárral ittál?` + ' 🍺🍷🍸',
 		[
 			{
-				title: t`Csak eggyel` + '😊',
+				title: t`Csak eggyel` + ' 😊',
 				to: '/sobriety-test/how-many-fingers/' + 1,
 			},
 			{
@@ -98,7 +98,7 @@ const dontTextYourEx = function*({ locale, psid }, param) {
 				to: '/sobriety-test/where-you-are/' + (drunkness + 1),
 			},
 			{
-				title: t`Bulizni tovább ezerrel!` + ' 😁',
+				title: t`Bulizni tovább!` + ' 😁',
 				to: '/sobriety-test/where-you-are/' + (drunkness + 2),
 			},
 			{
@@ -155,7 +155,7 @@ const doTheMath = function*({ locale, psid }, param) {
 	switch (true) {
 		case drunkness < 5:
 			yield sendReply(
-				t`Az ügyvédem nem szereti, ha azt mondom emberekenek, hogy igyanak még, úgyhogy nem is mondom.` +
+				t`Az ügyvédem nem szereti, ha azt mondom emberekenek, hogy igyanak még, úgyhogy nem is mondok semmit.` +
 					' 😅',
 				psid
 			);
