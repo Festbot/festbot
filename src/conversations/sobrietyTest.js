@@ -1,5 +1,6 @@
 const { sendQuickReply, sendReply } = require('../actions');
 const i18n = require('../i18n');
+const shuffle = require('../utils/shuffle');
 
 const howManyDrinks = function*({ locale, psid }) {
 	const t = i18n(locale);
@@ -60,7 +61,7 @@ const howManyFingers = function*({ locale, psid }, param) {
 
 	return sendQuickReply(
 		t`Hány ujjamat mutatom?` + ' ' + fingers[random],
-		[
+		shuffle([
 			{
 				title: random + (coin ? 1 : -1),
 				to: '/sobriety-test/dont-text-your-ex/' + (drunkness + 1),
@@ -81,7 +82,7 @@ const howManyFingers = function*({ locale, psid }, param) {
 				title: t`Most bemutattál?` + ' 😂',
 				to: '/sobriety-test/dont-text-your-ex/' + (drunkness + 5),
 			},
-		],
+		]),
 		psid
 	);
 };
@@ -92,7 +93,7 @@ const dontTextYourEx = function*({ locale, psid }, param) {
 
 	return sendQuickReply(
 		t`Mit tartanál most a legjobb ötletnek?` + ' 🙄',
-		[
+		shuffle([
 			{
 				title: t`Hazamenni, uncsizok` + ' 😗',
 				to: '/sobriety-test/where-you-are/' + (drunkness + 1),
@@ -113,7 +114,7 @@ const dontTextYourEx = function*({ locale, psid }, param) {
 				title: t`Átmenni az exemhez` + ' 😅',
 				to: '/sobriety-test/where-you-are/' + (drunkness + 5),
 			},
-		],
+		]),
 		psid
 	);
 };
@@ -124,7 +125,7 @@ const whereYouAre = function*({ locale, psid }, param) {
 
 	return sendQuickReply(
 		t`Tudod, hogy hol vagy most?` + ' 🙄',
-		[
+		shuffle([
 			{
 				title: t`Még szép` + ' 😎',
 				to: '/sobriety-test/do-the-math/' + (drunkness + 1),
@@ -141,7 +142,7 @@ const whereYouAre = function*({ locale, psid }, param) {
 				title: t`Uhhh...` + ' 🤪',
 				to: '/sobriety-test/do-the-math/' + (drunkness + 5),
 			},
-		],
+		]),
 		psid
 	);
 };
