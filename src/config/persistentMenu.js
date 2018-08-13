@@ -1,4 +1,5 @@
 const i18n = require('../i18n');
+const { version } = require('../../package.json');
 
 const getPersistentMenu = function() {
 	return ['default', 'en_US', 'hu_HU'].map(locale => {
@@ -103,7 +104,7 @@ const getPersistentMenu = function() {
 							title:
 								'🐻 ' +
 								t`Rólam` +
-								` (${process.env.npm_config_init_version})`,
+								` (${version})`,
 							type: 'postback',
 							payload: '/get-started/about-me',
 						},
