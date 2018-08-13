@@ -16,4 +16,4 @@ module.exports = function(lat1, lon1, lat2, lon2) {
 	var d = R * c * 1000; // Distance in m
 
 	return d;
-}
+};

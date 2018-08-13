@@ -19,10 +19,6 @@ const introduction = function*({ psid, locale }) {
 		timezone: facebookData.timezone,
 	});
 
-	const [momentLocale] = locale.split('_');
-	moment.locale(momentLocale);
-	const festbotAge = moment().to(process.env.FESTBOT_BIRTH_DAY);
-
 	const t = i18n(locale);
 
 	const festival = 'Sziget';
@@ -106,24 +102,6 @@ const introduction = function*({ psid, locale }) {
 	// );
 
 	// yield sleep(6 * 60 * 60 * 1000);
-
-	// yield sendReply(
-	// 	t`A Festbotot szabadidőnkben csináljuk, és még csak ${festbotAge} született.` +
-	// 		' 🤓' +
-	// 		t`A már meglévő funkciók mellett időről időre további új és izgalmas lehetőségekkel bővítjük a Festbotot.` +
-	// 		' 🧐',
-	// 	psid
-	// );
-	// yield sendReply(
-	// 	t`Ez persze időbe telik és sok sok munka, ezért a fejlesztéshez önkéntes közreműködőkre is szükség van.`,
-	// 	psid
-	// );
-	// yield sendReply(
-	// 	t`Ha szívesen csatlakoznál a közösségünkhöz, és tudsz segíteni nekünk, jelentkezz ✨VIP✨ tagnak a közreműködői csoportunkba.`,
-	// 	psid
-	// );
-
-	// yield sendReply(t`https://www.facebook.com/groups/festbotvip/`, psid);
 };
 
 const setLanguage = function*({ psid }, locale) {
@@ -160,4 +138,30 @@ const getStarted = function*({ psid }) {
 	);
 };
 
-module.exports = { getStarted, introduction, setLanguage };
+const aboutMe = function*({ psid, locale }) {
+	const t = i18n(locale);
+
+	const [momentLocale] = locale.split('_');
+	moment.locale(momentLocale);
+	const festbotAge = moment().to(process.env.FESTBOT_BIRTH_DAY);
+
+	yield sendReply(
+		t`A Festbotot szabadidőnkben csináljuk, és még csak ${festbotAge} született.` +
+			' 🤓' +
+			t`A már meglévő funkciók mellett időről időre további új és izgalmas lehetőségekkel bővítjük a Festbotot.` +
+			' 🧐',
+		psid
+	);
+	yield sendReply(
+		t`Ez persze időbe telik és sok sok munka, ezért a fejlesztéshez önkéntes közreműködőkre is szükség van.`,
+		psid
+	);
+	yield sendReply(
+		t`Ha szívesen csatlakoznál a közösségünkhöz, és tudsz segíteni nekünk, jelentkezz ✨VIP✨ tagnak a közreműködői csoportunkba.`,
+		psid
+	);
+
+	yield sendReply(t`https://www.facebook.com/groups/festbotvip/`, psid);
+};
+
+module.exports = { getStarted, introduction, setLanguage, aboutMe };

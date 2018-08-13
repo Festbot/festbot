@@ -99,6 +99,14 @@ const getPersistentMenu = function() {
 							type: 'postback',
 							payload: '/settings/ask-language',
 						},
+						{
+							title:
+								'🐻 ' +
+								t`Rólam` +
+								` (${process.env.npm_config_init_version})`,
+							type: 'postback',
+							payload: '/get-started/about-me',
+						},
 					],
 				},
 			],

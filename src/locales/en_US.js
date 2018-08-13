@@ -13,6 +13,7 @@ module.exports = {
 	'Előadók szerint': 'Discover artists',
 	'Fesztiválok, programok': 'Festivals/Program list',
 	'Mai programom': 'My agenda',
+	Rólam: 'About me',
 
 	'Beállítások és segítség': 'Settings & Help',
 	Zerkelés: 'Zerking',

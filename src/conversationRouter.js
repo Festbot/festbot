@@ -20,6 +20,7 @@ const routes = [
 		route: '/get-started/set-language/:locale',
 		handler: GetStarted.setLanguage,
 	},
+	{ route: '/get-started/about-me', handler: GetStarted.aboutMe },
 
 	{ route: '/agenda/get-agenda', handler: Agenda.getAgenda },
 
