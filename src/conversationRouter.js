@@ -114,8 +114,12 @@ const routes = [
 		handler: SobrietyTest.doTheMath,
 	},
 	{
-		route: '/sobriety-test/do-you-know-where-you-are/:drunkness',
-		handler: SobrietyTest.doYouknowWhereYouAre,
+		route: '/sobriety-test/where-you-are/:drunkness',
+		handler: SobrietyTest.whereYouAre,
+	},
+	{
+		route: '/sobriety-test/do-the-math/:drunkness',
+		handler: SobrietyTest.doTheMath,
 	},
 ].map(route => ({ ...route, regex: pathToRegexp(route.route) }));
 

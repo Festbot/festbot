@@ -2,7 +2,7 @@ const {
 	howManyDrinks,
 	howManyFingers,
 	dontTextYourEx,
-	doYouknowWhereYouAre,
+	whereYouAre,
 } = require('../../src/conversations/sobrietyTest');
 const { isAction, actionTypeMatches } = require('../helpers/actions');
 const { SEND_QUICK_REPLY } = require('../../src/actionTypes');
@@ -46,7 +46,7 @@ describe('dontTextYourEx', function() {
 });
 
 describe('doYouknowWhereYouAre', function() {
-	const generator = doYouknowWhereYouAre(contextMock);
+	const generator = whereYouAre(contextMock);
 
 	it('returns an action', function() {
 		const { value } = generator.next();
