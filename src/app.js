@@ -117,10 +117,10 @@ throng(
 						);
 					} else {
 						console.log('nem tudom mit kaptam', messagingEvent);
-						receivedPostback(
-							messagingEvent.sender.id,
-							'/auto-reply'
-						);
+						// receivedPostback(
+						// 	messagingEvent.sender.id,
+						// 	'/auto-reply'
+						// );
 					}
 				});
 			});
