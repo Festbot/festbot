@@ -40,8 +40,8 @@ module.exports = async function(req, res) {
 			(req.body.test && user.isTestUser)
 		) {
 			await FacebookSendApi.sendNotification(
-				users[i].psid,
-				req.body.message[locale]
+				users.psid,
+				req.body.message[user.locale]
 			);
 		}
 	}

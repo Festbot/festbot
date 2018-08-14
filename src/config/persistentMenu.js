@@ -104,7 +104,7 @@ const getPersistentMenu = function() {
 							title:
 								'🐻 ' +
 								t`Rólam` +
-								` (${version})`,
+								` (v${version})`,
 							type: 'postback',
 							payload: '/get-started/about-me',
 						},
