@@ -101,10 +101,7 @@ const getPersistentMenu = function() {
 							payload: '/settings/ask-language',
 						},
 						{
-							title:
-								'🐻 ' +
-								t`Rólam` +
-								` (v${version})`,
+							title: '🐻 ' + t`Rólam` + ` (v${version})`,
 							type: 'postback',
 							payload: '/get-started/about-me',
 						},

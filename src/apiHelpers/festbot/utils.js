@@ -45,9 +45,10 @@ const createDocWithId = async function(db, id, data) {
 	return await request.put(options);
 };
 
-const find = async function(db, selector) {
+const find = async function(db, selector, limit = 25) {
 	const options = {
 		url: 'https://api.festbot.com/' + db + '/_find',
+		limit,
 		json: {
 			selector,
 		},

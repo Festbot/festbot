@@ -58,9 +58,13 @@ const hashFacebookPSID = function(psid) {
 };
 
 const getUsersWithActiveFestival = async function(festivalId) {
-	const { docs } = await find('users', {
-		activeFestival: festivalId,
-	});
+	const { docs } = await find(
+		'users',
+		{
+			activeFestival: festivalId,
+		},
+		1000
+	);
 	return docs;
 };
 
