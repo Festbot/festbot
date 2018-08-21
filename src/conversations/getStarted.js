@@ -21,7 +21,7 @@ const introduction = function*({ psid, locale }) {
 
 	const t = i18n(locale);
 
-	const festival = 'Sziget';
+	const festival = 'Strand';
 
 	yield sendReply(
 		t`Azért vagyok, hogy fesztiválos dolgokban segítsek neked.` + ' 😎',
